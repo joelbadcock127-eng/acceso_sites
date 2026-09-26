@@ -38,8 +38,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
-      "sharp",
-      "playwright"
+      "sharp"
     ]
   }
 }

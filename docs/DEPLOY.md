@@ -25,3 +25,5 @@ Deploy once, then open the `pages.dev` URL. The preview banner, `noindex` header
 ## Later, per site
 
 Environment variables (Settings, Variables and secrets): `WEB3FORMS_KEY`, `REQUESTS_PASSWORD`, `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `CONTENT_REPO` (`joelbadcock127-eng/acceso_sites`), `CONTENT_BRANCH`, `SITE_SLUG`. Bind a D1 database as `DB` (Settings, Bindings) for the booking request log. `scripts/new_client.mjs` does all of this for new prospects when `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set.
+
+Last deploy trigger: 2026-09-26T05:28Z

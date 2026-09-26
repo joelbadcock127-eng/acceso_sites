@@ -12,7 +12,7 @@ const href = adapter.bookUrl(target);
       <div class="truncate text-sm font-medium">{title}</div>
       {price && <div class="text-xs" style="color:var(--muted)">{price}</div>}
     </div>
-    <BookButton adapter={adapter} target={target} experience={experience} small />
+    <BookButton adapter={adapter} target={target} experience={experience} small class="shrink-0 whitespace-nowrap" />
   </div>
   <div class="md:hidden h-16" aria-hidden="true"></div>
 )}

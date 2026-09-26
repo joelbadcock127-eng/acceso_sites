@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/border-tracks-trip-notes.pdf", pages: 4, sizeKb: 196 }
+  - { kind: "trip-notes", file: "/downloads/border-tracks-trip-notes.pdf", pages: 4, sizeKb: 420 }
   - { kind: "packing-list", file: "/downloads/border-tracks-packing-list.pdf", pages: 1, sizeKb: 82 }
 title: "Border Tracks: Mt Lindesay to Richmond Gap"
 type: multiday
@@ -20,7 +20,7 @@ itinerary:
   - { label: "Day 1", title: "Mt Lindesay foothills to Campbell's Folly, about 11 km", body: "The Old Highway Road is a dirt track through grassy paddocks to King George Gate and into New South Wales, with the Border Ranges to the south. Turn left along the Rabbit Board Fence and the roller coaster trail runs through many forest types with spectacular viewpoints. Skirt the precipitous peak of Glennies Chair to a palm fringed oasis for morning tea, climb back to the fence and roll on through eucalypt forest and magnificent rainforest above the Palen Creek catchments. Lunch in a lush Rabbit Board Reserve paddock, then a steep spur down to the support van and the short drive to Campbell's Folly, where Clyde and Kym Bignall welcome the group to their piece of paradise." }
   - { label: "Day 2", title: "Back to the fence and on to Wild Mountains, about 12 km", body: "The dawn chorus and a hot cuppa by the campfire set the tone. After a hearty breakfast from the hosts, return to the fence for the invigorating climb. Much of the day is rainforest between 650 and 782 metres, with spectacular outlooks and some challenging Big Dippers where the fence dives to a saddle and climbs straight back up. Panoramic views over the finger lime orchards, a look back along the ranges walked so far, then an access road to Wild Mountains camp, where Richard and Susan Zoomers give a tour before tents, the campfire, sundowners and dinner in the main hall." }
   - { label: "Day 3", title: "Wild Mountains to Richmond Gap, about 16 km", body: "Retrace the previous afternoon's steps to the fence, now beside Lever's Plateau in the Border Ranges and small sections of Chinghee National Park. Long Creek rises here and the route passes the cascades and ravines of Long Falls. Knolls and saddles keep coming but the height falls away all the way to the Lion's Road on the border. Views open east over Running Creek Road and the Brisbane to Sydney railway far below, and shortly before the end the walk crosses the railway tunnel beneath the mountain. Farewell the fence at Richmond Gap and board the van for Boonah." }
-included: [Walking eco guide with a story guide and tour support guide, All meals from lunch on day 1 to lunch on day 3, Sunset drinks and a cheese platter both evenings, Private campsites with hot showers, Vehicle support and return transport from Boonah, Camping information and a comprehensive packing list on booking]
+included: [A walking eco guide plus a story guide and a tour support guide, All meals from lunch on day 1 to lunch on day 3, Sunset drinks and a cheese platter both evenings, Private campsites with hot showers, Vehicle support and return transport from Boonah, Camping information and a comprehensive packing list on booking]
 excluded: [Travel to Boonah, Travel insurance, Personal camping gear]
 whatToBring:
   - { group: "carry", item: "Day pack with personal gear for the day" }
@@ -36,7 +36,6 @@ faqs:
   - { q: "What if the walk is full?", a: "Guest numbers are strictly limited to nine. If the walk is already full you'll be placed on a waiting list." }
 gallery:
   - { src: "images/border-tracks-camp-golden-hour.jpg", alt: "The Border Tracks campsite in golden evening light", score: 5 }
-  - { src: "images/walkers-on-ridge-vista.jpg", alt: "Walkers on a ridge with the Scenic Rim beyond", score: 5 }
   - { src: "images/walkers-on-grassy-ridge.jpg", alt: "Walkers crossing a grassy ridge", score: 5 }
   - { src: "images/guide-and-group-at-tree.jpg", alt: "Teresa with the group beside a rainforest tree", score: 5 }
   - { src: "images/rabbit-board-sign.jpg", alt: "A Rabbit Board Fence sign on the border", score: 4 }

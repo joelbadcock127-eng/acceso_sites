@@ -14,7 +14,7 @@ const a = site.about ?? {};
 ---
 <Base title={`About | ${site.business.name}`} description={a.intro ?? site.seo.defaultDescription} jsonLd={[breadcrumb(site, [{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }])]}>
   <section class="pad-x section"><div class="container-xl grid items-center gap-10 lg:grid-cols-2"><div><h1 class="mb-5">{a.heading ?? `About ${site.business.name}`}</h1>{a.intro && <p class="lede" style="color:var(--muted)">{a.intro}</p>}{site.business.acknowledgement && <p class="mt-6 border-l-2 pl-4 text-sm" style="border-color:var(--accent);color:var(--muted)">{site.business.acknowledgement}</p>}</div>{a.image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={a.image} alt={a.alt ?? ''} class="aspect-[4/3] w-full object-cover" priority sizes="(min-width:1024px) 50vw, 100vw" widths={[768, 1080, 1440]} /></div>}</div></section>
-  {(a.story || site.home.story) && <StoryBlock heading={site.home.story?.heading ?? 'Our story'} body={a.story ?? site.home.story!.body} image={a.story ? undefined : site.home.story?.image} alt={site.home.story?.alt} />}
+  {(a.story || site.home.story) && <StoryBlock heading={site.home.story?.heading ?? 'Why we walk'} body={a.story ?? site.home.story!.body} image={a.story ? undefined : site.home.story?.image} alt={site.home.story?.alt} />}
   <GuideCards guides={guides} />
   <StatsRow stats={stats} />
   <CommitmentBand site={site} />

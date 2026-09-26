@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/winter-walking-weekend-trip-notes.pdf", pages: 3, sizeKb: 190 }
+  - { kind: "trip-notes", file: "/downloads/winter-walking-weekend-trip-notes.pdf", pages: 3, sizeKb: 312 }
 title: Scenic Rim Winter Walking Weekend
 type: multiday
 summary: Three days of bushwalking in very different places from a base at Boonah's Commercial Hotel, with a degustation dinner at Blume and breakfasts at Arthur Clive's Bakery. The inaugural August 2026 weekend filled; the next dates are to be announced.
@@ -38,6 +38,8 @@ heroImage: images/mt-lindesay-vista-walkers.jpg
 heroAlt: "Walkers with Mt Lindesay behind them"
 cardImages:
   - { src: "images/mt-lindesay-vista-walkers.jpg", alt: "Walkers with Mt Lindesay behind them" }
+datesComingSoon: true
+datesComingNote: Next dates to be announced
 seasons:
   - { months: [8], note: "The inaugural weekend ran 8 to 10 August 2026" }
 order: 3

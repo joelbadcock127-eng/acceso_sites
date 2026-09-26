@@ -44,7 +44,7 @@ const bookingLine = group === 1 ? `with your ${platform} booking built properly 
 const first = site.business.ownerNames?.[0]?.split(' ')[0] ?? '{FirstName}';
 const domain = (live ?? '{domain}').replace(/^https?:\/\//, '').replace(/\/$/, '');
 const email = `Subject options:
-1. I rebuilt ${site.business.name}'s website (it's yours if you want it)
+1. I rebuilt ${site.business.name}${site.business.name.endsWith('s') ? "'" : "'s"} website (it's yours if you want it)
 2. ${site.business.name}: a new site, already built
 
 Hi ${first},

@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/spring-retreat-art-nature-fine-food-trip-notes.pdf", pages: 3, sizeKb: 186 }
+  - { kind: "trip-notes", file: "/downloads/spring-retreat-art-nature-fine-food-trip-notes.pdf", pages: 3, sizeKb: 301 }
 title: "Scenic Rim Spring Retreat: Art, Nature and Fine Food"
 type: multiday
 summary: A weekend of spring delights below Mt Maroon at Tuckeroo Homestead, with an introduction to nature journaling led by artist Fleur Wade, a cooking class with chef Caz Osborne and an easy walk with journal in hand.

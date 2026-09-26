@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/scenic-rim-day-walks-trip-notes.pdf", pages: 3, sizeKb: 165 }
+  - { kind: "trip-notes", file: "/downloads/scenic-rim-day-walks-trip-notes.pdf", pages: 3, sizeKb: 273 }
 title: Scenic Rim day walks
 type: day
 summary: A season of eco interpreted day hikes in the Scenic Rim's national parks and private valleys, May to October, eight to ten walkers at a time. Pick your dates from the program.

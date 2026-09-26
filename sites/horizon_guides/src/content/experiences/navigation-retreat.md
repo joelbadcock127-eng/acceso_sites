@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/navigation-retreat-trip-notes.pdf", pages: 3, sizeKb: 182 }
+  - { kind: "trip-notes", file: "/downloads/navigation-retreat-trip-notes.pdf", pages: 3, sizeKb: 362 }
 title: 4 Day Navigation Retreat with Caro Ryan
 type: multiday
 summary: Learn to navigate with Caro Ryan, author of How to Navigate from LotsaFreshAir, over four days at Tuckeroo Homestead in the foothills of Mt Maroon, with a full day of practice in Mt Barney National Park. The 2026 course has run; the next is to be announced.
@@ -33,12 +33,13 @@ faqs:
 gallery:
   - { src: "images/rabbit-board-sign.jpg", alt: "A Rabbit Board Fence sign on the border", score: 4 }
   - { src: "images/rainforest-track-rabbit-fence.jpg", alt: "Walkers on a rainforest track beside the Rabbit Board Fence", score: 4 }
-  - { src: "images/mt-lindesay-from-paddock.jpg", alt: "Mt Lindesay from a paddock", score: 4 }
   - { src: "images/tall-forest.jpg", alt: "Tall forest in the Scenic Rim", score: 4 }
 heroImage: images/rainforest-track-rabbit-fence.jpg
 heroAlt: "Walkers on a rainforest track beside the Rabbit Board Fence"
 cardImages:
   - { src: "images/rainforest-track-rabbit-fence.jpg", alt: "Walkers on a rainforest track beside the Rabbit Board Fence" }
+datesComingSoon: true
+datesComingNote: Next course to be announced
 seasons:
   - { months: [7], note: "The 2026 course ran 16 to 19 July" }
 order: 5

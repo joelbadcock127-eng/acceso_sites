@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/private-guiding-trip-notes.pdf", pages: 2, sizeKb: 147 }
+  - { kind: "trip-notes", file: "/downloads/private-guiding-trip-notes.pdf", pages: 2, sizeKb: 277 }
 title: Private guiding
 type: private
 summary: A guided day in the national parks of the Scenic Rim chosen for you, from a half day on Mt Edwards to a full and challenging day on Mt Barney, or a tailor made trip with all the arrangements done.
@@ -25,7 +25,6 @@ faqs:
 gallery:
   - { src: "images/mt-greville-echo-point.jpg", alt: "A group at Echo Point on Mt Greville", score: 4 }
   - { src: "images/ridge-walker-grass-trees.jpg", alt: "A walker on a ridge among grass trees", score: 5 }
-  - { src: "images/toolona-creek-rainforest.jpg", alt: "A rainforest creek at Picnic Rock", score: 4 }
   - { src: "images/group-on-granite.jpg", alt: "A group on granite at Girraween", score: 4 }
 heroImage: images/mt-greville-echo-point.jpg
 heroAlt: "A group at Echo Point on Mt Greville"

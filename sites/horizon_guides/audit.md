@@ -69,6 +69,7 @@ Evidence: `intake/evidence/lighthouse-live.json`. The 390px screenshot shows a 4
 - The 2027 program, or the remaining 2026 dates still open, before launch: only three 2026 dates lie ahead (Ships Stern 18 October, the Aussie Bird Count weekend, the Spring Retreat)
 - Whether the Aussie Bird Count weekend has a price
 - The booking terms page was transcribed from the PDF and needs a proofread against it; the PDF itself is linked at the top of the page as the authoritative copy
+- Two addresses: the footer says 7 Church Street, Boonah and the booking terms say 494 Mt French Rd, Boonah. The preview uses Church Street for contact and leaves Mt French Rd in the terms
 - Confirm the Queensland Parks alerts link (parks.desi.qld.gov.au/park-alerts) is the page she wants walkers to check
 
 ## Archetype chosen

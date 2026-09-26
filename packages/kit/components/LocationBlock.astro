@@ -18,7 +18,7 @@ const heading = [b.baseTown, b.region].filter(Boolean).join(', ') || b.state;
         <div class="eyebrow mb-3">Where we are</div>
         <h2 class="mb-6">{heading}</h2>
         <ul class="grid gap-3 sm:grid-cols-2">
-          {b.location && <li class="flex items-start gap-3"><Icon name="pin" /><span>{b.location.lat.toFixed(4)}° S, {Math.abs(b.location.lng).toFixed(4)}° E</span></li>}
+          {b.location && <li class="flex items-start gap-3"><Icon name="pin" /><span>{Math.abs(b.location.lat).toFixed(4)}° {b.location.lat < 0 ? 'S' : 'N'}, {Math.abs(b.location.lng).toFixed(4)}° {b.location.lng < 0 ? 'W' : 'E'}</span></li>}
           {b.driveTimes.map((d) => <li class="flex items-start gap-3"><Icon name="car" /><span>{d.time} from {d.from}</span></li>)}
           {b.nearestAirport && <li class="flex items-start gap-3"><Icon name="plane" /><span>Nearest airport: {b.nearestAirport}</span></li>}
           {b.address && <li class="flex items-start gap-3"><Icon name="mail" /><span>{b.address}</span></li>}

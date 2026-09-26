@@ -1,0 +1,22 @@
+---
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import type { Site } from '../../lib/content/schema';
+interface Props { site: Site }
+const { site } = Astro.props;
+---
+<div class="card p-6 md:p-8">
+  <FormShell site={site} kind="corporate" submitLabel="Send enquiry" success="Thanks, we've received your enquiry and will be in touch.">
+    <Field name="orgType" label="Organisation type" options={['Company or team', 'School', 'University', 'Duke of Edinburgh group', 'Other']} required />
+    <Field name="organisation" label="Organisation name" required autocomplete="organization" />
+    <div class="grid gap-4 sm:grid-cols-2">
+      <Field name="groupSize" label="Group or team size" type="number" min={1} required />
+      <Field name="yearLevel" label="Year level" showWhen="orgType=School" />
+    </div>
+    <Field name="dates" label="Preferred dates" required />
+    <Field name="paperwork" label="Risk assessment or medical paperwork needs" options={['None', 'Risk assessment required', 'Medical forms required', 'Both']} />
+    <div class="grid gap-4 sm:grid-cols-2"><Field name="name" label="Your name" required autocomplete="name" /><Field name="email" label="Email" type="email" required autocomplete="email" /></div>
+    <Field name="phone" label="Phone" type="tel" autocomplete="tel" />
+    <Field name="notes" label="Anything else" type="textarea" rows={3} />
+  </FormShell>
+</div>

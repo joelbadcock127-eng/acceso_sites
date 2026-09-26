@@ -1,0 +1,63 @@
+---
+// Footer (A1 global): location, contact, social links, navigation columns,
+// newsletter (only if they already run one) and legal links (only theirs).
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import NewsletterForm from './forms/NewsletterForm.astro';
+import type { Site } from '../lib/content/schema';
+import theme from '/src/generated/theme.json';
+interface Props { site: Site }
+const { site } = Astro.props;
+const b = site.business;
+const socials = Object.entries(b.socials).filter(([, v]) => v) as [string, string][];
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-line section-md" style="background:var(--ground)">
+  <div class="pad-x container-xl">
+    <div class="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
+      <div class="grid gap-6">
+        <a href="/" aria-label={`${b.name} home`}>
+          {theme.logo.wordmark ? <span class:list={['font-display text-2xl', { frame: theme.logo.framed }]}>{b.name}</span> : <Img src={theme.logo.src} alt={theme.logo.alt || b.name} class="h-12 w-auto" sizes="200px" widths={[240, 480]} />}
+        </a>
+        {(b.address || b.baseTown) && (
+          <div>
+            <div class="label mb-1" style="color:var(--muted)">Location</div>
+            {b.mapsUrl ? <a href={b.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-4">{b.address ?? b.baseTown}</a> : <span>{b.address ?? b.baseTown}</span>}
+          </div>
+        )}
+        {(b.email || b.phone) && (
+          <div>
+            <div class="label mb-1" style="color:var(--muted)">Contact</div>
+            {b.email && <a href={`mailto:${b.email}`} class="block underline underline-offset-4">{b.email}</a>}
+            {b.phone && <a href={`tel:${b.phone.replace(/\s+/g, '')}`} class="block underline underline-offset-4">{b.phone}</a>}
+          </div>
+        )}
+        {socials.length > 0 && (
+          <ul class="flex gap-4" aria-label="Social links">
+            {socials.map(([k, v]) => <li><a href={v} target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center border border-line" aria-label={k[0].toUpperCase() + k.slice(1)}><Icon name={k === 'instagram' ? 'camera' : k === 'youtube' ? 'external' : k === 'tripadvisor' || k === 'google' ? 'star' : 'chat'} size={20} /></a></li>)}
+          </ul>
+        )}
+        {b.acknowledgement && <p class="text-sm" style="color:var(--muted)">{b.acknowledgement}</p>}
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {site.footer.columns.slice(0, 3).map((c) => (
+          <div>
+            <div class="mb-2 font-semibold">{c.label}</div>
+            <ul>{c.links.map((l) => <li><a href={l.href} class="block py-1.5 text-sm hover:underline underline-offset-4">{l.label}</a></li>)}</ul>
+          </div>
+        ))}
+        {site.newsletter && (
+          <div class:list={{ 'sm:col-span-2 lg:col-span-1': site.footer.columns.length < 3 }}>
+            <div class="mb-2 font-semibold">Newsletter</div>
+            {site.newsletter.blurb && <p class="mb-3 text-sm" style="color:var(--muted)">{site.newsletter.blurb}</p>}
+            <NewsletterForm site={site} />
+          </div>
+        )}
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-sm sm:flex-row sm:items-center sm:justify-between" style="color:var(--muted)">
+      <div>{site.footer.credit ?? `© ${year} ${b.legalName ?? b.name}. All rights reserved.`}</div>
+      {site.footer.legal.length > 0 && <ul class="flex flex-wrap gap-x-5 gap-y-1">{site.footer.legal.map((l) => <li><a href={l.href} class="underline underline-offset-4">{l.label}</a></li>)}</ul>}
+    </div>
+  </div>
+</footer>

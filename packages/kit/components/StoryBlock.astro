@@ -1,0 +1,19 @@
+---
+// Our story (A1 #9): the owner or guide story, in their words tightened.
+import Img from './Img.astro';
+interface Props { heading: string; body: string; image?: string; alt?: string; link?: { label: string; href: string } }
+const { heading, body, image, alt = '', link } = Astro.props;
+---
+{body && (
+  <section class="pad-x section" data-reveal>
+    <div class:list={['container-xl grid items-center gap-10', { 'lg:grid-cols-[1.1fr_1fr]': image }]}>
+      <div class:list={{ 'mx-auto max-w-2xl text-center': !image }}>
+        <div class="eyebrow mb-3">Our story</div>
+        <h2 class="mb-5">{heading}</h2>
+        <div class="prose lede" style="color:var(--muted)" set:html={body.split(/\n\n+/).map((p) => `<p>${p}</p>`).join('')} />
+        {link && <a href={link.href} class="btn-link mt-6">{link.label}</a>}
+      </div>
+      {image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={image} alt={alt} class="aspect-square w-full object-cover" sizes="(min-width:1024px) 45vw, 100vw" widths={[768, 1080]} /></div>}
+    </div>
+  </section>
+)}

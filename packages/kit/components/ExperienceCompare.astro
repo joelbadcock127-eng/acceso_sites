@@ -1,0 +1,28 @@
+---
+// A simple comparison table on the experiences index (A4). 3 or more experiences.
+import { formatPriceShort, groupSizeLine } from '../lib/site';
+import type { ExperienceEntry } from '../lib/site';
+interface Props { experiences: ExperienceEntry[] }
+const { experiences } = Astro.props;
+const cols = [
+  { k: 'Duration', f: (e: ExperienceEntry) => e.data.durationLabel },
+  { k: 'Distance', f: (e: ExperienceEntry) => e.data.distanceKm && `${e.data.distanceKm} km` },
+  { k: 'Grade', f: (e: ExperienceEntry) => e.data.grade?.label },
+  { k: 'Group size', f: (e: ExperienceEntry) => groupSizeLine(e.data.groupSize) },
+  { k: 'Price', f: (e: ExperienceEntry) => formatPriceShort(e.data.priceFrom) },
+  { k: 'Best for', f: (e: ExperienceEntry) => e.data.bestFor },
+].filter((c) => experiences.some((e) => c.f(e)));
+---
+{experiences.length >= 3 && cols.length >= 3 && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl">
+      <h2 class="mb-6">Compare the walks</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[40rem] border-collapse text-left text-sm">
+          <thead><tr class="label" style="color:var(--muted)"><th class="border-b border-line py-2 pr-4 font-medium">Walk</th>{cols.map((c) => <th class="border-b border-line py-2 pr-4 font-medium">{c.k}</th>)}</tr></thead>
+          <tbody>{experiences.map((e) => <tr><th class="border-b border-line py-3 pr-4 text-left font-medium"><a href={`/experiences/${e.slug}`} class="underline underline-offset-4">{e.data.title}</a></th>{cols.map((c) => <td class="border-b border-line py-3 pr-4">{c.f(e) ?? '—'}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}

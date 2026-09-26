@@ -1,0 +1,29 @@
+---
+// Twelve month strip (A4b): when each experience runs and what each season brings.
+import { MONTHS_SHORT } from '../lib/site';
+interface Props { rows: { title: string; slug?: string; months: number[] }[]; notes: { months: number[]; note: string }[]; heading?: string; id?: string }
+const { rows, notes, heading = 'Through the year', id = 'seasons' } = Astro.props;
+const facts = notes.length + rows.filter((r) => r.months.length).length;
+---
+{facts >= 2 && (
+  <section id={id} class="pad-x section border-t border-line anchor-offset" data-reveal>
+    <div class="container-xl">
+      <h2 class="mb-8">{heading}</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[44rem] border-collapse text-sm">
+          <thead><tr><th class="w-40 py-2 text-left"></th>{MONTHS_SHORT.map((m) => <th class="label py-2 text-center font-medium" style="color:var(--muted)">{m}</th>)}</tr></thead>
+          <tbody>
+            {rows.filter((r) => r.months.length).map((r) => (
+              <tr><th class="py-2 pr-3 text-left font-medium">{r.slug ? <a href={`/experiences/${r.slug}`} class="underline underline-offset-4">{r.title}</a> : r.title}</th>{MONTHS_SHORT.map((_, i) => <td class="p-1"><div class="h-6" style={r.months.includes(i + 1) ? 'background:var(--accent)' : 'background:var(--line)'} title={r.months.includes(i + 1) ? `${r.title} runs in ${MONTHS_SHORT[i]}` : undefined}></div></td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {notes.length > 0 && (
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {notes.map((n) => <li class="border-t border-line pt-3"><div class="label" style="color:var(--muted)">{n.months.map((m) => MONTHS_SHORT[m - 1]).join(', ')}</div><p class="mt-1">{n.note}</p></li>)}
+        </ul>
+      )}
+    </div>
+  </section>
+)}

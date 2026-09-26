@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import { pageData } from '../../lib/page';
+import { formatDate } from '../../lib/site';
+import { breadcrumb } from '../../lib/jsonld';
+export async function getStaticPaths() { const { posts } = await pageData(); return [...posts].sort((a, b) => b.data.date.localeCompare(a.data.date)).slice(0, 6).map((p) => ({ params: { slug: p.slug }, props: { slug: p.slug } })); }
+const { slug } = Astro.props as { slug: string };
+const { site, posts } = await pageData();
+const p = posts.find((x) => x.slug === slug)!;
+const html = p.rendered?.html ?? (p.body ?? '').split(/\n\n+/).map((x) => `<p>${x}</p>`).join('');
+---
+<Base title={`${p.data.title} | ${site.business.name}`} description={p.data.summary ?? p.data.title} ogImage={p.data.image} jsonLd={[breadcrumb(site, [{ name: 'Home', path: '/' }, { name: 'Journal', path: '/journal' }, { name: p.data.title, path: `/journal/${slug}` }])]}>
+  <article class="pad-x section"><div class="container-md">
+    <div class="text-xs" style="color:var(--muted)">{[p.data.category, formatDate(p.data.date), p.data.readTime].filter(Boolean).join(' · ')}</div>
+    <h1 class="mt-3 mb-8">{p.data.title}</h1>
+    {p.data.image && <div class="mb-10 overflow-hidden" style="border-radius:var(--radius)"><Img src={p.data.image} alt={p.data.alt ?? ''} class="aspect-[16/9] w-full object-cover" priority sizes="768px" widths={[768, 1080, 1440]} /></div>}
+    <div class="prose lede" set:html={html} />
+    <p class="mt-10"><a href="/journal" class="btn-link">All posts</a></p>
+  </div></article>
+</Base>

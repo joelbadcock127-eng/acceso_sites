@@ -1,0 +1,37 @@
+---
+// Print route for trip notes (A4c). Rendered to PDF by scripts/build_pdfs.mjs.
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import ElevationProfile from '../../../../components/ElevationProfile.astro';
+import { pageData } from '../../../../lib/page';
+import { getRouteData } from '../../../../lib/routes';
+import { keyFacts, formatPrice, groupSizeLine } from '../../../../lib/site';
+import '../../../../styles/print.css';
+import theme from '/src/generated/theme.json';
+export async function getStaticPaths() { const { experiences } = await pageData(); return experiences.map((e) => ({ params: { slug: e.slug }, props: { slug: e.slug } })); }
+const { slug } = Astro.props as { slug: string };
+const { site, experiences, faqs } = await pageData();
+const entry = experiences.find((x) => x.slug === slug)!; const e = entry.data;
+const route = await getRouteData(slug, e.route?.dataFile);
+const hero = e.heroImage ?? e.gallery[0]?.src;
+const qs = e.faqs.length ? e.faqs : faqs.slice(0, 5);
+const groups = [...new Set(e.whatToBring.map((i) => i.group))];
+---
+<Base title={`${e.title}: trip notes`} description={e.summary} bare noindex>
+  <article class="print-doc mx-auto max-w-3xl p-6 print:p-0">
+    <div class="print-header"><span>{site.business.name}</span>{!theme.logo.wordmark && <Img src={theme.logo.src} alt="" widths={[240]} sizes="120px" />}<span>Trip notes</span></div>
+    <div class="print-cover">{hero && <Img src={hero} alt={e.heroAlt ?? ''} widths={[1080]} sizes="800px" />}<h1>{e.title}</h1>{site.home.positioning && <p class="lede">{site.home.positioning.heading}</p>}<p>{e.summary}</p></div>
+    <div class="facts">{keyFacts(e).map((f) => <div><div class="k">{f.k}</div><div class="v">{f.v}</div></div>)}</div>
+    {e.itinerary.length > 0 && <><h2>{e.type === 'multiday' ? 'Day by day' : 'The day'}</h2>{e.itinerary.map((d) => <div class="day"><div class="label">{d.label}</div><h3>{d.title}</h3><p>{d.body}</p></div>)}</>}
+    {route && <><h2>Route and elevation</h2><ElevationProfile data={route} print /><p class="small">{route.distanceKm && `${route.distanceKm} km. `}{route.ascentM && `${route.ascentM} m of ascent. `}{route.highestM && `Highest point ${route.highestM} m. `}{route.attribution}</p></>}
+    {e.included.length > 0 && <div class="two-col"><div><h2>Included</h2><ul>{e.included.map((x) => <li>{x}</li>)}</ul></div>{e.excluded.length > 0 && <div><h2>Not included</h2><ul>{e.excluded.map((x) => <li>{x}</li>)}</ul></div>}</div>}
+    {(e.fitness || e.suitsIf.length > 0) && <><h2>Fitness and who it suits</h2>{e.fitness && <p>{e.fitness}</p>}{e.grade && <p><strong>Grade:</strong> {e.grade.label}{e.grade.explainer && `. ${e.grade.explainer}`}</p>}{e.suitsIf.length > 0 && <><h3>This suits you if</h3><ul>{e.suitsIf.map((x) => <li>{x}</li>)}</ul></>}{e.notForIf.length > 0 && <><h3>Probably not for you if</h3><ul>{e.notForIf.map((x) => <li>{x}</li>)}</ul></>}</>}
+    {e.whatToBring.length > 0 && <><h2>What to bring</h2><div class="two-col">{groups.map((g) => <div><h3 style="text-transform:capitalize">{g}</h3><ul class="check">{e.whatToBring.filter((i) => i.group === g).map((i) => <li class:list={{ provided: i.provided }}>{i.item}{i.provided && ' (provided)'}</li>)}</ul></div>)}</div></>}
+    {(e.startLocation || site.business.driveTimes.length > 0) && <><h2>Meeting point and getting there</h2>{e.startLocation && <p><strong>Meet:</strong> {e.startLocation.name}{e.startTime && `, ${e.startTime}`}</p>}{site.business.driveTimes.map((d) => <p>{d.time} drive from {d.from}</p>)}{site.business.nearestAirport && <p>Nearest airport: {site.business.nearestAirport}</p>}{site.business.address && <p>{site.business.address}</p>}</>}
+    {qs.length > 0 && <><h2>Questions</h2>{qs.map((q) => <div class="day"><h3>{q.q}</h3><p>{q.a}</p></div>)}</>}
+    <h2>How to book</h2>
+    <p>{site.booking.group === 2 ? `Send a request to book from the ${e.title} page and ${site.booking.ownerFirstName ?? 'we'} will confirm within ${site.booking.responseTime}.` : site.booking.group === 3 ? 'Pick a day on the website and it goes straight into the guide\'s calendar.' : 'Book online from the walk page on our website.'}{groupSizeLine(e.groupSize) && ` Groups are ${groupSizeLine(e.groupSize)!.toLowerCase()}.`}{formatPrice(e.priceFrom) && ` ${formatPrice(e.priceFrom)}.`}</p>
+    <h2>Contact</h2>
+    <p>{site.business.name}{site.business.email && ` · ${site.business.email}`}{site.business.phone && ` · ${site.business.phone}`}{site.seo.siteUrl && ` · ${site.seo.siteUrl.replace(/^https?:\/\//, '')}`}</p>
+  </article>
+</Base>

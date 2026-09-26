@@ -1,0 +1,24 @@
+---
+// For operators working across several regions: one map linking each region to its trips.
+import { STATES, stateCode, makeProjector, ringPath } from '../lib/geo/project';
+import type { ExperienceEntry } from '../lib/site';
+interface Props { areas: { name: string; state: string; lat: number; lng: number; experiences: string[] }[]; experiences: ExperienceEntry[] }
+const { areas, experiences } = Astro.props;
+const codes = [...new Set(areas.map((a) => stateCode(a.state)).filter(Boolean))] as string[];
+const shapes = codes.map((c) => STATES[c]);
+const W = 720, H = 560;
+let bbox: [number, number, number, number] | null = null;
+for (const s of shapes) bbox = bbox ? [Math.min(bbox[0], s.bbox[0]), Math.min(bbox[1], s.bbox[1]), Math.max(bbox[2], s.bbox[2]), Math.max(bbox[3], s.bbox[3])] : [...s.bbox];
+const project = bbox ? makeProjector(bbox, W, H, 30) : null;
+---
+{areas.length >= 2 && project && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full border border-line" style="background:var(--surface)" role="img" aria-label="Map of the regions we operate in">
+        <g fill="var(--ground)" stroke="var(--ink)" stroke-width="1">{shapes.flatMap((s) => s.rings.map((r) => <path d={ringPath(r, project!)} />))}</g>
+        {areas.map((a) => { const [x, y] = project!(a.lng, a.lat); return <g transform={`translate(${x.toFixed(1)} ${y.toFixed(1)})`}><circle r="8" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5" /><text x="14" y="5" font-size="14" font-family="var(--font-label)" fill="var(--ink)">{a.name}</text></g>; })}
+      </svg>
+      <div><h2 class="mb-6">Where we operate</h2><ul class="grid gap-4">{areas.map((a) => <li class="border-t border-line pt-3"><div class="font-display text-2xl">{a.name}</div><ul class="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm">{a.experiences.map((slug) => { const e = experiences.find((x) => x.slug === slug); return e ? <li><a href={`/experiences/${e.slug}`} class="underline underline-offset-4">{e.data.title}</a></li> : null; })}</ul></li>)}</ul></div>
+    </div>
+  </section>
+)}

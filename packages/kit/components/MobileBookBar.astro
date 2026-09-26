@@ -1,0 +1,18 @@
+---
+// Sticky at mobile widths on experience pages (A4). Hides without a booking link.
+import BookButton from './BookButton.astro';
+import type { BookingAdapter, BookingTarget } from '../lib/booking';
+interface Props { adapter: BookingAdapter; target?: BookingTarget; price?: string | null; experience: string; title: string }
+const { adapter, target, price, experience, title } = Astro.props;
+const href = adapter.bookUrl(target);
+---
+{href && href !== '#' && (
+  <div class="mobile-book-bar md:hidden fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-line surface px-4 py-2.5" style="padding-bottom:max(.625rem, env(safe-area-inset-bottom))" data-mobile-bar>
+    <div class="min-w-0">
+      <div class="truncate text-sm font-medium">{title}</div>
+      {price && <div class="text-xs" style="color:var(--muted)">{price}</div>}
+    </div>
+    <BookButton adapter={adapter} target={target} experience={experience} small />
+  </div>
+  <div class="md:hidden h-16" aria-hidden="true"></div>
+)}

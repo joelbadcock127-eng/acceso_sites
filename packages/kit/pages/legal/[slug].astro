@@ -1,0 +1,12 @@
+---
+// Their policies, verbatim (A5). Never written by us.
+import Base from '../../layouts/Base.astro';
+import { pageData } from '../../lib/page';
+export async function getStaticPaths() { const { legal } = await pageData(); return legal.map((l) => ({ params: { slug: l.slug }, props: { slug: l.slug } })); }
+const { slug } = Astro.props as { slug: string };
+const { site, legal } = await pageData();
+const l = legal.find((x) => x.slug === slug)!;
+---
+<Base title={`${l.data.title} | ${site.business.name}`} description={l.data.title}>
+  <article class="pad-x section"><div class="container-md"><h1 class="mb-8">{l.data.title}</h1><div class="prose" set:html={l.rendered?.html ?? (l.body ?? '').split(/\n\n+/).map((x) => `<p>${x}</p>`).join('')} /></div></article>
+</Base>

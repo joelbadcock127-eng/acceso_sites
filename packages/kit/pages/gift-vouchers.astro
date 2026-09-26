@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import BookButton from '../components/BookButton.astro';
+import GiftVoucherRequest from '../components/forms/GiftVoucherRequest.astro';
+import { pageData } from '../lib/page';
+const { site, adapter, experiences } = await pageData();
+const g = site.giftVouchers;
+const platformGift = adapter.giftUrl?.();
+---
+<Base title={`Gift vouchers | ${site.business.name}`} description={g?.intro ?? `Give a guided walk with ${site.business.name}.`}>
+  <section class="pad-x section"><div class="container-xl grid items-center gap-10 lg:grid-cols-2"><div><h1 class="mb-4">{g?.heading ?? 'Gift vouchers'}</h1><p class="lede" style="color:var(--muted)">{g?.intro ?? `Give a guided walk with ${site.business.name}.`}</p><div class="mt-8">{platformGift ? <BookButton adapter={adapter} gift /> : null}</div></div>{g?.image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={g.image} alt={g.alt ?? ''} class="aspect-[4/3] w-full object-cover" priority sizes="50vw" widths={[768, 1080]} /></div>}</div></section>
+  {!platformGift && <section class="pad-x section border-t border-line"><div class="container-md"><h2 class="mb-6">Request a voucher</h2><GiftVoucherRequest site={site} experiences={experiences} /></div></section>}
+</Base>

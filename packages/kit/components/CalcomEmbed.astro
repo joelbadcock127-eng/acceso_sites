@@ -1,0 +1,22 @@
+---
+// Group 3: Cal.com event type for a guiding day. Inline embed loads on demand; disabled in preview.
+import type { Site } from '../lib/content/schema';
+import { isPreview } from '../lib/site';
+interface Props { site: Site; event: string; title: string }
+const { site, event, title } = Astro.props;
+const preview = isPreview(site);
+const link = site.booking.account ? `${site.booking.account}/${event}` : null;
+---
+{link && (
+  <section id="book" class="anchor-offset card p-6 md:p-8">
+    <h2 class="mb-2 text-3xl">Check availability</h2>
+    <p class="mb-4" style="color:var(--muted)">Pick a day for {title}. It goes straight into the guide's calendar.</p>
+    {preview ? <p class="border border-line p-4 text-sm">Preview only. Once live, booking requests go straight to your inbox.</p> : (
+      <div data-cal-link={link} data-cal-inline style="min-height:32rem"></div>
+      <script>
+        const el = document.querySelector<HTMLElement>('[data-cal-inline]');
+        if (el) { const s = document.createElement('script'); s.src = 'https://app.cal.com/embed/embed.js'; s.async = true; s.onload = () => { (window as any).Cal?.('inline', { elementOrSelector: el, calLink: el.dataset.calLink }); }; document.head.appendChild(s); }
+      </script>
+    )}
+  </section>
+)}

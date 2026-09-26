@@ -1,0 +1,97 @@
+---
+// Hide test (A11): renders every optional component with empty content. The
+// hide_test.mjs script asserts that only the always on shell remains.
+import Base from '../../layouts/Base.astro';
+import Positioning from '../../components/Positioning.astro';
+import PressStrip from '../../components/PressStrip.astro';
+import FeatureSplit from '../../components/FeatureSplit.astro';
+import LocationBlock from '../../components/LocationBlock.astro';
+import OfferCards from '../../components/OfferCards.astro';
+import StatsRow from '../../components/StatsRow.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import StoryBlock from '../../components/StoryBlock.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import JournalTeaser from '../../components/JournalTeaser.astro';
+import CommitmentBand from '../../components/CommitmentBand.astro';
+import KeyFactsBanner from '../../components/KeyFactsBanner.astro';
+import AnchorNav from '../../components/AnchorNav.astro';
+import Itinerary from '../../components/Itinerary.astro';
+import IncludedExcluded from '../../components/IncludedExcluded.astro';
+import PackageCards from '../../components/PackageCards.astro';
+import AmenityGrid from '../../components/AmenityGrid.astro';
+import DeparturesTable from '../../components/DeparturesTable.astro';
+import PackingList from '../../components/PackingList.astro';
+import SpeciesGrid from '../../components/SpeciesGrid.astro';
+import GuideCards from '../../components/GuideCards.astro';
+import Gallery from '../../components/Gallery.astro';
+import RegionMap from '../../components/RegionMap.astro';
+import MobileBookBar from '../../components/MobileBookBar.astro';
+import ExperienceCompare from '../../components/ExperienceCompare.astro';
+import NextDeparture from '../../components/NextDeparture.astro';
+import TrustRow from '../../components/TrustRow.astro';
+import WhoItsFor from '../../components/WhoItsFor.astro';
+import RouteMap from '../../components/RouteMap.astro';
+import DayOnTheTrail from '../../components/DayOnTheTrail.astro';
+import SeasonCalendar from '../../components/SeasonCalendar.astro';
+import TripFinder from '../../components/TripFinder.astro';
+import SignatureMoment from '../../components/SignatureMoment.astro';
+import SignatureMap from '../../components/SignatureMap.astro';
+import OperatingAreasMap from '../../components/OperatingAreasMap.astro';
+import GettingThere from '../../components/GettingThere.astro';
+import TapToChat from '../../components/TapToChat.astro';
+import ReviewsWidget from '../../components/ReviewsWidget.astro';
+import RecentFromTheTrail from '../../components/RecentFromTheTrail.astro';
+import AdditionalInfo from '../../components/AdditionalInfo.astro';
+import { getAdapter } from '../../lib/booking';
+import type { Site, Experience } from '../../lib/content/schema';
+import { siteSchema, experienceSchema } from '../../lib/content/schema';
+const site: Site = siteSchema.parse({ business: { name: 'Empty Test' }, seo: { defaultTitle: 'Empty', defaultDescription: 'Empty' }, home: { hero: { headline: 'Empty' } }, preview: { enabled: true } });
+const emptySite: Site = { ...site, business: { ...site.business, email: undefined, phone: undefined } };
+const exp: Experience = experienceSchema.parse({ title: 'Empty', summary: 'Empty', sourceUrl: 'https://example.invalid' });
+const adapter = getAdapter({ provider: 'request', group: 2 });
+const noBook = { ...adapter, bookUrl: () => '#' };
+---
+<Base title="Kit hide test" description="Every component with empty content" noindex>
+  <div id="hide-test">
+    <Positioning site={emptySite} />
+    <PressStrip items={[]} />
+    <FeatureSplit features={[]} />
+    <LocationBlock site={emptySite} />
+    <OfferCards site={emptySite} experiences={[]} />
+    <StatsRow stats={[]} />
+    <Testimonials items={[]} />
+    <StoryBlock heading="" body="" />
+    <FaqAccordion items={[]} />
+    <JournalTeaser posts={[]} />
+    <CommitmentBand site={emptySite} />
+    <KeyFactsBanner experience={exp} />
+    <AnchorNav sections={[]} />
+    <Itinerary items={[]} />
+    <IncludedExcluded included={[]} excluded={[]} />
+    <AdditionalInfo experience={exp} />
+    <PackageCards experience={exp} slug="empty" adapter={adapter} />
+    <AmenityGrid items={[]} />
+    <DeparturesTable experience={exp} slug="empty" adapter={adapter} />
+    <PackingList items={[]} />
+    <SpeciesGrid items={[]} />
+    <GuideCards guides={[]} />
+    <Gallery images={[]} />
+    <RegionMap site={emptySite} />
+    <MobileBookBar adapter={noBook} experience="empty" title="Empty" />
+    <ExperienceCompare experiences={[]} />
+    <NextDeparture experience={exp} />
+    <TrustRow site={emptySite} />
+    <WhoItsFor suits={[]} notFor={[]} />
+    <RouteMap experience={exp} routeData={null} />
+    <DayOnTheTrail items={[]} />
+    <SeasonCalendar rows={[]} notes={[]} />
+    <TripFinder experiences={[]} />
+    <SignatureMoment data={null} />
+    <SignatureMap site={emptySite} experiences={[]} />
+    <OperatingAreasMap areas={[]} experiences={[]} />
+    <GettingThere site={emptySite} />
+    <TapToChat site={emptySite} />
+    <ReviewsWidget site={emptySite} />
+    <RecentFromTheTrail site={emptySite} />
+  </div>
+</Base>

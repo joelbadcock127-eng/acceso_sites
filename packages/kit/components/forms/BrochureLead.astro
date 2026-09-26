@@ -1,0 +1,15 @@
+---
+// "Email me the trip notes" (A4c optional lead capture). Off by default, disabled in preview.
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import type { Site } from '../../lib/content/schema';
+interface Props { site: Site; experience: string; file: string }
+const { site, experience, file } = Astro.props;
+---
+<div class="border border-line p-5">
+  <h3 class="mb-3 text-xl">Email me the trip notes</h3>
+  <FormShell site={site} kind="brochure" submitLabel="Send them to me" success="Sent. Check your inbox for the trip notes.">
+    <input type="hidden" name="experience" value={experience} /><input type="hidden" name="file" value={file} />
+    <Field name="email" label="Email" type="email" required autocomplete="email" />
+  </FormShell>
+</div>

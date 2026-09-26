@@ -1,0 +1,16 @@
+---
+// Only when they already run a newsletter. Posts to their provider directly.
+import type { Site } from '../../lib/content/schema';
+import { isPreview } from '../../lib/site';
+interface Props { site: Site }
+const { site } = Astro.props;
+const n = site.newsletter;
+const preview = isPreview(site);
+---
+{n && (
+  <form action={preview ? '#' : n.actionUrl} method="post" target="_blank" class="flex gap-2" data-kit-form data-preview={String(preview)} data-success="Thanks, you're on the list.">
+    <div class="field flex-1"><label class="sr-only" for="nl-email">Email</label><input id="nl-email" type="email" name="EMAIL" placeholder="Your email" required autocomplete="email" /><span class="error">Please add your email.</span></div>
+    <div class="actions"><button type="submit" class="btn">Sign up</button></div>
+    <p data-status hidden class="basis-full text-sm"></p>
+  </form>
+)}

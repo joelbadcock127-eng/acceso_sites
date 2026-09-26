@@ -1,0 +1,10 @@
+---
+// Only when they already invite contact that way ("WhatsApp me").
+import Icon from './Icon.astro';
+import type { Site } from '../lib/content/schema';
+interface Props { site: Site }
+const { site } = Astro.props;
+const c = site.business.chat;
+const links = c ? [c.whatsapp && { label: 'WhatsApp us', href: `https://wa.me/${c.whatsapp.replace(/[^0-9]/g, '')}` }, c.sms && { label: 'Text us', href: `sms:${c.sms.replace(/\s+/g, '')}` }, c.messenger && { label: 'Message us', href: c.messenger }].filter(Boolean) as { label: string; href: string }[] : [];
+---
+{links.length > 0 && <div class="flex flex-wrap gap-3">{links.map((l) => <a href={l.href} target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><Icon name="chat" size={18} />{l.label}</a>)}</div>}

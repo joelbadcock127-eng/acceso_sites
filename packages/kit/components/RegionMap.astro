@@ -1,0 +1,32 @@
+---
+// State outline from Natural Earth (public domain), simplified to a small
+// inline SVG, with a pin at the base town. Links out to Google Maps rather
+// than embedding it. Hides without a state and a location.
+import { STATES, stateCode, makeProjector, ringPath } from '../lib/geo/project';
+import type { Site } from '../lib/content/schema';
+interface Props { site: Site; class?: string }
+const { site, class: cls = '' } = Astro.props;
+const code = stateCode(site.business.state);
+const loc = site.business.location;
+const shape = code ? STATES[code] : null;
+const W = 480, H = 400;
+const project = shape ? makeProjector(shape.bbox, W, H, 24) : null;
+const pin = shape && loc && project ? project(loc.lng, loc.lat) : null;
+---
+{shape && project && pin && (
+  <figure class:list={['region-map', cls]}>
+    <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full" role="img" aria-label={`Map of ${shape.name} showing ${site.business.baseTown ?? site.business.name}`}>
+      <g fill="var(--surface)" stroke="var(--ink)" stroke-width="1" stroke-linejoin="round">
+        {shape.rings.map((r) => <path d={ringPath(r, project)} />)}
+      </g>
+      <g transform={`translate(${pin[0].toFixed(1)} ${pin[1].toFixed(1)})`}>
+        <circle r="14" fill="var(--accent)" opacity=".25" />
+        <circle r="5" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5" />
+      </g>
+      {site.business.baseTown && (
+        <text x={Math.min(pin[0] + 12, W - 100).toFixed(1)} y={(pin[1] - 10).toFixed(1)} font-family="var(--font-label)" font-size="13" fill="var(--ink)" letter-spacing=".08em" style="text-transform:uppercase">{site.business.baseTown}</text>
+      )}
+    </svg>
+    <figcaption class="sr-only">{site.business.baseTown}, {shape.name}</figcaption>
+  </figure>
+)}

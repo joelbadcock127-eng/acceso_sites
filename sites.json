@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "_demo_ridgeline",
+    "business": "Ridgeline Walks (fictional demo)",
+    "status": "preview",
+    "pagesProject": null,
+    "previewUrl": null,
+    "domain": null,
+    "sentOn": null,
+    "deleteAfter": null,
+    "bookingGroup": 2,
+    "archetype": "expedition"
+  },
+  {
+    "slug": "bakers",
+    "business": "Bakers Walking Co",
+    "status": "preview",
+    "pagesProject": null,
+    "previewUrl": null,
+    "domain": null,
+    "sentOn": null,
+    "deleteAfter": null,
+    "bookingGroup": 1,
+    "archetype": "lodge"
+  }
+]

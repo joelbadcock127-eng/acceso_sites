@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import NextDeparture from '../../components/NextDeparture.astro';
+import ExperienceCompare from '../../components/ExperienceCompare.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import TripFinder from '../../components/TripFinder.astro';
+import { pageData } from '../../lib/page';
+import { formatPriceShort, groupSizeLine } from '../../lib/site';
+import { breadcrumb } from '../../lib/jsonld';
+import plan from '/src/content/plan.json';
+const { site, adapter, experiences } = await pageData();
+const on = (k: string) => (plan as Record<string, boolean>)[k] !== false;
+const groups = [['day', 'Day walks'], ['multiday', 'Multi day walks'], ['private', 'Private guiding'], ['corporate', 'Corporate and groups']] as const;
+const amenities = [...new Set(experiences.flatMap((e) => e.data.amenities.map((a) => JSON.stringify(a))))].map((s) => JSON.parse(s) as { label: string; icon?: string }).slice(0, 6);
+const heroImg = experiences.find((e) => e.data.heroImage)?.data;
+---
+<Base title={`Walks and experiences | ${site.business.name}`} description={`Every guided walk ${site.business.name} runs${site.business.region ? ` in ${site.business.region}` : ''}: dates, distance, grade, group size and price.`} jsonLd={[breadcrumb(site, [{ name: 'Home', path: '/' }, { name: 'Experiences', path: '/experiences' }])]}>
+  <section class="relative band">
+    {heroImg?.heroImage && <div class="absolute inset-0"><Img src={heroImg.heroImage} alt="" class="cover" priority sizes="100vw" widths={[768, 1440, 1920]} /><div class="overlay"></div></div>}
+    <div class="pad-x container-xl relative py-24 text-center md:py-32">
+      <h1>Experiences</h1>
+      {site.home.offers?.intro && <p class="lede mx-auto mt-4 max-w-2xl">{site.home.offers.intro}</p>}
+      {amenities.length >= 3 && <ul class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">{amenities.map((a) => <li class="flex items-center gap-2"><Icon name={a.icon ?? 'check'} size={18} />{a.label}</li>)}</ul>}
+    </div>
+  </section>
+  {groups.map(([type, label]) => {
+    const list = experiences.filter((e) => e.data.type === type);
+    return list.length > 0 && (
+      <section class="pad-x section border-b border-line" data-reveal>
+        <div class="container-xl">
+          <h2 class="mb-10">{label}</h2>
+          <ul class="grid gap-12">
+            {list.map((e) => {
+              const imgs = (e.data.cardImages.length >= 4 ? e.data.cardImages : e.data.gallery).slice(0, 4);
+              const one = imgs[0] ?? (e.data.heroImage ? { src: e.data.heroImage, alt: e.data.heroAlt ?? '' } : null);
+              return (
+                <li class="grid gap-8 lg:grid-cols-2 lg:items-center">
+                  <a href={`/experiences/${e.slug}`} class="block overflow-hidden" style="border-radius:var(--radius)" aria-label={e.data.title}>
+                    {imgs.length >= 4 ? <div class="mosaic">{imgs.map((im) => <Img src={im.src} alt={im.alt} sizes="(min-width:1024px) 25vw, 50vw" widths={[480, 768]} />)}</div> : one ? <Img src={one.src} alt={one.alt} class="aspect-[4/3] w-full object-cover" sizes="(min-width:1024px) 50vw, 100vw" widths={[768, 1080, 1440]} /> : null}
+                  </a>
+                  <div>
+                    <div class="mb-3 flex flex-wrap gap-2">{e.data.grade && <span class="badge badge-accent">{e.data.grade.label}</span>}<NextDeparture experience={e.data} /></div>
+                    <h3 class="text-3xl"><a href={`/experiences/${e.slug}`}>{e.data.title}</a></h3>
+                    {e.data.bestFor && <p class="mt-2"><strong>Best for:</strong> {e.data.bestFor}</p>}
+                    <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm" style="color:var(--muted)">
+                      {e.data.distanceKm && <li class="flex items-center gap-1.5"><Icon name="distance" size={18} />{e.data.distanceKm} km</li>}
+                      {e.data.durationLabel && <li class="flex items-center gap-1.5"><Icon name="clock" size={18} />{e.data.durationLabel}</li>}
+                      {groupSizeLine(e.data.groupSize) && <li class="flex items-center gap-1.5"><Icon name="group" size={18} />{groupSizeLine(e.data.groupSize)}</li>}
+                      {formatPriceShort(e.data.priceFrom) && <li class="flex items-center gap-1.5 font-medium" style="color:var(--ink)">{formatPriceShort(e.data.priceFrom)} per {e.data.priceFrom!.per}</li>}
+                    </ul>
+                    <p class="mt-4">{e.data.summary}</p>
+                    <a href={`/experiences/${e.slug}`} class="btn-link mt-5">Learn more about {e.data.title}</a>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+    );
+  })}
+  {on('compare') && <ExperienceCompare experiences={experiences} />}
+  {on('tripFinder') && <TripFinder experiences={experiences} />}
+  {site.home.cta && <CtaBand site={site} adapter={adapter} heading={site.home.cta.heading} body={site.home.cta.body} label={site.home.cta.label} image={site.home.cta.image} video={site.home.cta.video} poster={site.home.cta.poster} />}
+</Base>

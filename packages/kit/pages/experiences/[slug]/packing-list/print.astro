@@ -1,0 +1,20 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { pageData } from '../../../../lib/page';
+import '../../../../styles/print.css';
+export async function getStaticPaths() { const { experiences } = await pageData(); return experiences.filter((e) => e.data.whatToBring.length > 0).map((e) => ({ params: { slug: e.slug }, props: { slug: e.slug } })); }
+const { slug } = Astro.props as { slug: string };
+const { site, experiences } = await pageData();
+const e = experiences.find((x) => x.slug === slug)!.data;
+const names: Record<string, string> = { wear: 'Wear', carry: 'Carry', sleep: 'Sleep', extras: 'Extras' };
+const groups = [...new Set(e.whatToBring.map((i) => i.group))];
+---
+<Base title={`${e.title}: packing list`} description={`Packing list for ${e.title}`} bare noindex>
+  <article class="print-doc mx-auto max-w-3xl p-6 print:p-0">
+    <div class="print-header"><span>{site.business.name}</span><span>Packing list</span></div>
+    <h1>{e.title}: packing list</h1>
+    <p class="small">Tick as you pack. Items marked "provided" are supplied by {site.business.name}.</p>
+    <div class="two-col">{groups.map((g) => <div><h2>{names[g] ?? g}</h2><ul class="check">{e.whatToBring.filter((i) => i.group === g).map((i) => <li class:list={{ provided: i.provided }}>{i.item}{i.provided && ' (provided)'}</li>)}</ul></div>)}</div>
+    {e.fitness && <><h2>A note on fitness</h2><p>{e.fitness}</p></>}
+  </article>
+</Base>

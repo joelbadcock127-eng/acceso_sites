@@ -1,0 +1,19 @@
+---
+// Australian Walking Track Grading System (grades 1 to 5) if they use it, otherwise their own scale.
+import type { Experience } from '../lib/content/schema';
+interface Props { grade: NonNullable<Experience['grade']> }
+const { grade } = Astro.props;
+const awtgs: Record<string, string> = {
+  '1': 'No bushwalking experience required. Flat, even surface with no steps or steep sections. Suitable for wheelchair users with assistance.',
+  '2': 'No bushwalking experience required. A hardened or compacted surface with gentle hills and occasional steps.',
+  '3': 'Some bushwalking experience recommended. Tracks may have short steep hill sections, a rough surface and many steps.',
+  '4': 'Bushwalking experience recommended. Tracks may be long, rough and very steep. Directional signage may be limited.',
+  '5': 'Very experienced bushwalkers with specialised skills, including navigation and emergency first aid. Tracks are likely to be very rough, very steep and unmarked.',
+};
+const text = grade.explainer ?? (grade.system === 'awtgs' ? awtgs[String(grade.value)] : undefined);
+---
+<div class="grid gap-2 border border-line p-5">
+  <div class="flex items-baseline gap-3"><span class="label" style="color:var(--muted)">Grade</span><span class="font-display text-2xl">{grade.label}</span>{grade.system === 'awtgs' && <span class="badge">Grade {grade.value} of 5</span>}</div>
+  {text && <p class="text-sm" style="color:var(--muted)">{text}</p>}
+  {grade.system === 'awtgs' && <p class="text-xs" style="color:var(--muted)">Australian Walking Track Grading System</p>}
+</div>

@@ -1,0 +1,78 @@
+---
+// The HTML shell for every page. Preview privacy (noindex meta, banner) and
+// the booking platform's head script are decided here from content.
+import { getSite, isPreview, absoluteUrl } from '../lib/site';
+import { getAdapter } from '../lib/booking';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PreviewBanner from '../components/PreviewBanner.astro';
+import theme from '/src/generated/theme.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>[];
+  bodyClass?: string;
+  /** Print routes drop nav, footer and motion */
+  bare?: boolean;
+  noindex?: boolean;
+}
+const { title, description, ogImage, jsonLd = [], bodyClass = '', bare = false, noindex = false } = Astro.props;
+const site = await getSite();
+const preview = isPreview(site);
+const adapter = getAdapter({ ...site.booking, giftUrl: site.booking.giftUrl ?? undefined });
+const headScript = adapter.headScript?.() ?? null;
+const og = ogImage ?? site.seo.ogImage;
+const canonical = absoluteUrl(site, Astro.url.pathname);
+const textureClass = theme.texture === 'topo' ? 'texture-topo' : theme.texture === 'grain' ? 'texture-grain' : '';
+---
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {(preview || noindex) && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.business.name} />
+    {og && <meta property="og:image" content={absoluteUrl(site, og)} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {!preview && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={theme.favicon} type={theme.favicon.endsWith(".svg") ? "image/svg+xml" : "image/png"} />
+    {theme.adobeKitId && <link rel="stylesheet" href={`https://use.typekit.net/${theme.adobeKitId}.css`} />}
+    {headScript && !bare && <Fragment set:html={headScript} />}
+    {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+    {theme.textureFile && <link rel="preload" as="image" href={theme.textureFile} />}
+    {site.analytics.plausibleDomain && !preview && <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.outbound-links.js"></script>}
+    <slot name="head" />
+  </head>
+  <body class:list={[bodyClass, textureClass, { 'is-preview': preview }]} style={theme.textureFile ? `background-image:url(${theme.textureFile});background-size:1200px;background-attachment:fixed` : undefined}>
+    {preview && !bare && <PreviewBanner business={site.preview.preparedFor ?? site.business.name} />}
+    {!bare && <SiteHeader site={site} adapter={adapter} />}
+    <main id="main">
+      <slot />
+    </main>
+    {!bare && <SiteFooter site={site} />}
+    {!bare && (
+      <script>
+        import { initMotion, pauseOffscreenVideos } from '../client/motion';
+        import { initForms } from '../client/forms';
+        initMotion();
+        pauseOffscreenVideos();
+        initForms();
+        // Book button clicks are tracked as events tagged with their experience (Phase C, step 8).
+        document.addEventListener('click', (e) => {
+          const a = (e.target as HTMLElement).closest('[data-book]');
+          if (!a) return;
+          const exp = (a as HTMLElement).dataset.book || 'site';
+          (window as any).plausible?.('Book click', { props: { experience: exp } });
+          (window as any).gtag?.('event', 'book_click', { experience: exp });
+        });
+      </script>
+    )}
+  </body>
+</html>

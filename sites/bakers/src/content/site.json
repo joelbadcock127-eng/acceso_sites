@@ -1,0 +1,138 @@
+{
+  "business": {
+    "name": "Bakers Walking Co",
+    "legalName": "Bakers Walking Co.",
+    "tagline": "The Private Tasmanian Off-Grid Walking Experience",
+    "region": "North-West Tasmania",
+    "state": "TAS",
+    "baseTown": "Bakers Beach",
+    "address": "1050 Bakers Beach Rd, Bakers Beach TAS 7307, Australia",
+    "email": "admin@bakerswalkingco.au",
+    "ownerNames": ["Joel Badcock"],
+    "socials": {
+      "facebook": "https://www.facebook.com/profile.php?id=61563716445548",
+      "instagram": "https://www.instagram.com/bakers_walking_co/",
+      "youtube": "https://studio.youtube.com/channel/@BakersWalkingCo"
+    },
+    "acknowledgement": null,
+    "location": { "lat": -41.266667, "lng": 146.616667 },
+    "driveTimes": [
+      { "from": "Launceston", "time": "1 hour", "sourceUrl": "https://www.bakerswalkingco.com.au/" },
+      { "from": "Devonport Airport", "time": "15 minutes", "sourceUrl": "https://www.bakerswalkingco.com.au/" }
+    ],
+    "nearestAirport": "Devonport Airport",
+    "mapsUrl": "https://maps.app.goo.gl/eYuUiuVBceTc7iu26",
+    "commitment": {
+      "heading": "Our Commitment to Wildlife Protection",
+      "body": "We contribute 1 percent of profits to conservation efforts supporting the protection of the Tasmanian devil and its habitat.",
+      "href": "/about",
+      "image": "images/tas-devil.png",
+      "sourceUrl": "https://www.bakerswalkingco.com.au/"
+    },
+    "notFoundLine": "That track isn't on the estate."
+  },
+  "booking": {
+    "provider": "fareharbor",
+    "group": 1,
+    "account": "bakerswalkingco",
+    "defaultUrl": "https://fareharbor.com/embeds/book/bakerswalkingco/?full-items=yes",
+    "giftUrl": "https://fareharbor.com/embeds/book/bakerswalkingco/items/685661/?full-items=yes",
+    "responseTime": "24 hours",
+    "ownerFirstName": "Joel"
+  },
+  "nav": {
+    "primary": [ { "label": "The Estate", "href": "/about" }, { "label": "Experiences", "href": "/experiences" } ],
+    "groups": [
+      { "label": "Experiences", "links": [ { "label": "The Narawntapu", "href": "/experiences/narawntapu" }, { "label": "The Estate Walk", "href": "/experiences/the-estate-walk" }, { "label": "The Bakers Traverse", "href": "/experiences/bakers-traverse" }, { "label": "Three Day Walk", "href": "/experiences/multi-day-experience" }, { "label": "Corporate", "href": "/experiences/corporate" } ] },
+      { "label": "Information", "links": [ { "label": "About Us", "href": "/about" }, { "label": "FAQ", "href": "/faq" }, { "label": "Downloads", "href": "/downloads" }, { "label": "Contact Us", "href": "/contact" } ] },
+      { "label": "Explore", "links": [ { "label": "Accommodation", "href": "/experiences/multi-day-experience#accommodation" }, { "label": "Stories", "href": "/journal" }, { "label": "Gift Vouchers", "href": "/gift-vouchers" }, { "label": "Private Groups", "href": "/private-and-groups" } ] }
+    ],
+    "featured": [
+      { "title": "Day Walk", "image": "images/coast-group.jpg", "alt": "Group of eight hikers posing on a coastal trail with ocean and hills in the background", "cta": "Book Now", "kind": "book", "bookingTarget": { "itemId": "712971" } },
+      { "title": "Gift Voucher", "image": "images/bath-sunset-couple.jpg", "alt": "Young couple relaxing together in an outdoor bathtub at sunset surrounded by trees", "cta": "Buy Now", "kind": "gift" }
+    ],
+    "bookLabel": "Book Now"
+  },
+  "footer": {
+    "columns": [
+      { "label": "Experiences", "links": [ { "label": "Narawntapu", "href": "/experiences/narawntapu" }, { "label": "The Estate Walk", "href": "/experiences/the-estate-walk" }, { "label": "The Bakers Traverse", "href": "/experiences/bakers-traverse" }, { "label": "Three Day Walk", "href": "/experiences/multi-day-experience" }, { "label": "Corporate", "href": "/experiences/corporate" } ] },
+      { "label": "Information", "links": [ { "label": "About Us", "href": "/about" }, { "label": "FAQ", "href": "/faq" }, { "label": "Downloads", "href": "/downloads" }, { "label": "Contact Us", "href": "/contact" } ] },
+      { "label": "Explore", "links": [ { "label": "Accommodation", "href": "/experiences/multi-day-experience#accommodation" }, { "label": "Stories", "href": "/journal" }, { "label": "Gift Vouchers", "href": "/gift-vouchers" }, { "label": "Our Experiences", "href": "/experiences" } ] }
+    ],
+    "legal": [ { "label": "Privacy policy", "href": "/legal/privacy-policy" }, { "label": "Refund Policy", "href": "/legal/refund-policy" }, { "label": "Terms and conditions", "href": "/legal/terms-conditions" } ],
+    "credit": "© 2026 Bakers Walking Co. All rights reserved."
+  },
+  "seo": {
+    "defaultTitle": "The #1 Tasmanian Off-Grid Walking Getaway | Bakers Walking Company",
+    "defaultDescription": "Guided walking experiences across a private 1,137-acre Tasmanian estate, designed for depth, connection, and complete disconnection from the outside world.",
+    "ogImage": "images/hero-estate-aerial.jpg",
+    "siteUrl": "https://www.bakerswalkingco.com.au"
+  },
+  "newsletter": { "provider": "formspree", "actionUrl": "https://formspree.io/f/mpqvwkyz", "blurb": "New experiences, seasonal updates and stories from the estate. No noise, just the good stuff." },
+  "preview": { "enabled": true, "preparedFor": "Bakers Walking Co (kit fidelity test)", "sourceDomain": "bakerswalkingco.com.au" },
+  "home": {
+    "hero": {
+      "headline": "The Private Tasmanian Off-Grid Walking Experience",
+      "support": "Guided walking experiences across a private 1,137-acre Tasmanian estate, designed for depth, connection, and complete disconnection from the outside world.",
+      "cta": { "label": "Experiences", "href": "/experiences" },
+      "video": "/video/landing.mp4",
+      "poster": "images/poster-landing.jpg",
+      "alt": "Aerial footage of the Bakers estate and coast"
+    },
+    "positioning": {
+      "heading": "Tasmania Without The Crowds",
+      "body": "A private estate twice the size of Monaco on Tasmania’s north-west coast. Day walks and curated multi-day experiences, led by local Tasmanian guides.",
+      "link": { "label": "Discover the experience", "href": "/experiences" }
+    },
+    "features": [
+      { "heading": "Private by design", "body": "Walking entirely on private land, you’ll never share a track with the public — just your group, the quiet, and the freedom to move at your pace.", "link": { "label": "Explore Our Estate", "href": "/about" }, "video": "/video/grid.mp4", "poster": "images/poster-grid.jpg", "images": [] },
+      { "heading": "Guided, at your pace", "body": "Local Tasmanian guides shape each walk around ability and conditions, so it feels unrushed, safe, and genuinely immersive.", "link": { "label": "Learn More", "href": "/about" }, "video": "/video/trail.mp4", "poster": "images/poster-trail.jpg", "images": [] },
+      { "heading": "Off-grid luxury accommodation", "body": "Our sustainable lodge proves that being disconnected doesn't mean roughing it; enjoy architectural luxury, gourmet hosting, and panoramic wellness facilities in total seclusion.", "link": { "label": "Learn More", "href": "/experiences/multi-day-experience#accommodation" }, "video": "/video/luxury.mp4", "poster": "images/poster-luxury.jpg", "images": [] }
+    ],
+    "offers": { "heading": "Explore Our Offers", "intro": "Choose the pace that fits your journey. From immersive single-day guided walks to fully hosted multi-day retreats, our offers are designed to scale to your group's needs." },
+    "statsHeading": "The scale of what we have speaks for itself",
+    "story": {
+      "heading": "Our Story",
+      "body": "Bakers Walking Company began with a Sunday drive and a for-sale sign. Behind the grass and decay was a hand-built 1980s lodge, hidden within 1,137 acres of bushland and waiting for a second life.\n\nWe did not want to create another over-commercialised tourism product. We wanted to offer a more personal way to experience Tasmania — one that paired wild places with comfort, privacy and thoughtful guiding.\n\nSo the property was restored, the lodge was transformed into a modern off-grid retreat, and more than 22 kilometres of tracks were carved through the landscape.",
+      "image": "images/lodge-lawn.jpg",
+      "alt": "Spacious green lawn with a wooden cabin on the left and an outdoor seating area",
+      "link": { "label": "About us", "href": "/about" }
+    },
+    "cta": { "heading": "Step into the wild now", "body": "Book a day walk or reserve your three-day get away. Either way, the tracks are waiting.", "label": "Book Now", "image": "images/lodge-path.jpg" },
+    "contactHeading": "Get in touch."
+  },
+  "about": {
+    "heading": "About the Bakers Walking Company",
+    "intro": "We champion a new philosophy in tourism — protecting Tasmania’s wild places rather than over-commercialising them, and safeguarding the wildlife and landscapes people travel the world to see.",
+    "story": "Bakers Walking Company began with a Sunday drive and a for-sale sign.\n\nBehind the grass and decay was a hand-built 1980s lodge, hidden within 1,137 acres of bushland and waiting for a second life. A tourism product didn't even enter our mind at first. But we, like so many others, were frustrated with how expensive and crowded the popular destinations were. But there are many places in Tasmania that are amazing, and that's when the idea came to us.\n\nWe did not want to create another over-commercialised tourism product. We wanted to offer a more personal way to experience Tasmania — one that paired wild places with comfort, privacy and thoughtful guiding.\n\nSo the property was restored, the lodge was transformed into a modern off-grid retreat, and more than 22 kilometres of tracks were carved through the landscape. What stands here now is the result: a place shaped by hard work, care and a belief that nature can be experienced without losing what makes it special.",
+    "image": "images/estate-forest.jpg",
+    "alt": "Dense forest with tall trees and green and brown ferns covering the forest floor"
+  },
+  "contact": { "heading": "Get in touch.", "intro": "For custom retreats, corporate bookings, partnerships and general enquiries. We'll get back to you within 24 hours.", "interests": ["Day walk", "Corporate", "Private booking", "Partnership", "General inquiry", "Other"] },
+  "privateGroups": {
+    "heading": "Private groups and corporate retreats",
+    "intro": "A private wilderness sanctuary where your team can find clarity and connection away from the noise.",
+    "body": "We tailor every itinerary — from airport transfers to off-grid accommodation — providing an exclusive experience that can't be found elsewhere. We specialise in customised private group bookings and retreats, and can include private chefs, massage therapists and a walking route suited to you.",
+    "kinds": ["Private group", "Friends and family", "Corporate team", "Leadership off-site"],
+    "image": "images/corporate-table.jpg",
+    "alt": "Group of six people sitting outdoors at a wooden table with drinks and snacks",
+    "sourceUrl": "https://www.bakerswalkingco.com.au/corporate"
+  },
+  "giftVouchers": {
+    "heading": "Gift Voucher",
+    "intro": "Gift vouchers are available online for specific dollar amounts or full experience packages.",
+    "image": "images/bath-sunset-couple.jpg",
+    "alt": "Young couple relaxing together in an outdoor bathtub at sunset",
+    "sourceUrl": "https://www.bakerswalkingco.com.au/faqs"
+  },
+  "gettingThere": { "meetingPoint": "1050 Bakers Beach Road, Bakers Beach, opposite Marana Drive", "directionsUrl": "https://maps.app.goo.gl/eYuUiuVBceTc7iu26", "sourceUrl": "https://www.bakerswalkingco.com.au/faqs" },
+  "reviews": {},
+  "instagram": {},
+  "analytics": { "ga4": "G-9B9WZ8FQD6" },
+  "trust": [
+    { "label": "Guide experience", "value": "Local Tasmanian guides", "sourceUrl": "https://www.bakerswalkingco.com.au/" },
+    { "label": "Cancellation", "value": "Full refund with 24 hours notice on day walks", "sourceUrl": "https://www.bakerswalkingco.com.au/refund-policy" }
+  ],
+  "seasons": [],
+  "youtube": []
+}

@@ -1,0 +1,20 @@
+---
+// Every image goes through here. Site images live in sites/{slug}/src/images
+// and are referenced from content as "images/name.jpg". They come out as AVIF
+// plus WebP with responsive sizes. Anything else (public/ or a URL) renders as
+// a plain lazy image with explicit dimensions where known.
+import { Picture } from 'astro:assets';
+interface Props {
+  src: string; alt: string; class?: string; sizes?: string; widths?: number[]; loading?: 'lazy' | 'eager'; priority?: boolean; width?: number; height?: number; style?: string;
+}
+const { src, alt, class: cls = '', sizes = '(max-width: 768px) 100vw, 50vw', widths = [480, 768, 1080, 1440, 1920], loading, priority = false, width, height, style } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG}');
+const key = '/src/' + src.replace(/^\/?(src\/)?/, '');
+const mod = images[key] ? (await images[key]()).default : null;
+const load = loading ?? (priority ? 'eager' : 'lazy');
+---
+{mod ? (
+  <Picture src={mod} alt={alt} class={cls} formats={['avif', 'webp']} widths={widths.filter((w) => w <= mod.width).concat(mod.width)} sizes={sizes} loading={load} decoding={priority ? 'sync' : 'async'} fetchpriority={priority ? 'high' : undefined} style={style} pictureAttributes={{ class: 'contents' }} />
+) : (
+  <img src={src} alt={alt} class={cls} loading={load} decoding="async" width={width} height={height} style={style} />
+)}

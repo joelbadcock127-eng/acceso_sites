@@ -1,0 +1,8 @@
+---
+// Rendered only in preview mode (A4). Slim, honest, and impossible to miss in a screenshot.
+interface Props { business: string }
+const { business } = Astro.props;
+---
+<div class="preview-banner label" style="background:var(--ink);color:var(--surface);text-align:center;padding:.5rem 1rem;font-size:.75rem;letter-spacing:.1em">
+  Private preview prepared for {business}
+</div>

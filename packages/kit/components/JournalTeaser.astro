@@ -1,0 +1,27 @@
+---
+// Journal (A1 #11): the three latest posts, 3 or more needed.
+import Img from './Img.astro';
+import { formatDate } from '../lib/site';
+interface Props { posts: { slug: string; data: { title: string; date: string; category?: string; readTime?: string; image?: string; alt?: string; summary?: string } }[]; heading?: string }
+const { posts, heading = 'From the trail' } = Astro.props;
+const latest = [...posts].sort((a, b) => b.data.date.localeCompare(a.data.date)).slice(0, 3);
+---
+{posts.length >= 3 && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl">
+      <div class="mb-10 flex flex-wrap items-end justify-between gap-4"><h2>{heading}</h2><a href="/journal" class="btn-link">All posts</a></div>
+      <ul class="grid gap-8 md:grid-cols-3">
+        {latest.map((p) => (
+          <li>
+            <a href={`/journal/${p.slug}`} class="group block">
+              {p.data.image && <div class="mb-4 overflow-hidden" style="border-radius:var(--radius)"><Img src={p.data.image} alt={p.data.alt ?? ''} class="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="(min-width:768px) 33vw, 100vw" widths={[480, 768]} /></div>}
+              <div class="flex gap-3 text-xs" style="color:var(--muted)">{p.data.category && <span class="badge">{p.data.category}</span>}{p.data.readTime && <span class="self-center">{p.data.readTime}</span>}<span class="self-center">{formatDate(p.data.date)}</span></div>
+              <h3 class="mt-2 text-2xl">{p.data.title}</h3>
+              {p.data.summary && <p class="mt-1" style="color:var(--muted)">{p.data.summary}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

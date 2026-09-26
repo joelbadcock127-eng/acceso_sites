@@ -1,0 +1,20 @@
+---
+interface Props { name: string; label: string; type?: string; required?: boolean; options?: string[]; placeholder?: string; autocomplete?: string; rows?: number; error?: string; showWhen?: string; min?: string | number; max?: string | number; value?: string; half?: boolean }
+const { name, label, type = 'text', required = false, options, placeholder, autocomplete, rows = 4, error, showWhen, min, max, value, half = false } = Astro.props;
+const id = `f-${name}-${Math.random().toString(36).slice(2, 7)}`;
+const msg = error ?? (required ? `Please add ${label.toLowerCase()}.` : 'Please check this field.');
+---
+<div class:list={['field', { 'sm:col-span-1': half }]} data-show-when={showWhen}>
+  <label for={id}>{label}{required && <span aria-hidden="true"> *</span>}</label>
+  {options ? (
+    <select id={id} name={name} required={required}>
+      <option value="">Choose…</option>
+      {options.map((o) => <option value={o} selected={o === value}>{o}</option>)}
+    </select>
+  ) : type === 'textarea' ? (
+    <textarea id={id} name={name} rows={rows} required={required} placeholder={placeholder}>{value}</textarea>
+  ) : (
+    <input id={id} name={name} type={type} required={required} placeholder={placeholder} autocomplete={autocomplete} min={min} max={max} value={value} />
+  )}
+  <span class="error">{msg}</span>
+</div>

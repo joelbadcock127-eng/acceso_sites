@@ -1,0 +1,18 @@
+---
+// Only when they sell vouchers but their platform can't.
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import type { Site } from '../../lib/content/schema';
+import type { ExperienceEntry } from '../../lib/site';
+interface Props { site: Site; experiences: ExperienceEntry[] }
+const { site, experiences } = Astro.props;
+---
+<div class="card p-6 md:p-8">
+  <FormShell site={site} kind="gift-voucher" submitLabel="Request a voucher" success="Thanks, we'll be in touch with payment details and your voucher.">
+    <Field name="experience" label="Voucher for" options={[...experiences.map((e) => e.data.title), 'A dollar amount']} required />
+    <Field name="amount" label="Amount (AUD)" type="number" min={1} showWhen="experience=A dollar amount" />
+    <div class="grid gap-4 sm:grid-cols-2"><Field name="recipient" label="Recipient's name" required /><Field name="name" label="Your name" required autocomplete="name" /></div>
+    <Field name="email" label="Your email" type="email" required autocomplete="email" />
+    <Field name="message" label="Message for the recipient" type="textarea" rows={3} />
+  </FormShell>
+</div>

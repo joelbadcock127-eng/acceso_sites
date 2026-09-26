@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+interface Props { items: { label: string; icon?: string }[]; heading?: string; id?: string }
+const { items, heading = 'Accommodation', id = 'accommodation' } = Astro.props;
+---
+{items.length >= 4 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <h2 class="mb-6 text-3xl">{heading}</h2>
+    <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">{items.map((a) => <li class="flex items-center gap-3 border border-line p-4"><Icon name={a.icon ?? 'check'} /><span>{a.label}</span></li>)}</ul>
+  </section>
+)}

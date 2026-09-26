@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.env
+.env.*
+*.log
+# Scraped material never enters git. It lives in the private R2 bucket (acceso-intake/{slug}/).
+sites/*/intake/
+# Pitch packs hold screenshots and video of prospect sites.
+sites/*/pitch/
+# Generated per build from theme.json
+sites/*/src/generated/
+# Generated PDFs are build output
+sites/*/public/downloads/*.pdf
+# QA output
+sites/*/qa/
+docs/screens/tmp/

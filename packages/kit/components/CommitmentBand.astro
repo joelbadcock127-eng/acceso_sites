@@ -1,0 +1,23 @@
+---
+// A pledge they state (A1 #13): conservation, cultural or community. Framed
+// in a thin accent border the way Bakers frames its wildlife pledge.
+import Img from './Img.astro';
+import type { Site } from '../lib/content/schema';
+interface Props { site: Site }
+const { site } = Astro.props;
+const c = site.business.commitment;
+---
+{c && c.sourceUrl && (
+  <section class="pad-x section-md" data-reveal>
+    <div class="container-xl border p-3" style="border-color:var(--accent)">
+      <div class:list={['relative overflow-hidden p-8 md:p-16', c.image ? 'band' : 'surface']}>
+        {c.image && <><Img src={c.image} alt="" class="cover absolute inset-0" sizes="100vw" widths={[768, 1440]} /><div class="overlay"></div></>}
+        <div class="relative max-w-2xl">
+          <h2 class="mb-4">{c.heading}</h2>
+          <p class="lede">{c.body}</p>
+          {c.href && <a href={c.href} class:list={['mt-6', c.image ? 'btn btn-alt' : 'btn-link']}>Read more</a>}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

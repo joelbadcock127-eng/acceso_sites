@@ -1,0 +1,30 @@
+---
+// GuideCards (A4) and GuideProfiles (A4b) in one: portrait, name, years guiding,
+// background, and "what they know better than anyone". Credentials only as stated.
+import Img from './Img.astro';
+import type { Guide } from '../lib/content/schema';
+interface Props { guides: Guide[]; heading?: string; intro?: string }
+const { guides, heading = 'Your guides', intro } = Astro.props;
+---
+{guides.length > 0 && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl">
+      <h2 class="mb-3">{heading}</h2>
+      {intro && <p class="lede mb-8 max-w-2xl" style="color:var(--muted)">{intro}</p>}
+      <ul class:list={['grid gap-8', guides.length === 1 ? 'lg:grid-cols-[1fr_2fr]' : 'md:grid-cols-2 lg:grid-cols-3']}>
+        {guides.map((g) => (
+          <li class="grid content-start gap-4">
+            {g.photo && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={g.photo} alt={g.alt ?? g.name} class="aspect-[4/5] w-full object-cover" sizes="(min-width:1024px) 33vw, 100vw" widths={[480, 768]} /></div>}
+            <div>
+              <h3 class="text-2xl">{g.name}</h3>
+              <div class="text-sm" style="color:var(--muted)">{[g.role, g.yearsGuiding && `${g.yearsGuiding} years guiding`].filter(Boolean).join(' · ')}</div>
+              <p class="mt-3">{g.bio}</p>
+              {g.knowsBest && <p class="mt-3 border-l-2 pl-4 italic" style="border-color:var(--accent)">Knows better than anyone: {g.knowsBest}</p>}
+              {g.credentials.length > 0 && <ul class="mt-3 flex flex-wrap gap-2">{g.credentials.map((c) => <li class="badge">{c}</li>)}</ul>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

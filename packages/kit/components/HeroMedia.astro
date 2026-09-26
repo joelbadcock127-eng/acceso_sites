@@ -1,0 +1,77 @@
+---
+// Home hero (A1 #1). Variants: full bleed, split, type led. Falls back to
+// typeLed when there's no usable image. Video is muted, looping, playsinline,
+// with a poster; slow zoom only for stills and only without reduced motion.
+import Img from './Img.astro';
+import BookButton from './BookButton.astro';
+import TrustRow from './TrustRow.astro';
+import type { Site } from '../lib/content/schema';
+import type { BookingAdapter } from '../lib/booking';
+import theme from '/src/generated/theme.json';
+interface Props { site: Site; adapter: BookingAdapter }
+const { site, adapter } = Astro.props;
+const h = site.home.hero;
+const hasMedia = !!(h.video || h.image);
+const variant = !hasMedia ? 'typeLed' : theme.variants.hero;
+const zoom = theme.heroStyle === 'stillSlowZoom' && !h.video;
+---
+{variant === 'full' && (
+  <section class="relative band overflow-hidden" data-hero>
+    <div class="absolute inset-0">
+      {h.video ? (
+        <video class="cover" autoplay muted loop playsinline preload="metadata" poster={h.poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source src={h.video} type="video/mp4" /></video>
+      ) : (
+        <Img src={h.image!} alt="" class:list={['cover', { 'zoom-slow': zoom }]} priority sizes="100vw" widths={[768, 1080, 1440, 1920]} />
+      )}
+      <div class="overlay"></div>
+    </div>
+    <div class="pad-x container-xl relative flex min-h-[calc(100svh-4.5rem)] max-h-[60rem] items-center py-24">
+      <div class="max-w-3xl">
+        <h1 class="mb-5">{h.headline}</h1>
+        {h.support && <p class="lede mb-8 max-w-xl">{h.support}</p>}
+        <div class="flex flex-wrap items-center gap-4">
+          {h.cta ? <a href={h.cta.href} class="btn btn-alt-solid">{h.cta.label}</a> : <BookButton adapter={adapter} variant="alt-solid" />}
+          {h.cta && <BookButton adapter={adapter} variant="alt" />}
+        </div>
+        <TrustRow site={site} class="mt-6" onBand />
+      </div>
+    </div>
+    {h.alt && <span class="sr-only">{h.alt}</span>}
+  </section>
+)}
+{variant === 'split' && (
+  <section class="grid lg:grid-cols-2" data-hero>
+    <div class="pad-x flex items-center py-16 lg:py-24">
+      <div class="max-w-xl">
+        <h1 class="mb-5">{h.headline}</h1>
+        {h.support && <p class="lede mb-8" style="color:var(--muted)">{h.support}</p>}
+        <div class="flex flex-wrap gap-4">
+          {h.cta ? <a href={h.cta.href} class="btn btn-accent">{h.cta.label}</a> : <BookButton adapter={adapter} />}
+          {h.cta && <BookButton adapter={adapter} variant="secondary" />}
+        </div>
+        <TrustRow site={site} class="mt-6" />
+      </div>
+    </div>
+    <div class="relative min-h-[60svh] overflow-hidden">
+      {h.video ? <video class="cover absolute inset-0" autoplay muted loop playsinline preload="metadata" poster={h.poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source src={h.video} type="video/mp4" /></video>
+        : <Img src={h.image!} alt={h.alt ?? ''} class:list={['cover absolute inset-0', { 'zoom-slow': zoom }]} priority sizes="(min-width:1024px) 50vw, 100vw" widths={[768, 1080, 1440]} />}
+    </div>
+  </section>
+)}
+{variant === 'typeLed' && (
+  <section class="pad-x section relative overflow-hidden" data-hero>
+    <div class="container-xl">
+      <div class="max-w-4xl">
+        {site.business.region && <div class="eyebrow mb-6">{site.business.region}{site.business.state ? `, ${site.business.state}` : ''}</div>}
+        <h1 class="mb-6" style="font-size:clamp(3rem, 2rem + 5vw, 7rem)">{h.headline}</h1>
+        {h.support && <p class="lede mb-8 max-w-xl" style="color:var(--muted)">{h.support}</p>}
+        <div class="flex flex-wrap gap-4">
+          {h.cta ? <a href={h.cta.href} class="btn btn-accent">{h.cta.label}</a> : <BookButton adapter={adapter} />}
+          {h.cta && <BookButton adapter={adapter} variant="secondary" />}
+        </div>
+        <TrustRow site={site} class="mt-6" />
+      </div>
+      {h.image && <div class="mt-12 overflow-hidden" style="border-radius:var(--radius)"><Img src={h.image} alt={h.alt ?? ''} class="aspect-[21/9] w-full object-cover" priority sizes="100vw" widths={[768, 1080, 1440, 1920]} /></div>}
+    </div>
+  </section>
+)}

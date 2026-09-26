@@ -1,0 +1,15 @@
+---
+// The only way a page links to booking (A7). Variant and label follow the
+// adapter, so Group 2 always reads "Request to book".
+import type { BookingAdapter, BookingTarget } from '../lib/booking';
+interface Props { adapter: BookingAdapter; target?: BookingTarget; variant?: 'primary' | 'accent' | 'secondary' | 'alt' | 'alt-solid' | 'link'; label?: string; experience?: string; class?: string; small?: boolean; gift?: boolean }
+const { adapter, target, variant = 'accent', label, experience = 'site', class: cls = '', small = false, gift = false } = Astro.props;
+const href = gift ? adapter.giftUrl?.() ?? '#' : adapter.bookUrl(target);
+const text = label ?? (gift ? 'Buy a gift voucher' : adapter.label);
+const attrs = adapter.linkAttrs?.(target) ?? {};
+const external = href.startsWith('http');
+const classes = { primary: 'btn', accent: 'btn btn-accent', secondary: 'btn btn-secondary', alt: 'btn btn-alt', 'alt-solid': 'btn btn-alt-solid', link: 'btn-link' }[variant];
+---
+{gift && href === '#' ? null : (
+  <a href={href} class:list={[classes, cls, { 'btn-sm': small }]} data-book={experience} {...attrs} target={external && !attrs['data-fareharbor'] ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{text}</a>
+)}

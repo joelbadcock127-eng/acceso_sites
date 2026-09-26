@@ -1,0 +1,30 @@
+---
+// Location (A1 #5): base town, region, drive times they state, and the
+// region map with a pin. Hides without location facts.
+import Icon from './Icon.astro';
+import RegionMap from './RegionMap.astro';
+import type { Site } from '../lib/content/schema';
+interface Props { site: Site }
+const { site } = Astro.props;
+const b = site.business;
+const hasFacts = !!(b.baseTown || b.region) && (b.driveTimes.length > 0 || !!b.location || !!b.nearestAirport);
+const heading = [b.baseTown, b.region].filter(Boolean).join(', ') || b.state;
+---
+{hasFacts && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <div class="eyebrow mb-3">Where we are</div>
+        <h2 class="mb-6">{heading}</h2>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {b.location && <li class="flex items-start gap-3"><Icon name="pin" /><span>{b.location.lat.toFixed(4)}° S, {Math.abs(b.location.lng).toFixed(4)}° E</span></li>}
+          {b.driveTimes.map((d) => <li class="flex items-start gap-3"><Icon name="car" /><span>{d.time} from {d.from}</span></li>)}
+          {b.nearestAirport && <li class="flex items-start gap-3"><Icon name="plane" /><span>Nearest airport: {b.nearestAirport}</span></li>}
+          {b.address && <li class="flex items-start gap-3"><Icon name="mail" /><span>{b.address}</span></li>}
+        </ul>
+        {b.mapsUrl && <a href={b.mapsUrl} target="_blank" rel="noopener" class="btn-link mt-6">Open in Google Maps</a>}
+      </div>
+      <RegionMap site={site} />
+    </div>
+  </section>
+)}

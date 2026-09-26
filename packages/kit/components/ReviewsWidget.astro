@@ -1,0 +1,9 @@
+---
+// Official Google or Tripadvisor widget only, launch only, never in preview.
+import type { Site } from '../lib/content/schema';
+import { isPreview } from '../lib/site';
+interface Props { site: Site }
+const { site } = Astro.props;
+const show = !isPreview(site) && !!site.reviews.widgetEmbed;
+---
+{show && <section class="pad-x section-md border-t border-line"><div class="container-xl" set:html={site.reviews.widgetEmbed} /></section>}

@@ -1,0 +1,38 @@
+---
+// Contact (A1 #14): a form with an interest dropdown, plus email, phone and socials.
+import Icon from './Icon.astro';
+import FormShell from './forms/FormShell.astro';
+import Field from './forms/Field.astro';
+import type { Site } from '../lib/content/schema';
+interface Props { site: Site; heading?: string; intro?: string; experiences?: string[] }
+const { site, heading = site.home.contactHeading ?? 'Get in touch', intro, experiences = [] } = Astro.props;
+const b = site.business;
+const interests = site.contact.interests.length ? site.contact.interests : [...experiences, 'Private or group booking', 'Gift vouchers', 'Something else'];
+---
+{(b.email || b.phone) && (
+  <section id="contact" class="pad-x section anchor-offset" data-reveal>
+    <div class="container-xl grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <h2 class="mb-4">{heading}</h2>
+        {intro && <p class="lede mb-6" style="color:var(--muted)">{intro}</p>}
+        <ul class="grid gap-3">
+          {b.email && <li class="flex items-center gap-3"><Icon name="mail" /><a href={`mailto:${b.email}`} class="underline underline-offset-4">{b.email}</a></li>}
+          {b.phone && <li class="flex items-center gap-3"><Icon name="phone" /><a href={`tel:${b.phone.replace(/\s+/g, '')}`} class="underline underline-offset-4">{b.phone}</a></li>}
+          {b.address && <li class="flex items-start gap-3"><Icon name="pin" /><span>{b.address}</span></li>}
+          {b.socials.instagram && <li class="flex items-center gap-3"><Icon name="camera" /><a href={b.socials.instagram} target="_blank" rel="noopener" class="underline underline-offset-4">Instagram</a></li>}
+          {b.socials.facebook && <li class="flex items-center gap-3"><Icon name="chat" /><a href={b.socials.facebook} target="_blank" rel="noopener" class="underline underline-offset-4">Facebook</a></li>}
+        </ul>
+      </div>
+      <div class="card p-6 md:p-8">
+        <FormShell site={site} kind="contact" submitLabel="Send message">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <Field name="name" label="Your name" required autocomplete="name" />
+            <Field name="email" label="Email" type="email" required autocomplete="email" />
+          </div>
+          <Field name="interest" label="I'm interested in" options={interests} />
+          <Field name="message" label="Message" type="textarea" required />
+        </FormShell>
+      </div>
+    </div>
+  </section>
+)}

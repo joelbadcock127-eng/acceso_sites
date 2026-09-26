@@ -1,0 +1,31 @@
+---
+// Group 2 request to book (A7): experience prefilled, a date from their
+// departures or season, group size, name, email, phone, message. Under a minute.
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import { futureDepartures, formatDate } from '../../lib/site';
+import type { Site } from '../../lib/content/schema';
+import type { ExperienceEntry } from '../../lib/site';
+interface Props { site: Site; experience?: ExperienceEntry; experiences?: ExperienceEntry[]; id?: string }
+const { site, experience, experiences = [], id = 'request-to-book' } = Astro.props;
+const deps = experience ? futureDepartures(experience.data) : [];
+const dateOptions = deps.map((d) => `${formatDate(d.start)}${d.end && d.end !== d.start ? ` to ${formatDate(d.end)}` : ''}`);
+const owner = site.booking.ownerFirstName ?? site.business.ownerNames[0]?.split(' ')[0] ?? 'We';
+---
+<section id={id} class="anchor-offset card p-6 md:p-8" data-reveal>
+  <h2 class="mb-2 text-3xl">Request to book</h2>
+  <p class="mb-6" style="color:var(--muted)">{owner} will confirm your spot and send payment details within {site.booking.responseTime}. Nothing is charged until then.</p>
+  <FormShell site={site} kind="request" submitLabel="Send booking request" success={`Request received. ${owner} will confirm your spot and send payment details within ${site.booking.responseTime}.`}>
+    {experience ? <input type="hidden" name="experience" value={experience.data.title} /> : <Field name="experience" label="Which walk" options={experiences.map((e) => e.data.title)} required />}
+    <div class="grid gap-4 sm:grid-cols-2">
+      {dateOptions.length ? <Field name="date" label="Preferred departure" options={dateOptions} required /> : <Field name="date" label={experience?.data.season ? `Preferred date (${experience.data.season})` : 'Preferred date'} type="date" required />}
+      <Field name="groupSize" label="How many walkers" type="number" min={1} max={experience?.data.groupSize?.max ?? 30} required />
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <Field name="name" label="Your name" required autocomplete="name" />
+      <Field name="email" label="Email" type="email" required autocomplete="email" />
+    </div>
+    <Field name="phone" label="Phone" type="tel" autocomplete="tel" />
+    <Field name="message" label="Anything we should know" type="textarea" rows={3} />
+  </FormShell>
+</section>

@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+interface Props { label: string; url: string }
+const { label, url } = Astro.props;
+---
+<a href={url} target="_blank" rel="noopener" class="flex items-center gap-3 border border-line p-4 hover:border-ink"><Icon name="info" /><span>{label}</span><Icon name="external" size={16} class="ml-auto opacity-60" /></a>

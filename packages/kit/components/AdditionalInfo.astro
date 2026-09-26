@@ -1,0 +1,23 @@
+---
+// Fitness, group size, season, accessibility, cancellation (experience #9).
+import { groupSizeLine } from '../lib/site';
+import type { Experience } from '../lib/content/schema';
+interface Props { experience: Experience; id?: string }
+const { experience: e, id = 'info' } = Astro.props;
+const rows: [string, string][] = [];
+if (e.fitness) rows.push(['Fitness', e.fitness]);
+const gs = groupSizeLine(e.groupSize); if (gs) rows.push(['Group size', gs]);
+if (e.season) rows.push(['Season', e.season]);
+if (e.startTime || e.startLocation) rows.push(['Meeting point', [e.startLocation?.name, e.startTime && `at ${e.startTime}`].filter(Boolean).join(', ')]);
+if (e.accessibility) rows.push(['Accessibility', e.accessibility]);
+if (e.cancellation) rows.push(['Cancellation', e.cancellation]);
+if (e.accommodation) rows.push(['Accommodation', e.accommodation]);
+---
+{rows.length > 0 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <h2 class="mb-5 text-3xl">Good to know</h2>
+    <dl class="grid divide-y divide-line border-y border-line">
+      {rows.map(([k, v]) => <div class="grid gap-1 py-3 sm:grid-cols-[10rem_1fr]"><dt class="label" style="color:var(--muted)">{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+  </section>
+)}

@@ -1,0 +1,17 @@
+---
+// Welcome pack (A4c): launch only, from their stated policies in src/content/welcome.md.
+import Base from '../../layouts/Base.astro';
+import { pageData } from '../../lib/page';
+import '../../styles/print.css';
+const { site } = await pageData();
+const files = import.meta.glob<string>('/src/content/welcome.md', { query: '?raw', import: 'default' });
+const raw = files['/src/content/welcome.md'] ? await files['/src/content/welcome.md']() : '';
+const html = raw.split(/\n\n+/).map((p) => p.startsWith('# ') ? `<h2>${p.slice(2)}</h2>` : p.startsWith('- ') ? `<ul>${p.split('\n').map((l) => `<li>${l.replace(/^- /, '')}</li>`).join('')}</ul>` : `<p>${p}</p>`).join('');
+---
+<Base title={`Welcome pack | ${site.business.name}`} description="What happens after booking" bare noindex>
+  <article class="print-doc mx-auto max-w-3xl p-6 print:p-0">
+    <div class="print-header"><span>{site.business.name}</span><span>Welcome pack</span></div>
+    <h1>Welcome to {site.business.name}</h1>
+    {html ? <Fragment set:html={html} /> : <p>The welcome pack is written from the owner's own policies at launch.</p>}
+  </article>
+</Base>

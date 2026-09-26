@@ -1,0 +1,12 @@
+---
+// Lightweight click to load embed: a poster and a button, the iframe only on demand.
+interface Props { id: string; title: string }
+const { id, title } = Astro.props;
+---
+<div class="relative aspect-video overflow-hidden bg-black" data-yt={id}>
+  <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" class="cover opacity-80" loading="lazy" width="480" height="360" />
+  <button type="button" class="btn btn-alt-solid absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-label={`Play video: ${title}`}>Play video</button>
+  <script>
+    document.querySelectorAll<HTMLElement>('[data-yt]').forEach((el) => el.querySelector('button')?.addEventListener('click', () => { el.innerHTML = `<iframe class="absolute inset-0 h-full w-full" src="https://www.youtube-nocookie.com/embed/${el.dataset.yt}?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; }));
+  </script>
+</div>

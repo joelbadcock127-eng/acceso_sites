@@ -1,0 +1,54 @@
+---
+// Home. Sections render only when their content exists; the home page carries
+// at most 10 sections by build plan (B4b), which is the content's job, not this file's.
+import Base from '../layouts/Base.astro';
+import HeroMedia from '../components/HeroMedia.astro';
+import Positioning from '../components/Positioning.astro';
+import PressStrip from '../components/PressStrip.astro';
+import FeatureSplit from '../components/FeatureSplit.astro';
+import LocationBlock from '../components/LocationBlock.astro';
+import OfferCards from '../components/OfferCards.astro';
+import StatsRow from '../components/StatsRow.astro';
+import Testimonials from '../components/Testimonials.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import JournalTeaser from '../components/JournalTeaser.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CommitmentBand from '../components/CommitmentBand.astro';
+import ContactSection from '../components/ContactSection.astro';
+import SignatureMap from '../components/SignatureMap.astro';
+import SignatureMoment from '../components/SignatureMoment.astro';
+import TripFinder from '../components/TripFinder.astro';
+import SeasonCalendar from '../components/SeasonCalendar.astro';
+import RecentFromTheTrail from '../components/RecentFromTheTrail.astro';
+import ReviewsWidget from '../components/ReviewsWidget.astro';
+import { pageData } from '../lib/page';
+import { organization } from '../lib/jsonld';
+import plan from '/src/content/plan.json';
+const { site, adapter, experiences, testimonials, faqs, press, stats, posts, signature } = await pageData();
+const on = (k: string) => (plan as Record<string, boolean>)[k] !== false;
+const h = site.home;
+const seasonRows = experiences.map((e) => ({ title: e.data.title, slug: e.slug, months: e.data.seasons.flatMap((s) => s.months) }));
+---
+<Base title={site.seo.defaultTitle} description={site.seo.defaultDescription} jsonLd={[organization(site)]}>
+  <HeroMedia site={site} adapter={adapter} />
+  <Positioning site={site} />
+  {on('pressStrip') && <PressStrip items={press} />}
+  {on('featureSplit') && <FeatureSplit features={h.features} />}
+  {on('locationBlock') && <LocationBlock site={site} />}
+  <OfferCards site={site} experiences={experiences} />
+  {on('tripFinder') && <TripFinder experiences={experiences} />}
+  {on('statsRow') && <StatsRow stats={stats} heading={h.statsHeading} />}
+  {on('signatureMap') && <SignatureMap site={site} experiences={experiences} landmarks={(plan as any).landmarks ?? []} />}
+  {on('signatureMoment') && <SignatureMoment data={signature} />}
+  {on('seasonCalendar') && <SeasonCalendar rows={seasonRows} notes={site.seasons} />}
+  <Testimonials items={testimonials} />
+  {on('story') && h.story && <StoryBlock heading={h.story.heading} body={h.story.body} image={h.story.image} alt={h.story.alt} link={h.story.link} />}
+  {on('faq') && <FaqAccordion items={faqs} heading="Questions" moreHref={faqs.length > 5 ? '/faq' : undefined} />}
+  {on('journal') && <JournalTeaser posts={posts} />}
+  {h.cta && <CtaBand site={site} adapter={adapter} heading={h.cta.heading} body={h.cta.body} label={h.cta.label} image={h.cta.image} video={h.cta.video} poster={h.cta.poster} />}
+  <CommitmentBand site={site} />
+  <RecentFromTheTrail site={site} />
+  <ReviewsWidget site={site} />
+  <ContactSection site={site} experiences={experiences.map((e) => e.data.title)} />
+</Base>

@@ -1,0 +1,4 @@
+[
+  { "name": "Sam Demo", "role": "Founder and lead guide", "bio": "Sam has guided the Razorback every summer since 2009 and knows the ridge in every weather. Before Ridgeline, Sam worked ski patrol at Hotham for six winters.", "yearsGuiding": 15, "knowsBest": "Where the wind hides on the Razorback, and which snow gum gives shelter for lunch.", "credentials": ["Wilderness First Aid"], "photo": "images/demo-07.jpg", "alt": "Demo placeholder portrait", "sourceUrl": "demo" },
+  { "name": "Jo Demo", "role": "Guide", "bio": "Jo joined in 2016 after a decade of botanical survey work on the High Plains and is the reason our wildflower walks run when they do.", "yearsGuiding": 8, "knowsBest": "The exact fortnight the snow daisies peak.", "credentials": [], "photo": "images/demo-11.jpg", "alt": "Demo placeholder portrait", "sourceUrl": "demo" }
+]

@@ -1,0 +1,23 @@
+{
+  "pressStrip": true,
+  "featureSplit": true,
+  "locationBlock": true,
+  "tripFinder": false,
+  "statsRow": true,
+  "signatureMap": false,
+  "signatureMoment": true,
+  "seasonCalendar": false,
+  "story": true,
+  "faq": true,
+  "journal": true,
+  "routeMap": false,
+  "dayOnTheTrail": false,
+  "compare": true,
+  "conditions": false,
+  "parkAlerts": false,
+  "brochureLead": false,
+  "whoItsFor": true,
+  "packingList": true,
+  "gettingThere": true,
+  "downloads": true
+}

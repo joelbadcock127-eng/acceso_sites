@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { pageData } from '../lib/page';
+import { faqPage, breadcrumb } from '../lib/jsonld';
+const { site, adapter, faqs } = await pageData();
+---
+<Base title={`Questions | ${site.business.name}`} description={`Answers to the questions walkers ask ${site.business.name} before booking.`} jsonLd={[faqPage(faqs), breadcrumb(site, [{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }])]}>
+  <section class="pad-x section-md"><div class="container-xl"><h1>Questions</h1></div></section>
+  <FaqAccordion items={faqs} heading="Before you book" limit={100} intro="If your question isn't here, email or call and a real person answers." />
+  {site.home.cta && <CtaBand site={site} adapter={adapter} heading={site.home.cta.heading} body={site.home.cta.body} label={site.home.cta.label} image={site.home.cta.image} />}
+</Base>

@@ -1,0 +1,30 @@
+{
+  "archetype": "expedition",
+  "pairing": "expedition",
+  "colors": {
+    "ground": "#f3efe6",
+    "surface": "#fbf9f4",
+    "ink": "#1d2a24",
+    "muted": "#55635c",
+    "line": "rgba(29, 42, 36, 0.16)",
+    "accent": "#b5562a",
+    "accentInk": "#fbf9f4",
+    "overlay": "rgba(16, 24, 20, 0.5)",
+    "band": "#1d2a24",
+    "bandInk": "#f3efe6"
+  },
+  "radius": "2px",
+  "logo": { "src": "images/logo-ridgeline.svg", "alt": "Ridgeline Walks", "framed": false, "invertOnHero": true, "height": "2.25rem", "wordmark": true },
+  "heroStyle": "stillSlowZoom",
+  "texture": "topo",
+  "variants": {
+    "hero": "split",
+    "positioning": "left",
+    "featureSplit": "stacked",
+    "offerCards": "featurePlusTwo",
+    "statsRow": "cards",
+    "testimonials": "grid",
+    "ctaBand": "split",
+    "keyFacts": "pills"
+  }
+}

@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import { pageData } from '../../lib/page';
+import { formatDate } from '../../lib/site';
+const { site, posts } = await pageData();
+const list = [...posts].sort((a, b) => b.data.date.localeCompare(a.data.date)).slice(0, 6);
+---
+<Base title={`Journal | ${site.business.name}`} description={`Stories and updates from ${site.business.name}.`}>
+  <section class="pad-x section"><div class="container-xl"><h1 class="mb-10">Journal</h1>
+    <ul class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">{list.map((p) => <li><a href={`/journal/${p.slug}`} class="group block">{p.data.image && <div class="mb-4 overflow-hidden" style="border-radius:var(--radius)"><Img src={p.data.image} alt={p.data.alt ?? ''} class="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" sizes="33vw" widths={[480, 768]} /></div>}<div class="text-xs" style="color:var(--muted)">{[p.data.category, formatDate(p.data.date), p.data.readTime].filter(Boolean).join(' · ')}</div><h2 class="mt-2 text-2xl">{p.data.title}</h2>{p.data.summary && <p class="mt-1" style="color:var(--muted)">{p.data.summary}</p>}</a></li>)}</ul>
+  </div></section>
+</Base>

@@ -1,0 +1,24 @@
+---
+// Big numbers (A1 #7). Exactly what they state, 3 or more, each with a sourceFact.
+import type { Stat } from '../lib/content/schema';
+import theme from '/src/generated/theme.json';
+interface Props { stats: Stat[]; heading?: string; image?: string }
+const { stats, heading } = Astro.props;
+const v = theme.variants.statsRow;
+const items = stats.filter((s) => s.sourceFact).slice(0, 4);
+---
+{items.length >= 3 && (
+  <section class:list={['pad-x', v === 'band' ? 'band section' : 'section border-t border-line']} data-reveal>
+    <div class="container-xl">
+      {heading && <h2 class="mb-10 max-w-2xl">{heading}</h2>}
+      <ul class:list={['grid gap-8', v === 'cards' ? 'md:grid-cols-3' : 'md:grid-cols-3', { 'lg:grid-cols-4': items.length === 4 }]}>
+        {items.map((s) => (
+          <li class:list={[v === 'cards' ? 'card p-8' : 'border-l pl-6', v === 'band' ? 'border-band-ink/40' : 'border-line']}>
+            <div class="stat-number" data-count={s.value}>{s.value}</div>
+            <div class="mt-2 text-lg" style={v === 'band' ? 'opacity:.85' : 'color:var(--muted)'}>{s.label}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

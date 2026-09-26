@@ -1,0 +1,32 @@
+---
+// Clean elevation chart under the map, from elevations sampled along the route.
+import type { RouteData } from './RouteMap.astro';
+interface Props { data: RouteData; print?: boolean }
+const { data, print = false } = Astro.props;
+const pts = data.points.filter((p) => typeof p[2] === 'number') as [number, number, number][];
+const W = 800, H = 200, padL = 44, padB = 24, padT = 12;
+let path = '', area = '', ticks: { y: number; v: number }[] = [], xticks: { x: number; v: string }[] = [];
+if (pts.length > 2) {
+  // cumulative distance
+  const R = 6371; const d: number[] = [0];
+  for (let i = 1; i < pts.length; i++) { const [a, b] = [pts[i - 1], pts[i]]; const dLat = (b[1] - a[1]) * Math.PI / 180, dLng = (b[0] - a[0]) * Math.PI / 180; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a[1] * Math.PI / 180) * Math.cos(b[1] * Math.PI / 180) * Math.sin(dLng / 2) ** 2; d.push(d[i - 1] + 2 * R * Math.asin(Math.sqrt(h))); }
+  const total = d[d.length - 1] || 1;
+  const els = pts.map((p) => p[2]); const minE = Math.floor(Math.min(...els) / 50) * 50, maxE = Math.ceil(Math.max(...els) / 50) * 50 || minE + 50;
+  const X = (km: number) => padL + (km / total) * (W - padL - 10); const Y = (m: number) => padT + (1 - (m - minE) / (maxE - minE || 1)) * (H - padT - padB);
+  path = pts.map((p, i) => `${i ? 'L' : 'M'}${X(d[i]).toFixed(1)} ${Y(p[2]).toFixed(1)}`).join('');
+  area = path + `L${X(total).toFixed(1)} ${Y(minE).toFixed(1)}L${X(0).toFixed(1)} ${Y(minE).toFixed(1)}Z`;
+  const step = (maxE - minE) / 4; ticks = [0, 1, 2, 3, 4].map((i) => ({ y: Y(minE + step * i), v: Math.round(minE + step * i) }));
+  const kmStep = total > 40 ? 10 : total > 15 ? 5 : total > 6 ? 2 : 1; for (let k = 0; k <= total; k += kmStep) xticks.push({ x: X(k), v: `${k} km` });
+}
+---
+{path && (
+  <figure class="mt-6">
+    <svg viewBox={`0 0 ${W} ${H}`} class:list={['h-auto w-full', { elev: print }]} role="img" aria-label="Elevation profile of the route">
+      {ticks.map((t) => <g><line x1={padL} x2={W - 10} y1={t.y} y2={t.y} stroke="var(--line)" /><text x={padL - 6} y={t.y + 4} text-anchor="end" font-size="11" fill="var(--muted)" font-family="var(--font-label)">{t.v} m</text></g>)}
+      <path d={area} fill="var(--accent)" opacity=".2" />
+      <path d={path} fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" />
+      {xticks.map((t) => <text x={t.x} y={H - 6} text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--font-label)">{t.v}</text>)}
+    </svg>
+    <figcaption class="sr-only">Elevation along the route{data.ascentM ? `, ${data.ascentM} metres of ascent` : ''}.</figcaption>
+  </figure>
+)}

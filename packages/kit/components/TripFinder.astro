@@ -1,0 +1,36 @@
+---
+// Three quick questions, answered with a recommended experience (A4b). Pure
+// front end logic from their facts; collects nothing.
+import type { ExperienceEntry } from '../lib/site';
+import { formatPriceShort } from '../lib/site';
+interface Props { experiences: ExperienceEntry[] }
+const { experiences } = Astro.props;
+const data = experiences.map((e) => ({ slug: e.slug, title: e.data.title, type: e.data.type, days: e.data.type === 'multiday' ? 3 : 1, grade: Number(e.data.grade?.value) || (/(hard|challeng|strenuous)/i.test(e.data.grade?.label ?? '') ? 4 : /(moderate|medium)/i.test(e.data.grade?.label ?? '') ? 3 : 2), summary: e.data.summary, price: formatPriceShort(e.data.priceFrom), bestFor: e.data.bestFor ?? '', pack: e.data.packFree, accommodation: !!e.data.accommodation, wildlife: /wildlife|bird|species|animal/i.test([e.data.summary, ...e.data.highlights].join(' ')), views: /view|summit|ridge|lookout|coast/i.test([e.data.summary, ...e.data.highlights].join(' ')) }));
+---
+{experiences.length >= 3 && (
+  <section class="pad-x section band" data-reveal data-trip-finder data-trips={JSON.stringify(data)}>
+    <div class="container-lg">
+      <div class="mb-8 max-w-2xl"><h2 class="mb-3">Which walk is right for you?</h2><p class="lede">Three quick questions. Nothing is collected.</p></div>
+      <form class="grid gap-6 md:grid-cols-3" data-tf-form>
+        <fieldset class="grid gap-2"><legend class="label mb-2">How many days?</legend>{[['1', 'One day'], ['3', 'A few days'], ['any', 'Not sure yet']].map(([v, l]) => <label class="flex items-center gap-2"><input type="radio" name="days" value={v} class="accent-current" />{l}</label>)}</fieldset>
+        <fieldset class="grid gap-2"><legend class="label mb-2">How fit?</legend>{[['2', 'Easy going'], ['3', 'Regular walker'], ['4', 'Up for a challenge']].map(([v, l]) => <label class="flex items-center gap-2"><input type="radio" name="fit" value={v} class="accent-current" />{l}</label>)}</fieldset>
+        <fieldset class="grid gap-2"><legend class="label mb-2">What matters most?</legend>{[['views', 'Big views'], ['wildlife', 'Wildlife'], ['comfort', 'Comfort at the end of the day']].map(([v, l]) => <label class="flex items-center gap-2"><input type="radio" name="care" value={v} class="accent-current" />{l}</label>)}</fieldset>
+      </form>
+      <div class="mt-8 hidden border p-6" style="border-color:color-mix(in srgb, var(--band-ink) 30%, transparent)" data-tf-result aria-live="polite"></div>
+    </div>
+    <script>
+      document.querySelectorAll<HTMLElement>('[data-trip-finder]').forEach((root) => {
+        const trips = JSON.parse(root.dataset.trips || '[]');
+        const form = root.querySelector<HTMLFormElement>('[data-tf-form]')!; const out = root.querySelector<HTMLElement>('[data-tf-result]')!;
+        form.addEventListener('change', () => {
+          const f = new FormData(form); const days = f.get('days'), fit = Number(f.get('fit')), care = f.get('care');
+          if (!days || !fit || !care) return;
+          const scored = trips.map((t: any) => { let s = 0; if (days === 'any') s += 1; else s += (days === '1' ? t.days === 1 : t.days > 1) ? 3 : 0; s += 2 - Math.min(2, Math.abs(t.grade - fit)); if (care === 'wildlife' && t.wildlife) s += 2; if (care === 'views' && t.views) s += 2; if (care === 'comfort' && (t.accommodation || t.pack)) s += 2; return { t, s }; }).sort((a: any, b: any) => b.s - a.s);
+          const best = scored[0].t;
+          out.classList.remove('hidden');
+          out.innerHTML = `<div class="label mb-2" style="opacity:.7">Our suggestion</div><h3 class="text-2xl">${best.title}</h3><p class="mt-2">${best.summary}</p><div class="mt-4 flex flex-wrap items-center gap-4">${best.price ? `<span class="font-medium">${best.price}</span>` : ''}<a class="btn btn-alt-solid btn-sm" href="/experiences/${best.slug}">See ${best.title}</a></div>`;
+        });
+      });
+    </script>
+  </section>
+)}

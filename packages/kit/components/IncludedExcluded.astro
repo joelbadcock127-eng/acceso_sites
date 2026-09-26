@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+interface Props { included: string[]; excluded: string[]; id?: string }
+const { included, excluded, id = 'included' } = Astro.props;
+---
+{included.length > 0 && (
+  <section id={id} class="anchor-offset grid gap-8 md:grid-cols-2" data-reveal>
+    <div>
+      <h2 class="mb-5 text-3xl">What's included</h2>
+      <ul class="grid gap-2">{included.map((x) => <li class="flex items-start gap-3"><Icon name="check" class="mt-1 flex-none" size={18} /><span>{x}</span></li>)}</ul>
+    </div>
+    {excluded.length > 0 && (
+      <div>
+        <h2 class="mb-5 text-3xl">Not included</h2>
+        <ul class="grid gap-2" style="color:var(--muted)">{excluded.map((x) => <li class="flex items-start gap-3"><Icon name="cross" class="mt-1 flex-none" size={18} /><span>{x}</span></li>)}</ul>
+      </div>
+    )}
+  </section>
+)}

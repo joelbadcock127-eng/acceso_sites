@@ -1,0 +1,80 @@
+---
+// Interactive route map (A4b): MapLibre with OpenFreeMap tiles, lazy loaded
+// when scrolled into view, with a static SVG first so the page stays fast.
+// Route data comes from scripts/route_elevation.mjs (GPX in, JSON out).
+import ElevationProfile from './ElevationProfile.astro';
+import type { Experience } from '../lib/content/schema';
+interface Props { experience: Experience; id?: string; routeData?: RouteData | null }
+export interface RouteData { points: [number, number, number?][]; days?: number[]; ascentM?: number; highestM?: number; distanceKm?: number; attribution?: string; bbox: [number, number, number, number] }
+const { experience: e, id = 'map', routeData } = Astro.props;
+const data = routeData ?? null;
+const pins = e.route?.pins ?? [];
+const W = 800, H = 480;
+let staticPath = '';
+let pinPts: { x: number; y: number; name: string; kind: string }[] = [];
+if (data && data.points.length > 1) {
+  const [minx, miny, maxx, maxy] = data.bbox;
+  const kx = Math.cos(((miny + maxy) / 2 * Math.PI) / 180);
+  const w = (maxx - minx) * kx || 0.001, h = (maxy - miny) || 0.001;
+  const s = Math.min((W - 60) / w, (H - 60) / h);
+  const ox = (W - w * s) / 2, oy = (H - h * s) / 2;
+  const P = (lng: number, lat: number) => [ox + (lng - minx) * kx * s, oy + (maxy - lat) * s];
+  staticPath = data.points.map((p, i) => { const [x, y] = P(p[0], p[1]); return `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`; }).join('');
+  pinPts = pins.map((p) => { const [x, y] = P(p.lng, p.lat); return { x, y, name: p.name, kind: p.kind }; });
+}
+const dayColours = ['var(--accent)', 'var(--ink)', 'var(--muted)', 'var(--accent)'];
+---
+{data && (
+  <section id={id} class="anchor-offset" data-reveal data-route-map data-route={JSON.stringify({ points: data.points.map((p) => [p[0], p[1]]), days: data.days ?? [], pins, bbox: data.bbox })}>
+    <h2 class="mb-6">The route</h2>
+    <div class="relative overflow-hidden border border-line" style="aspect-ratio:5/3;background:var(--surface)">
+      <svg viewBox={`0 0 ${W} ${H}`} class="absolute inset-0 h-full w-full" role="img" aria-label={`Static map of the ${e.title} route`} data-route-static>
+        <path d={staticPath} fill="none" stroke="var(--accent)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+        {pinPts.map((p) => <g><circle cx={p.x} cy={p.y} r="6" fill={p.kind === 'start' ? 'var(--ink)' : 'var(--surface)'} stroke="var(--ink)" stroke-width="2" /><text x={p.x + 10} y={p.y + 4} font-size="14" font-family="var(--font-label)" fill="var(--ink)">{p.name}</text></g>)}
+      </svg>
+      <div class="absolute inset-0" data-route-live hidden></div>
+      <div class="absolute bottom-0 right-0 bg-surface/80 px-2 py-1 text-[11px]" data-route-attrib>{data.attribution ?? 'Route from the operator'}</div>
+      <button type="button" class="btn btn-sm absolute left-3 top-3" data-route-activate>Open interactive map</button>
+    </div>
+    {(data.distanceKm || data.ascentM || data.highestM) && (
+      <dl class="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+        {data.distanceKm && <div><dt class="label" style="color:var(--muted)">Distance</dt><dd class="font-medium">{data.distanceKm} km</dd></div>}
+        {data.ascentM && <div><dt class="label" style="color:var(--muted)">Total ascent</dt><dd class="font-medium">{data.ascentM} m</dd></div>}
+        {data.highestM && <div><dt class="label" style="color:var(--muted)">Highest point</dt><dd class="font-medium">{data.highestM} m</dd></div>}
+      </dl>
+    )}
+    <ElevationProfile data={data} />
+    <script>
+      // Lazy: MapLibre and its CSS load only when the map is near the viewport or the button is pressed.
+      const roots = document.querySelectorAll<HTMLElement>('[data-route-map]');
+      const boot = async (root: HTMLElement) => {
+        if (root.dataset.booted) return; root.dataset.booted = '1';
+        const cfg = JSON.parse(root.dataset.route || '{}');
+        const live = root.querySelector<HTMLElement>('[data-route-live]')!;
+        const btn = root.querySelector<HTMLButtonElement>('[data-route-activate]');
+        const [{ default: maplibregl }] = await Promise.all([import('maplibre-gl'), import('maplibre-gl/dist/maplibre-gl.css')]);
+        const css = getComputedStyle(document.documentElement);
+        const accent = css.getPropertyValue('--accent').trim() || '#c60';
+        const ink = css.getPropertyValue('--ink').trim() || '#111';
+        live.hidden = false; btn?.remove(); root.querySelector('[data-route-static]')?.setAttribute('hidden', '');
+        const map = new maplibregl.Map({ container: live, style: 'https://tiles.openfreemap.org/styles/positron', bounds: [[cfg.bbox[0], cfg.bbox[1]], [cfg.bbox[2], cfg.bbox[3]]], fitBoundsOptions: { padding: 40 }, attributionControl: { compact: false } });
+        map.addControl(new maplibregl.NavigationControl(), 'top-right');
+        map.on('load', () => {
+          const days: number[] = cfg.days; const pts: [number, number][] = cfg.points;
+          const features = days.length ? [...new Set(days)].map((d) => ({ type: 'Feature', properties: { day: d }, geometry: { type: 'LineString', coordinates: pts.filter((_, i) => days[i] === d) } })) : [{ type: 'Feature', properties: { day: 1 }, geometry: { type: 'LineString', coordinates: pts } }];
+          map.addSource('route', { type: 'geojson', data: { type: 'FeatureCollection', features } as any });
+          map.addLayer({ id: 'route-casing', type: 'line', source: 'route', paint: { 'line-color': '#fff', 'line-width': 7, 'line-opacity': .8 }, layout: { 'line-join': 'round', 'line-cap': 'round' } });
+          map.addLayer({ id: 'route', type: 'line', source: 'route', paint: { 'line-color': ['match', ['%', ['get', 'day'], 2], 0, ink, accent], 'line-width': 4 }, layout: { 'line-join': 'round', 'line-cap': 'round' } });
+          for (const p of cfg.pins) new maplibregl.Marker({ color: p.kind === 'start' ? ink : accent }).setLngLat([p.lng, p.lat]).setPopup(new maplibregl.Popup({ offset: 24 }).setText(p.name)).addTo(map);
+        });
+      };
+      roots.forEach((root) => {
+        root.querySelector('[data-route-activate]')?.addEventListener('click', () => boot(root));
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 640px)').matches) {
+          const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); boot(root); } }, { rootMargin: '200px' });
+          io.observe(root);
+        }
+      });
+    </script>
+  </section>
+)}

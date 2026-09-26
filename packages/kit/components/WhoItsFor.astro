@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+interface Props { suits: string[]; notFor: string[]; id?: string }
+const { suits, notFor, id = 'who' } = Astro.props;
+---
+{suits.length > 0 && (
+  <section id={id} class="anchor-offset grid gap-8 md:grid-cols-2" data-reveal>
+    <div class="card p-6"><h3 class="mb-4 text-2xl">This suits you if</h3><ul class="grid gap-2">{suits.map((s) => <li class="flex items-start gap-3"><Icon name="check" size={18} class="mt-1 flex-none" /><span>{s}</span></li>)}</ul></div>
+    {notFor.length > 0 && <div class="border border-line p-6"><h3 class="mb-4 text-2xl">Probably not for you if</h3><ul class="grid gap-2" style="color:var(--muted)">{notFor.map((s) => <li class="flex items-start gap-3"><Icon name="cross" size={18} class="mt-1 flex-none" /><span>{s}</span></li>)}</ul></div>}
+  </section>
+)}

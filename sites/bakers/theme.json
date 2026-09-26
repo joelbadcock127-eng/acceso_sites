@@ -1,0 +1,33 @@
+{
+  "archetype": "lodge",
+  "pairing": "lodge",
+  "adobeKitId": "omv6qkl",
+  "fonts": { "display": "warbler-banner", "body": "optima-nova-lt-pro", "label": "optima-nova-lt-pro" },
+  "colors": {
+    "ground": "#f8f5f0",
+    "surface": "#ffffff",
+    "ink": "#050403",
+    "muted": "#666372",
+    "line": "rgba(5, 4, 3, 0.15)",
+    "accent": "#ddbe72",
+    "accentInk": "#050403",
+    "overlay": "rgba(0, 0, 0, 0.5)",
+    "band": "#636260",
+    "bandInk": "#ffffff"
+  },
+  "radius": "0px",
+  "favicon": "/favicon.png",
+  "logo": { "src": "images/logo-bakers.png", "alt": "Bakers Walking Co", "framed": false, "invertOnHero": true, "height": "3rem", "wordmark": false },
+  "heroStyle": "video",
+  "texture": "none",
+  "variants": {
+    "hero": "full",
+    "positioning": "centred",
+    "featureSplit": "alternate",
+    "offerCards": "three",
+    "statsRow": "band",
+    "testimonials": "slider",
+    "ctaBand": "image",
+    "keyFacts": "banner"
+  }
+}

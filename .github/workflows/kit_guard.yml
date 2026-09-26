@@ -1,0 +1,48 @@
+# Kit changes can't break live clients: on any change under packages/kit,
+# build every site marked live in sites.json and run its QA gates.
+name: kit_guard
+on:
+  pull_request:
+    paths: ['packages/kit/**', 'pnpm-lock.yaml']
+  push:
+    branches: [main]
+    paths: ['packages/kit/**', 'pnpm-lock.yaml']
+jobs:
+  sites:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.list.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: |
+          SITES=$(node -e "const s=require('./sites.json').filter(x=>x.status==='live').map(x=>x.slug); console.log(JSON.stringify(s.length?s:['_demo_ridgeline']))")
+          echo "matrix=$SITES" >> "$GITHUB_OUTPUT"
+  guard:
+    needs: sites
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: ${{ fromJson(needs.sites.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm build:site ${{ matrix.slug }}
+      - run: node scripts/qa.mjs ${{ matrix.slug }} --no-lighthouse
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: qa-${{ matrix.slug }}, path: sites/${{ matrix.slug }}/qa }
+  hide_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/hide_test.mjs

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import PrivateQuote from '../components/forms/PrivateQuote.astro';
+import CorporateSchools from '../components/forms/CorporateSchools.astro';
+import { pageData } from '../lib/page';
+const { site, experiences } = await pageData();
+const p = site.privateGroups!;
+const corporate = p.kinds.some((k) => /corporate|team|school|university|duke/i.test(k));
+---
+<Base title={`Private and group walks | ${site.business.name}`} description={p.intro}>
+  <section class="pad-x section"><div class="container-xl grid items-center gap-10 lg:grid-cols-2"><div><h1 class="mb-4">{p.heading}</h1><p class="lede" style="color:var(--muted)">{p.intro}</p>{p.body && <div class="prose mt-6" set:html={p.body.split(/\n\n+/).map((x) => `<p>${x}</p>`).join('')} />}{p.kinds.length > 0 && <ul class="mt-6 flex flex-wrap gap-2">{p.kinds.map((k) => <li class="badge">{k}</li>)}</ul>}</div>{p.image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={p.image} alt={p.alt ?? ''} class="aspect-[4/3] w-full object-cover" priority sizes="50vw" widths={[768, 1080]} /></div>}</div></section>
+  <section class="pad-x section border-t border-line"><div class="container-xl grid gap-10 lg:grid-cols-2"><div><h2 class="mb-2">Request a private or group quote</h2><p class="mb-6" style="color:var(--muted)">Three short steps.</p><PrivateQuote site={site} experiences={experiences} kinds={p.kinds.filter((k) => !/corporate|team|school|university|duke/i.test(k))} /></div>{corporate && <div><h2 class="mb-2">Corporate, schools and groups</h2><p class="mb-6" style="color:var(--muted)">For teams, schools and universities.</p><CorporateSchools site={site} /></div>}</div></section>
+</Base>

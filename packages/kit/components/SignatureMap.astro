@@ -1,0 +1,51 @@
+---
+// A custom illustrated SVG map of their region (A4d maps #1): the state
+// outline, their walks, the base town, nearest airport and the landmarks their
+// content names. Drawn from Natural Earth and their own pins, styled by tokens.
+import { STATES, stateCode, makeProjector, ringPath } from '../lib/geo/project';
+import type { Site } from '../lib/content/schema';
+import type { ExperienceEntry } from '../lib/site';
+interface Props { site: Site; experiences: ExperienceEntry[]; landmarks?: { name: string; lat: number; lng: number; kind?: string }[]; heading?: string }
+const { site, experiences, landmarks = [], heading = 'Where the walks are' } = Astro.props;
+const code = stateCode(site.business.state);
+const shape = code ? STATES[code] : null;
+const base = site.business.location;
+const pins = [
+  ...experiences.flatMap((e) => (e.data.route?.pins ?? []).filter((p) => p.kind === 'start').slice(0, 1).map((p) => ({ name: e.data.title, lat: p.lat, lng: p.lng, kind: 'walk', href: `/experiences/${e.slug}` }))),
+  ...landmarks.map((l) => ({ ...l, kind: l.kind ?? 'landmark', href: undefined as string | undefined })),
+];
+const W = 720, H = 560;
+let project: ((lng: number, lat: number) => [number, number]) | null = null;
+if (shape && base) {
+  // Zoom to the region: a box around the base and the pins, at least 2.5 degrees wide.
+  const lats = [base.lat, ...pins.map((p) => p.lat)], lngs = [base.lng, ...pins.map((p) => p.lng)];
+  const cx = (Math.min(...lngs) + Math.max(...lngs)) / 2, cy = (Math.min(...lats) + Math.max(...lats)) / 2;
+  const span = Math.max(2.5, (Math.max(...lngs) - Math.min(...lngs)) * 1.6, (Math.max(...lats) - Math.min(...lats)) * 1.6);
+  project = makeProjector([cx - span / 2, cy - span * 0.39, cx + span / 2, cy + span * 0.39], W, H, 0);
+}
+---
+{shape && base && project && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+      <div>
+        <div class="eyebrow mb-3">{shape.name}</div>
+        <h2 class="mb-4">{heading}</h2>
+        <ul class="grid gap-2">
+          <li class="flex items-center gap-3"><span class="h-3 w-3 rounded-full" style="background:var(--ink)"></span>{site.business.baseTown ?? 'Base'}</li>
+          {pins.filter((p) => p.kind === 'walk').map((p) => <li class="flex items-center gap-3"><span class="h-3 w-3 rounded-full" style="background:var(--accent)"></span>{p.href ? <a href={p.href} class="underline underline-offset-4">{p.name}</a> : p.name}</li>)}
+          {site.business.nearestAirport && <li class="flex items-center gap-3"><span class="h-3 w-3 rotate-45" style="background:var(--muted)"></span>{site.business.nearestAirport}</li>}
+        </ul>
+      </div>
+      <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full border border-line" style="background:var(--surface)" role="img" aria-label={`Illustrated map of ${site.business.region ?? shape.name} showing the walks`}>
+        <defs><pattern id="sig-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="var(--line)" stroke-width="1" /></pattern><clipPath id="sig-clip"><rect width={W} height={H} /></clipPath></defs>
+        <rect width={W} height={H} fill="url(#sig-hatch)" opacity=".5" />
+        <g clip-path="url(#sig-clip)" fill="var(--ground)" stroke="var(--ink)" stroke-width="1.2" stroke-linejoin="round">{shape.rings.map((r) => <path d={ringPath(r, project!)} />)}</g>
+        <g clip-path="url(#sig-clip)">
+          {pins.map((p) => { const [x, y] = project!(p.lng, p.lat); return <g transform={`translate(${x.toFixed(1)} ${y.toFixed(1)})`}>{p.kind === 'walk' ? <circle r="7" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5" /> : p.kind === 'airport' ? <rect x="-5" y="-5" width="10" height="10" fill="var(--muted)" transform="rotate(45)" /> : <circle r="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5" />}<text x="12" y="4" font-size="13" font-family="var(--font-label)" fill="var(--ink)" letter-spacing=".04em">{p.name}</text></g>; })}
+          {(() => { const [x, y] = project!(base.lng, base.lat); return <g transform={`translate(${x.toFixed(1)} ${y.toFixed(1)})`}><circle r="16" fill="var(--ink)" opacity=".12" /><circle r="6" fill="var(--ink)" /><text x="12" y="-8" font-size="14" font-weight="600" font-family="var(--font-label)" fill="var(--ink)" letter-spacing=".08em" style="text-transform:uppercase">{site.business.baseTown ?? site.business.name}</text></g>; })()}
+        </g>
+        <text x="16" y={H - 16} font-size="11" fill="var(--muted)" font-family="var(--font-label)">Outline: Natural Earth. Illustrative only.</text>
+      </svg>
+    </div>
+  </section>
+)}

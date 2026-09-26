@@ -1,0 +1,10 @@
+---
+// The latest posts from their Instagram through an official embed or feed
+// tool, never scraped. Only once the owner connects it at launch; never in preview.
+import type { Site } from '../lib/content/schema';
+import { isPreview } from '../lib/site';
+interface Props { site: Site }
+const { site } = Astro.props;
+const show = !isPreview(site) && !!site.instagram.embedHtml;
+---
+{show && <section class="pad-x section border-t border-line"><div class="container-xl"><div class="mb-6 flex items-end justify-between gap-4"><h2>Recent from the trail</h2>{site.instagram.handle && <a href={`https://instagram.com/${site.instagram.handle.replace('@', '')}`} target="_blank" rel="noopener" class="btn-link">{site.instagram.handle}</a>}</div><div set:html={site.instagram.embedHtml} /></div></section>}

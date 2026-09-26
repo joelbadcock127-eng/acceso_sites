@@ -1,0 +1,45 @@
+{
+  "name": "acceso-sites",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Acceso walking site kit: one shared kit, one folder per site, one Cloudflare Pages project per site.",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "pnpm -r --filter './sites/*' build",
+    "build:site": "node scripts/run_site.mjs build",
+    "dev:site": "node scripts/run_site.mjs dev",
+    "list": "node scripts/list.mjs",
+    "qa": "node scripts/qa.mjs",
+    "review": "node scripts/review.mjs",
+    "shots": "node scripts/shots.mjs",
+    "pitch": "node scripts/pitch.mjs",
+    "intake": "node scripts/intake.mjs",
+    "audit": "node scripts/audit.mjs",
+    "new-client": "node scripts/new_client.mjs",
+    "kill": "node scripts/kill.mjs",
+    "eject": "node scripts/eject.mjs",
+    "build-pdfs": "node scripts/build_pdfs.mjs",
+    "contrast": "node scripts/contrast_check.mjs",
+    "hide-test": "node scripts/hide_test.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "axe-core": "^4.10.3",
+    "chrome-launcher": "^1.2.1",
+    "lighthouse": "^12.8.2",
+    "playwright": "1.56.1",
+    "sharp": "^0.34.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "playwright"
+    ]
+  }
+}

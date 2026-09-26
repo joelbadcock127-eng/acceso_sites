@@ -1,0 +1,70 @@
+---
+// Header with mega menu (A1 global): logo mark in a thin bracketed frame,
+// primary links, a "More" panel with three groups and two featured cards, and
+// a persistent booking button. Fully keyboard operable.
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import BookButton from './BookButton.astro';
+import MegaMenu from './MegaMenu.astro';
+import type { Site } from '../lib/content/schema';
+import type { BookingAdapter } from '../lib/booking';
+import theme from '/src/generated/theme.json';
+interface Props { site: Site; adapter: BookingAdapter }
+const { site, adapter } = Astro.props;
+const primary = site.nav.primary.length ? site.nav.primary : [{ label: 'Experiences', href: '/experiences' }, { label: 'About', href: '/about' }];
+const hasMenu = site.nav.groups.length > 0;
+const bookLabel = site.nav.bookLabel;
+---
+<header class="site-header sticky top-0 z-50 border-b border-line" style="background:var(--ground)" data-header>
+  <div class="pad-x flex min-h-[4.5rem] items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3 py-2" aria-label={`${site.business.name} home`}>
+      {theme.logo.wordmark ? (
+        <span class:list={['font-display text-2xl leading-none', { frame: theme.logo.framed }]}>{site.business.name}</span>
+      ) : (
+        <span class:list={{ frame: theme.logo.framed }}>
+          <Img src={theme.logo.src} alt={theme.logo.alt || site.business.name} class="w-auto" style={`height:${theme.logo.height}`} loading="eager" priority sizes="240px" widths={[240, 480]} />
+        </span>
+      )}
+    </a>
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+      {primary.map((l) => <a href={l.href} class="px-3 py-6 text-[0.95rem] font-medium hover:underline underline-offset-8 decoration-accent">{l.label}</a>)}
+      {hasMenu && (
+        <button type="button" class="flex items-center gap-1 px-3 py-6 text-[0.95rem] font-medium" aria-expanded="false" aria-controls="mega-menu" data-mega-toggle>
+          More <Icon name="chevron" size={16} />
+        </button>
+      )}
+    </nav>
+    <div class="flex items-center gap-2">
+      <BookButton adapter={adapter} label={bookLabel} class="hidden sm:inline-flex" />
+      <button type="button" class="flex h-11 w-11 items-center justify-center lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-mobile-toggle>
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  {hasMenu && <MegaMenu site={site} adapter={adapter} />}
+  <div id="mobile-menu" class="hidden border-t border-line lg:hidden" style="background:var(--ground)" data-mobile-menu>
+    <nav class="pad-x grid gap-1 py-4" aria-label="Mobile">
+      {primary.map((l) => <a href={l.href} class="py-3 text-lg font-display">{l.label}</a>)}
+      {site.nav.groups.map((g) => (
+        <div class="border-t border-line pt-3">
+          <div class="eyebrow mb-1">{g.label}</div>
+          {g.links.map((l) => <a href={l.href} class="block py-2">{l.label}</a>)}
+        </div>
+      ))}
+      <div class="pt-3 sm:hidden"><BookButton adapter={adapter} label={bookLabel} /></div>
+    </nav>
+  </div>
+</header>
+<script>
+  const header = document.querySelector('[data-header]');
+  const megaToggle = header?.querySelector<HTMLButtonElement>('[data-mega-toggle]');
+  const mega = header?.querySelector<HTMLElement>('[data-mega]');
+  const mobileToggle = header?.querySelector<HTMLButtonElement>('[data-mobile-toggle]');
+  const mobile = header?.querySelector<HTMLElement>('[data-mobile-menu]');
+  const setMega = (open: boolean) => { if (!mega || !megaToggle) return; mega.hidden = !open; megaToggle.setAttribute('aria-expanded', String(open)); };
+  megaToggle?.addEventListener('click', () => setMega(mega!.hidden));
+  mobileToggle?.addEventListener('click', () => { const open = mobile!.classList.toggle('hidden'); mobileToggle.setAttribute('aria-expanded', String(!open)); mobileToggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setMega(false); megaToggle?.focus(); } });
+  document.addEventListener('click', (e) => { if (header && !header.contains(e.target as Node)) setMega(false); });
+  mega?.addEventListener('focusout', (e) => { if (mega && !mega.contains(e.relatedTarget as Node) && e.relatedTarget !== megaToggle) setMega(false); });
+</script>

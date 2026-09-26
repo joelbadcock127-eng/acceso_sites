@@ -1,0 +1,32 @@
+/* Print stylesheet for the download routes (A4c): A4, real margins, a running
+   header and page numbers. Theme colours still come from the token layer. */
+@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+@page { @top-right { content: string(doc-title); font-family: var(--font-label); font-size: 9pt; color: #555; } @bottom-center { content: "Page " counter(page) " of " counter(pages); font-family: var(--font-label); font-size: 9pt; color: #555; } }
+html, body { background: #fff; color: #111; }
+body { font-size: 10.5pt; line-height: 1.45; font-family: var(--font-body); }
+.print-doc { max-width: 100%; }
+.print-doc h1 { string-set: doc-title content(); font-size: 26pt; margin: 0 0 4mm; }
+.print-doc h2 { font-size: 15pt; margin: 8mm 0 2mm; break-after: avoid; border-bottom: 1px solid #ddd; padding-bottom: 1mm; }
+.print-doc h3 { font-size: 12pt; margin: 5mm 0 1.5mm; break-after: avoid; }
+.print-doc p { max-width: none; margin: 0 0 2.5mm; }
+.print-doc ul { padding-left: 5mm; margin: 0 0 3mm; }
+.print-doc li { margin-bottom: 1mm; break-inside: avoid; }
+.print-cover { display: grid; gap: 4mm; margin-bottom: 8mm; }
+.print-cover img { width: 100%; height: 80mm; object-fit: cover; }
+.print-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 3mm; margin-bottom: 6mm; font-family: var(--font-label); font-size: 9pt; color: #555; }
+.print-header img { height: 10mm; width: auto; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 4mm 0 6mm; }
+.facts div { border: 1px solid #ddd; padding: 2.5mm; }
+.facts .k { font-family: var(--font-label); font-size: 8pt; text-transform: uppercase; letter-spacing: .08em; color: #666; }
+.facts .v { font-size: 12pt; font-weight: 600; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.day { break-inside: avoid; margin-bottom: 3mm; }
+.day .label { font-family: var(--font-label); font-size: 8.5pt; text-transform: uppercase; letter-spacing: .08em; color: #666; }
+.check { list-style: none; padding: 0; }
+.check li { display: flex; gap: 3mm; align-items: flex-start; padding: 1mm 0; border-bottom: 1px dotted #ccc; }
+.check li::before { content: ""; display: inline-block; width: 4mm; height: 4mm; border: 1px solid #333; margin-top: 0.8mm; flex: none; }
+.check li.provided::before { border-style: dashed; }
+.small { font-size: 9pt; color: #555; }
+.page-break { break-before: page; }
+svg.elev { width: 100%; height: 40mm; }
+.route-static { width: 100%; height: 90mm; object-fit: cover; border: 1px solid #ddd; }

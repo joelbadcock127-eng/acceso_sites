@@ -1,0 +1,21 @@
+---
+// "As featured in" (A1 #3). Only mentions shown on their own site, 3 or more.
+import Img from './Img.astro';
+interface Props { items: { name: string; logo?: string; href?: string }[]; heading?: string }
+const { items, heading = 'As featured in' } = Astro.props;
+---
+{items.length >= 3 && (
+  <section class="pad-x section-sm border-y border-line" data-reveal>
+    <div class="container-xl flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+      <div class="label" style="color:var(--muted)">{heading}</div>
+      <ul class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+        {items.map((p) => (
+          <li class="flex items-center">
+            {p.href ? <a href={p.href} target="_blank" rel="noopener" class="flex items-center">{p.logo ? <Img src={p.logo} alt={p.name} class="h-8 w-auto opacity-80" sizes="160px" widths={[240, 480]} /> : <span class="font-display text-xl">{p.name}</span>}</a>
+              : p.logo ? <Img src={p.logo} alt={p.name} class="h-8 w-auto opacity-80" sizes="160px" widths={[240, 480]} /> : <span class="font-display text-xl">{p.name}</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

@@ -1,0 +1,21 @@
+---
+import Img from './Img.astro';
+interface Props { items: { name: string; scientific?: string; note?: string; image?: string; season?: string }[]; heading?: string; intro?: string }
+const { items, heading = 'What you might see', intro } = Astro.props;
+---
+{items.length >= 6 && (
+  <section class="pad-x section border-t border-line" data-reveal>
+    <div class="container-xl">
+      <h2 class="mb-3">{heading}</h2>
+      {intro && <p class="lede mb-8 max-w-2xl" style="color:var(--muted)">{intro}</p>}
+      <ul class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {items.map((s) => (
+          <li class="card overflow-hidden">
+            {s.image && <Img src={s.image} alt={s.name} class="aspect-[4/3] w-full object-cover" sizes="(min-width:1024px) 25vw, 50vw" widths={[320, 480, 768]} />}
+            <div class="p-4"><div class="font-medium">{s.name}</div>{s.scientific && <div class="text-sm italic" style="color:var(--muted)">{s.scientific}</div>}{s.note && <p class="mt-1 text-sm" style="color:var(--muted)">{s.note}</p>}{s.season && <div class="mt-2 badge">{s.season}</div>}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

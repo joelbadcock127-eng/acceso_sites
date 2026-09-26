@@ -1,0 +1,33 @@
+---
+// Verbatim quotes only, from their own site, 2 or more (A1 #8, section 1 rule 2).
+import type { Testimonial } from '../lib/content/schema';
+import theme from '/src/generated/theme.json';
+interface Props { items: Testimonial[]; heading?: string; id?: string }
+const { items, heading = 'What walkers say', id } = Astro.props;
+const v = theme.variants.testimonials;
+const list = items.filter((t) => t.quote && t.name && t.sourceUrl);
+---
+{list.length >= 2 && (
+  <section id={id} class="pad-x section anchor-offset" data-reveal>
+    <div class="container-xl">
+      <h2 class="mb-10">{heading}</h2>
+      {v === 'grid' ? (
+        <ul class="grid gap-6 md:grid-cols-2">
+          {list.slice(0, 4).map((t) => (
+            <li class="card p-8"><blockquote><p class="font-display text-xl leading-snug">“{t.quote}”</p><footer class="mt-5 text-sm" style="color:var(--muted)"><span class="font-medium" style="color:var(--ink)">{t.name}</span>{t.origin && `, ${t.origin}`}{t.experience && ` · ${t.experience}`}</footer></blockquote></li>
+          ))}
+        </ul>
+      ) : v === 'single' ? (
+        <blockquote class="mx-auto max-w-3xl text-center"><p class="font-display text-2xl leading-snug md:text-3xl">“{list[0].quote}”</p><footer class="mt-6" style="color:var(--muted)"><span class="font-medium" style="color:var(--ink)">{list[0].name}</span>{list[0].origin && `, ${list[0].origin}`}</footer></blockquote>
+      ) : (
+        <div class="relative" data-slider>
+          <ul class="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none]" aria-label="Reviews" tabindex="0">
+            {list.slice(0, 6).map((t) => (
+              <li class="w-[85%] flex-none snap-start md:w-[48%]"><blockquote class="card h-full p-8"><p class="font-display text-xl leading-snug">“{t.quote}”</p><footer class="mt-5 text-sm" style="color:var(--muted)"><span class="font-medium" style="color:var(--ink)">{t.name}</span>{t.origin && `, ${t.origin}`}</footer></blockquote></li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+)}

@@ -1,0 +1,39 @@
+---
+import Img from './Img.astro';
+import BookButton from './BookButton.astro';
+import type { Site } from '../lib/content/schema';
+import type { BookingAdapter } from '../lib/booking';
+interface Props { site: Site; adapter: BookingAdapter }
+const { site, adapter } = Astro.props;
+const featured = site.nav.featured.slice(0, 2);
+---
+<div id="mega-menu" class="hidden border-t border-line lg:block" style="background:var(--ground)" data-mega hidden>
+  <div class="pad-x container-xl grid grid-cols-[minmax(0,26rem)_1fr] gap-12 py-8">
+    <div class="grid grid-cols-3 gap-8">
+      {site.nav.groups.slice(0, 3).map((g) => (
+        <div>
+          <div class="mb-2 font-semibold">{g.label}</div>
+          <ul class="grid">
+            {g.links.map((l) => <li><a href={l.href} class="block py-1.5 text-sm hover:underline underline-offset-4">{l.label}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    {featured.length > 0 && (
+      <div class="grid gap-6" style={`grid-template-columns: repeat(${featured.length}, minmax(0, 1fr))`}>
+        {featured.map((c) => (
+          <div class="relative flex min-h-56 flex-col justify-between overflow-hidden p-8 text-band-ink" style="border-radius:var(--radius)">
+            <Img src={c.image} alt={c.alt} class="cover absolute inset-0" sizes="(min-width: 1024px) 30vw, 100vw" widths={[640, 960]} />
+            <div class="overlay"></div>
+            <h3 class="relative text-2xl">{c.title}</h3>
+            <div class="relative mt-4">
+              {c.kind === 'book' ? <BookButton adapter={adapter} target={c.bookingTarget} label={c.cta} variant="alt" small experience={c.bookingTarget?.itemId ?? 'featured'} />
+                : c.kind === 'gift' ? <BookButton adapter={adapter} gift label={c.cta} variant="alt" small />
+                : <a href={c.href} class="btn btn-alt btn-sm">{c.cta}</a>}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>

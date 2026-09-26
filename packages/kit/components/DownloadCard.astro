@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { downloads: { kind: string; file: string; pages: number; sizeKb: number }[]; title: string; printHref?: string; compact?: boolean }
+const { downloads, title, printHref, compact = false } = Astro.props;
+const names: Record<string, string> = { 'trip-notes': 'Trip notes', 'packing-list': 'Packing list', 'welcome-pack': 'Welcome pack' };
+---
+{downloads.length > 0 && (
+  <ul class:list={['grid gap-3', { 'sm:grid-cols-2': !compact }]}>
+    {downloads.map((d) => (
+      <li><a href={d.file} class="card flex items-center gap-4 p-4 hover:border-ink" download>
+        <span class="flex h-12 w-12 flex-none items-center justify-center border border-line"><Icon name="download" /></span>
+        <span class="min-w-0"><span class="block font-medium">{names[d.kind] ?? d.kind}: {title}</span><span class="block text-sm" style="color:var(--muted)">PDF · {d.pages} {d.pages === 1 ? 'page' : 'pages'} · {d.sizeKb >= 1024 ? (d.sizeKb / 1024).toFixed(1) + ' MB' : d.sizeKb + ' KB'}</span></span>
+      </a></li>
+    ))}
+  </ul>
+)}
+{downloads.length === 0 && printHref && <a href={printHref} class="btn-link"><Icon name="print" size={18} />Print friendly version</a>}

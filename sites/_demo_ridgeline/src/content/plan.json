@@ -1,0 +1,14 @@
+{
+  "pressStrip": false,
+  "journal": true,
+  "tripFinder": true,
+  "signatureMap": true,
+  "signatureMoment": true,
+  "seasonCalendar": true,
+  "routeMap": true,
+  "dayOnTheTrail": true,
+  "conditions": true,
+  "parkAlerts": true,
+  "brochureLead": false,
+  "landmarks": [ { "name": "Mount Feathertop", "lat": -36.893, "lng": 147.137 }, { "name": "Mount Bogong", "lat": -36.733, "lng": 147.303 }, { "name": "Albury airport", "lat": -36.068, "lng": 146.958, "kind": "airport" } ]
+}

@@ -1,0 +1,20 @@
+---
+// A small forecast for the trailhead from Open Meteo, clearly labelled as a forecast.
+// Alpine, desert or tropical trips only (build plan decides).
+interface Props { lat: number; lng: number; label: string }
+const { lat, lng, label } = Astro.props;
+---
+<section class="border border-line p-5" data-conditions data-lat={lat} data-lng={lng}>
+  <div class="mb-3 flex items-baseline justify-between gap-4"><h3 class="text-xl">Conditions this week at {label}</h3><span class="text-xs" style="color:var(--muted)">Forecast, from Open Meteo</span></div>
+  <ul class="grid grid-cols-4 gap-2 text-center text-sm sm:grid-cols-7" data-conditions-days><li class="col-span-full" style="color:var(--muted)">Loading forecast…</li></ul>
+  <script>
+    document.querySelectorAll<HTMLElement>('[data-conditions]').forEach(async (el) => {
+      const list = el.querySelector('[data-conditions-days]')!;
+      try {
+        const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${el.dataset.lat}&longitude=${el.dataset.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=7`);
+        const j = await r.json();
+        list.innerHTML = j.daily.time.map((t: string, i: number) => `<li class="border border-line p-2"><div class="label" style="color:var(--muted)">${new Date(t + 'T00:00:00').toLocaleDateString('en-AU', { weekday: 'short' })}</div><div class="font-medium">${Math.round(j.daily.temperature_2m_max[i])}° <span style="color:var(--muted)">${Math.round(j.daily.temperature_2m_min[i])}°</span></div><div class="text-xs" style="color:var(--muted)">${j.daily.precipitation_probability_max[i]}% rain</div></li>`).join('');
+      } catch { list.innerHTML = '<li class="col-span-full" style="color:var(--muted)">Forecast unavailable right now.</li>'; }
+    });
+  </script>
+</section>

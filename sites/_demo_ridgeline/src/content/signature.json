@@ -1,0 +1,13 @@
+{
+  "kind": "timeline",
+  "heading": "Fifteen seasons on the Razorback",
+  "intro": "The walks have changed a little every year. The group size never has.",
+  "items": [
+    { "when": "2009", "label": "The first walk", "detail": "Three friends, one tent, a borrowed ute." },
+    { "when": "2012", "label": "The hut camp", "detail": "Real beds below Federation Hut. The traverse stops being a camping trip." },
+    { "when": "2016", "label": "Jo joins", "detail": "Wildflower walks start running on the right fortnight." },
+    { "when": "2020", "label": "The quiet season", "detail": "A year of local walkers only, and the night walk is born." },
+    { "when": "2024", "label": "Season fifteen", "detail": "Four hundred summits between two guides." }
+  ],
+  "sourceUrl": "demo"
+}

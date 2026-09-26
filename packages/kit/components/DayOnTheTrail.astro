@@ -1,0 +1,21 @@
+---
+// A scrolling timeline of a typical day (A4b): times, short lines, photos.
+import Img from './Img.astro';
+interface Props { items: { time: string; line: string; image?: string; alt?: string }[]; heading?: string; id?: string }
+const { items, heading = 'A day on the trail', id = 'day' } = Astro.props;
+---
+{items.length >= 3 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <h2 class="mb-8">{heading}</h2>
+    <ol class="relative grid gap-8 border-l border-line pl-8">
+      {items.map((it) => (
+        <li class="relative grid gap-4 md:grid-cols-[6rem_1fr_14rem] md:items-center">
+          <span class="absolute -left-[2.3rem] top-2 h-3 w-3 rounded-full" style="background:var(--accent);box-shadow:0 0 0 5px var(--ground)"></span>
+          <span class="font-display text-2xl">{it.time}</span>
+          <p class="lede">{it.line}</p>
+          {it.image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={it.image} alt={it.alt ?? ''} class="aspect-[4/3] w-full object-cover" sizes="224px" widths={[320, 480]} /></div>}
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

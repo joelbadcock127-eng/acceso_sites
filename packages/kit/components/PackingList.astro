@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { items: { group: string; item: string; provided: boolean }[]; id?: string; download?: string }
+const { items, id = 'packing', download } = Astro.props;
+const groups = [...new Set(items.map((i) => i.group))];
+const names: Record<string, string> = { wear: 'Wear', carry: 'Carry', sleep: 'Sleep', extras: 'Extras' };
+---
+{items.length > 0 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4"><h2 class="text-3xl">What to bring</h2>{download && <a href={download} class="btn-link"><Icon name="download" size={18} />Printable packing list</a>}</div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {groups.map((g) => (
+        <div><h3 class="label mb-3" style="color:var(--muted)">{names[g] ?? g}</h3><ul class="grid gap-1.5">{items.filter((i) => i.group === g).map((i) => <li class="flex items-start gap-2"><Icon name={i.provided ? 'check' : 'plus'} size={16} class="mt-1 flex-none" /><span>{i.item}{i.provided && <span class="ml-1 text-xs" style="color:var(--muted)">(we provide)</span>}</span></li>)}</ul></div>
+      ))}
+    </div>
+  </section>
+)}

@@ -1,0 +1,25 @@
+---
+// Sits beside every primary Book button (A4). 2 or more real facts, or nothing.
+import Icon from './Icon.astro';
+import type { Site, Experience } from '../lib/content/schema';
+interface Props { site: Site; experience?: Experience; class?: string; onBand?: boolean }
+const { site, experience, class: cls = '', onBand = false } = Astro.props;
+const items: { icon: string; text: string; href?: string }[] = [];
+if (experience?.groupSize?.max) items.push({ icon: 'group', text: `Maximum ${experience.groupSize.max} walkers` });
+for (const t of site.trust) items.push({ icon: /cancel/i.test(t.label) ? 'calendar' : /guide|year/i.test(t.label) ? 'guide' : /accredit|licen|member/i.test(t.label) ? 'check' : 'info', text: t.value });
+if (site.reviews.ratingLine && site.reviews.ratingSourceUrl) items.push({ icon: 'star', text: site.reviews.ratingLine, href: site.reviews.tripadvisorUrl ?? site.reviews.googleUrl });
+else if (site.reviews.tripadvisorUrl) items.push({ icon: 'star', text: 'Read our reviews on Tripadvisor', href: site.reviews.tripadvisorUrl });
+else if (site.reviews.googleUrl) items.push({ icon: 'star', text: 'Read our reviews on Google', href: site.reviews.googleUrl });
+if (experience?.cancellation && !site.trust.some((t) => /cancel/i.test(t.label))) items.push({ icon: 'calendar', text: experience.cancellation });
+const unique = items.filter((it, i) => items.findIndex((x) => x.text === it.text) === i).slice(0, 4);
+---
+{unique.length >= 2 && (
+  <ul class:list={['trust-row flex flex-wrap gap-x-5 gap-y-2 text-sm', cls]} style={onBand ? 'color:color-mix(in srgb, var(--band-ink) 85%, transparent)' : 'color:var(--muted)'}>
+    {unique.map((it) => (
+      <li class="flex items-center gap-1.5">
+        <Icon name={it.icon} size={18} />
+        {it.href ? <a href={it.href} target="_blank" rel="noopener" class="underline underline-offset-4">{it.text}</a> : <span>{it.text}</span>}
+      </li>
+    ))}
+  </ul>
+)}

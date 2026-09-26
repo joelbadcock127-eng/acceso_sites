@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Social intake helper</title>
+<style>body{font-family:system-ui;max-width:52rem;margin:2rem auto;padding:0 1rem;color:#111}label{display:block;margin-top:.75rem;font-size:.85rem}input,textarea{width:100%;font:inherit;padding:.5rem;box-sizing:border-box}textarea{min-height:6rem}button{font:inherit;padding:.6rem 1rem;margin-top:1rem;background:#111;color:#fff;border:0}ol{font-size:.9rem}#count{font-weight:600}</style>
+<h1>Social intake (B1b)</h1>
+<p>Open the prospect's public profiles yourself and paste the best material here. Nothing is scraped. Aim for 15 to 30 captions and up to 8 images. When you're done, download the files and drop them into <code>sites/{slug}/intake/social/</code>.</p>
+<form id="f"><label>Caption <textarea name="caption" required></textarea></label><label>Post URL <input name="url" type="url" required></label><label>Date <input name="date" type="date" required></label><label>Image (optional) <input name="image" type="file" accept="image/*"></label><button>Add post</button></form>
+<p><span id="count">0</span> captions added. <button id="dl" type="button">Download captions.md and videos.md</button></p>
+<label>Video links (YouTube and others), one per line <textarea id="videos"></textarea></label>
+<ol id="list"></ol>
+<script>
+const posts=[];const f=document.getElementById('f'),list=document.getElementById('list'),count=document.getElementById('count');
+f.onsubmit=async e=>{e.preventDefault();const d=new FormData(f);const img=d.get('image');let imgName='';if(img&&img.size){imgName=`social-${String(posts.length+1).padStart(2,'0')}.${img.name.split('.').pop()}`;const a=document.createElement('a');a.href=URL.createObjectURL(img);a.download=imgName;a.click();}
+posts.push({caption:d.get('caption').trim(),url:d.get('url'),date:d.get('date'),image:imgName});count.textContent=posts.length;const li=document.createElement('li');li.textContent=`${d.get('date')} · ${d.get('caption').slice(0,80)}`;list.append(li);f.reset();};
+document.getElementById('dl').onclick=()=>{const md='# Social captions\n\n'+posts.map(p=>`## ${p.date}\n\nSource: ${p.url}${p.image?`\nImage: images/${p.image}`:''}\n\n${p.caption}\n`).join('\n');dlText('captions.md',md);dlText('videos.md','# Video links\n\n'+document.getElementById('videos').value.trim().split('\n').filter(Boolean).map(v=>'- '+v).join('\n')+'\n');};
+function dlText(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/markdown'}));a.download=name;a.click();}
+</script></html>

@@ -1,0 +1,18 @@
+---
+// FAQ (A1 #10): 3 or more Q&As, native details elements so it's keyboard operable.
+interface Props { items: { q: string; a: string }[]; heading?: string; limit?: number; moreHref?: string; id?: string; intro?: string }
+const { items, heading = 'Questions', limit = 5, moreHref, id, intro } = Astro.props;
+const list = items.slice(0, limit);
+---
+{items.length >= 3 && (
+  <section id={id} class="pad-x section anchor-offset" data-reveal>
+    <div class="container-xl grid gap-10 lg:grid-cols-[1fr_2fr]">
+      <div><h2>{heading}</h2>{intro && <p class="mt-3" style="color:var(--muted)">{intro}</p>}{moreHref && <a href={moreHref} class="btn-link mt-4">All questions</a>}</div>
+      <div>
+        {list.map((f) => (
+          <details class="accordion"><summary>{f.q}</summary><div class="body prose" set:html={f.a.split(/\n\n+/).map((p) => `<p>${p}</p>`).join('')} /></details>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

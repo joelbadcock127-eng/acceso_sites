@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import DownloadCard from '../components/DownloadCard.astro';
+import { pageData } from '../lib/page';
+const { site, experiences } = await pageData();
+---
+<Base title={`Downloads | ${site.business.name}`} description={`Trip notes and packing lists for every ${site.business.name} walk, to print or share.`}>
+  <section class="pad-x section"><div class="container-lg"><h1 class="mb-3">Downloads</h1><p class="lede mb-10 max-w-2xl" style="color:var(--muted)">Trip notes and packing lists, generated from the same content as the site so they never go stale.</p>
+    <ul class="grid gap-10">{experiences.map((e) => <li><h2 class="mb-4 text-2xl">{e.data.title}</h2><DownloadCard downloads={e.data.downloads} title={e.data.title} printHref={`/experiences/${e.slug}/trip-notes/print`} /><ul class="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm"><li><a href={`/experiences/${e.slug}/trip-notes/print`} class="btn-link"><Icon name="print" size={16} />Trip notes, print view</a></li>{e.data.whatToBring.length > 0 && <li><a href={`/experiences/${e.slug}/packing-list/print`} class="btn-link"><Icon name="print" size={16} />Packing list, print view</a></li>}</ul></li>)}</ul>
+  </div></section>
+</Base>

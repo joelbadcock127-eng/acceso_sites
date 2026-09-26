@@ -1,0 +1,26 @@
+---
+// "Choose your adventure" (experience #11): each package with its own booking link.
+import BookButton from './BookButton.astro';
+import type { BookingAdapter } from '../lib/booking';
+import type { Experience } from '../lib/content/schema';
+interface Props { experience: Experience; slug: string; adapter: BookingAdapter; id?: string }
+const { experience: e, slug, adapter, id = 'packages' } = Astro.props;
+const items = e.packages.filter((p) => p.price && (p.bookingTarget.url || p.bookingTarget.itemId || adapter.onSite));
+---
+{items.length > 0 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <h2 class="mb-6">Choose your adventure</h2>
+    <ul class:list={['grid gap-6', items.length > 1 ? 'md:grid-cols-2' : '']}>
+      {items.map((p) => (
+        <li class="card flex flex-col p-8">
+          <h3 class="text-2xl">{p.name}</h3>
+          {p.description && <p class="mt-2" style="color:var(--muted)">{p.description}</p>}
+          <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="font-display text-2xl">{p.price}</div>
+            <BookButton adapter={adapter} target={{ ...p.bookingTarget, itemId: p.bookingTarget.itemId ?? (adapter.onSite ? slug : undefined) }} experience={slug} small />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

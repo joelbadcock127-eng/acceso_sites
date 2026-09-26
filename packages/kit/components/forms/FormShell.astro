@@ -1,0 +1,23 @@
+---
+// One form system for every module (A4d): honeypot, Turnstile, inline
+// validation, accessible status, and preview mode that never sends.
+import type { Site } from '../../lib/content/schema';
+import { isPreview } from '../../lib/site';
+interface Props { site: Site; kind: string; success?: string; submitLabel?: string; class?: string; id?: string }
+const { site, kind, success = 'Thanks, your message has been received.', submitLabel = 'Send', class: cls = '', id } = Astro.props;
+const preview = isPreview(site);
+const turnstile = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<form id={id} class:list={['grid gap-4', cls]} action="/api/form" method="post" data-kit-form data-preview={String(preview)} data-success={success} novalidate>
+  <input type="hidden" name="kind" value={kind} />
+  <input type="hidden" name="site" value={site.business.name} />
+  <div class="absolute -left-[9999px]" aria-hidden="true"><label>Leave this field empty <input type="text" name="_hp" tabindex="-1" autocomplete="off" /></label></div>
+  <slot />
+  {turnstile && !preview && <div class="cf-turnstile" data-sitekey={turnstile}></div>}
+  <div class="actions flex flex-wrap items-center gap-4">
+    <button type="submit" class="btn btn-accent">{submitLabel}</button>
+    {preview && <span class="text-sm" style="color:var(--muted)">Preview: this form doesn't send yet.</span>}
+  </div>
+  <p data-status hidden tabindex="-1" class="rounded border border-line p-3 text-sm" style="background:var(--surface)"></p>
+</form>
+{turnstile && !preview && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}

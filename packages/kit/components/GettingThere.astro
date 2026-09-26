@@ -1,0 +1,20 @@
+---
+// Nearest airport, drive times they state, meeting point, and a directions link.
+import Icon from './Icon.astro';
+import type { Site, Experience } from '../lib/content/schema';
+interface Props { site: Site; experience?: Experience; id?: string }
+const { site, experience, id = 'getting-there' } = Astro.props;
+const b = site.business; const g = site.gettingThere;
+const meeting = experience?.startLocation?.name ?? g?.meetingPoint;
+const rows: { icon: string; text: string; href?: string }[] = [];
+if (meeting) rows.push({ icon: 'pin', text: `Meet at ${meeting}${experience?.startTime ? `, ${experience.startTime}` : ''}`, href: experience?.startLocation?.mapsUrl ?? g?.directionsUrl ?? b.mapsUrl });
+for (const d of b.driveTimes) rows.push({ icon: 'car', text: `${d.time} drive from ${d.from}` });
+if (b.nearestAirport) rows.push({ icon: 'plane', text: `Nearest airport: ${b.nearestAirport}` });
+if (g?.notes) rows.push({ icon: 'info', text: g.notes });
+---
+{rows.length >= 2 && (
+  <section id={id} class="anchor-offset" data-reveal>
+    <h2 class="mb-5 text-3xl">Getting there</h2>
+    <ul class="grid gap-3">{rows.map((r) => <li class="flex items-start gap-3"><Icon name={r.icon} class="mt-0.5 flex-none" /><span>{r.text}{r.href && <> · <a href={r.href} target="_blank" rel="noopener" class="underline underline-offset-4">Directions</a></>}</span></li>)}</ul>
+  </section>
+)}

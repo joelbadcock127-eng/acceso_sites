@@ -1,0 +1,151 @@
+---
+// Experience detail (A1). Two variants, day and multiday: only multiday shows
+// accommodation and package cards. Booking information sits above every feature.
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import BookButton from '../../components/BookButton.astro';
+import TrustRow from '../../components/TrustRow.astro';
+import KeyFactsBanner from '../../components/KeyFactsBanner.astro';
+import AnchorNav from '../../components/AnchorNav.astro';
+import Itinerary from '../../components/Itinerary.astro';
+import IncludedExcluded from '../../components/IncludedExcluded.astro';
+import AdditionalInfo from '../../components/AdditionalInfo.astro';
+import AmenityGrid from '../../components/AmenityGrid.astro';
+import PackageCards from '../../components/PackageCards.astro';
+import DeparturesTable from '../../components/DeparturesTable.astro';
+import GradeExplainer from '../../components/GradeExplainer.astro';
+import PackingList from '../../components/PackingList.astro';
+import Gallery from '../../components/Gallery.astro';
+import WhoItsFor from '../../components/WhoItsFor.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import MobileBookBar from '../../components/MobileBookBar.astro';
+import RouteMap from '../../components/RouteMap.astro';
+import DayOnTheTrail from '../../components/DayOnTheTrail.astro';
+import GettingThere from '../../components/GettingThere.astro';
+import DownloadCard from '../../components/DownloadCard.astro';
+import ConditionsThisWeek from '../../components/ConditionsThisWeek.astro';
+import ParkAlertsLink from '../../components/ParkAlertsLink.astro';
+import RequestToBook from '../../components/forms/RequestToBook.astro';
+import CalcomEmbed from '../../components/CalcomEmbed.astro';
+import BrochureLead from '../../components/forms/BrochureLead.astro';
+import { pageData } from '../../lib/page';
+import { getRouteData } from '../../lib/routes';
+import { formatPrice, formatPriceShort } from '../../lib/site';
+import { touristTrip, breadcrumb, faqPage } from '../../lib/jsonld';
+import plan from '/src/content/plan.json';
+
+export async function getStaticPaths() {
+  const { experiences } = await pageData();
+  return experiences.map((e) => ({ params: { slug: e.slug }, props: { slug: e.slug } }));
+}
+const { slug } = Astro.props as { slug: string };
+const { site, adapter, experiences, testimonials } = await pageData();
+const entry = experiences.find((x) => x.slug === slug)!;
+const e = entry.data;
+const on = (k: string) => (plan as Record<string, boolean>)[k] !== false;
+const multi = e.type === 'multiday';
+const target = { itemId: e.booking.itemId ?? (adapter.onSite ? slug : undefined), url: e.booking.url };
+const route = on('routeMap') ? await getRouteData(slug, e.route?.dataFile) : null;
+const own = testimonials.filter((t) => !t.experience || t.experience === e.title);
+const sections = [
+  { id: 'overview', label: 'Overview', show: true },
+  { id: 'itinerary', label: 'Itinerary', show: e.itinerary.length > 0 },
+  { id: 'map', label: 'Route', show: !!route },
+  { id: 'day', label: 'A day on the trail', show: on('dayOnTheTrail') && e.dayOnTheTrail.length >= 3 },
+  { id: 'accommodation', label: 'Accommodation', show: multi && e.amenities.length >= 4 },
+  { id: 'packages', label: 'Packages', show: multi && e.packages.length > 0 },
+  { id: 'gallery', label: 'Gallery', show: e.gallery.filter((g) => (g.score ?? 4) >= 4).length >= 6 },
+  { id: 'reviews', label: 'Reviews', show: own.length >= 2 },
+  { id: 'faq', label: 'FAQs', show: e.faqs.length >= 3 },
+  { id: 'availability', label: 'Availability', show: e.departures.length > 0 || !!adapter.onSite },
+].filter((s) => s.show);
+const price = formatPrice(e.priceFrom);
+const hero = e.heroImage ?? e.gallery[0]?.src;
+const heroAlt = e.heroAlt ?? e.gallery[0]?.alt ?? '';
+const printHref = `/experiences/${slug}/trip-notes/print`;
+const tripNotes = e.downloads.find((d) => d.kind === 'trip-notes');
+const jsonLd = [touristTrip(site, e, slug), breadcrumb(site, [{ name: 'Home', path: '/' }, { name: 'Experiences', path: '/experiences' }, { name: e.title, path: `/experiences/${slug}` }])];
+if (e.faqs.length >= 3) jsonLd.push(faqPage(e.faqs));
+const desc = [e.summary, e.distanceKm && `${e.distanceKm} km`, e.durationLabel, e.grade?.label, price].filter(Boolean).join('. ');
+---
+<Base title={`${e.title} | ${site.business.name}`} description={desc.slice(0, 158)} ogImage={hero} jsonLd={jsonLd}>
+  <section class="relative band">
+    {hero && <div class="absolute inset-0"><Img src={hero} alt="" class="cover" priority sizes="100vw" widths={[768, 1080, 1440, 1920]} /><div class="overlay-gradient"></div><div class="overlay" style="opacity:.55"></div></div>}
+    <div class="pad-x container-xl relative flex min-h-[70svh] flex-col justify-end py-16">
+      <div class="max-w-3xl">
+        <div class="eyebrow mb-4" style="color:inherit;opacity:.8">{multi ? 'Multi day walk' : e.type === 'day' ? 'Day walk' : e.type === 'private' ? 'Private guiding' : 'Groups'}{site.business.region ? ` · ${site.business.region}` : ''}</div>
+        <h1 class="mb-4">{e.title}</h1>
+        <p class="lede mb-8 max-w-2xl">{e.summary}</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <BookButton adapter={adapter} target={target} experience={slug} variant="alt-solid" />
+          {adapter.giftUrl?.() && <BookButton adapter={adapter} gift variant="alt" />}
+          {price && <span class="font-medium">{price}</span>}
+        </div>
+        <TrustRow site={site} experience={e} class="mt-5" onBand />
+      </div>
+      <div class="mt-10"><KeyFactsBanner experience={e} onBand /></div>
+      {heroAlt && <span class="sr-only">{heroAlt}</span>}
+    </div>
+  </section>
+  <AnchorNav sections={sections} />
+
+  <div class="pad-x section">
+    <div class="container-xl grid gap-16 lg:grid-cols-[1fr_20rem] lg:gap-12">
+      <div class="grid gap-16">
+        <section id="overview" class="anchor-offset grid gap-8" data-reveal>
+          <div class="grid gap-8 md:grid-cols-[1fr_16rem]">
+            <div>
+              {price && <div class="eyebrow mb-3">{price}</div>}
+              <h2 class="mb-4">{e.title}</h2>
+              {e.bestFor && <p class="lede mb-4"><strong>Best for:</strong> {e.bestFor}</p>}
+              <div class="prose" set:html={entry.rendered?.html ?? (entry.body ? entry.body.split(/\n\n+/).map((p) => `<p>${p}</p>`).join('') : '')} />
+            </div>
+            <div class="grid content-start gap-3 text-sm">
+              {e.highlights.map((h) => <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="check" size={16} class="mt-1 flex-none" />{h}</div>)}
+              {e.packFree && <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="packfree" size={16} class="mt-1 flex-none" />Pack free</div>}
+              {e.startLocation && <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="pin" size={16} class="mt-1 flex-none" /><span>Starts {e.startLocation.mapsUrl ? <a href={e.startLocation.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-4">{e.startLocation.name}</a> : e.startLocation.name}{e.startTime && `, ${e.startTime}`}</span></div>}
+              <div class="mt-2"><BookButton adapter={adapter} target={target} experience={slug} small /></div>
+            </div>
+          </div>
+          {e.grade && <GradeExplainer grade={e.grade} />}
+        </section>
+        <Itinerary items={e.itinerary} heading={multi ? 'Day by day' : 'The day'} />
+        {route && <RouteMap experience={e} routeData={route} />}
+        {on('dayOnTheTrail') && <DayOnTheTrail items={e.dayOnTheTrail} />}
+        <IncludedExcluded included={e.included} excluded={e.excluded} />
+        <AdditionalInfo experience={e} />
+        {on('whoItsFor') && <WhoItsFor suits={e.suitsIf} notFor={e.notForIf} />}
+        {multi && <AmenityGrid items={e.amenities} />}
+        {multi && <PackageCards experience={e} slug={slug} adapter={adapter} />}
+        {on('packingList') && <PackingList items={e.whatToBring} download={e.downloads.find((d) => d.kind === 'packing-list')?.file ?? `/experiences/${slug}/packing-list/print`} />}
+        {on('gettingThere') && <GettingThere site={site} experience={e} />}
+        <Gallery images={e.gallery} />
+        <DeparturesTable experience={e} slug={slug} adapter={adapter} />
+        {adapter.onSite === 'request' && <RequestToBook site={site} experience={entry} />}
+        {adapter.onSite === 'calcom' && e.calcomEvent && <CalcomEmbed site={site} event={e.calcomEvent} title={e.title} />}
+      </div>
+      <aside class="grid content-start gap-6 lg:sticky lg:top-32 lg:self-start">
+        <div class="card p-6">
+          {price && <div class="font-display text-2xl">{formatPriceShort(e.priceFrom)}<span class="text-base" style="color:var(--muted)"> per {e.priceFrom!.per}</span></div>}
+          {e.priceFrom?.note && <p class="mt-1 text-sm" style="color:var(--muted)">{e.priceFrom.note}</p>}
+          <div class="mt-4 grid gap-2"><BookButton adapter={adapter} target={target} experience={slug} /><a href="#contact-us" class="btn btn-secondary btn-sm">Ask a question</a></div>
+          <TrustRow site={site} experience={e} class="mt-4 flex-col gap-2" />
+        </div>
+        {on('downloads') && (e.downloads.length > 0 || true) && <div><div class="label mb-3" style="color:var(--muted)">Downloads</div><DownloadCard downloads={e.downloads} title={e.title} printHref={printHref} compact /></div>}
+        {on('brochureLead') && tripNotes && <BrochureLead site={site} experience={e.title} file={tripNotes.file} />}
+        {on('conditions') && site.conditions && <ConditionsThisWeek lat={site.conditions.lat} lng={site.conditions.lng} label={site.conditions.label} />}
+        {on('parkAlerts') && site.parkAlerts && <ParkAlertsLink label={site.parkAlerts.label} url={site.parkAlerts.url} />}
+        {e.externalForms.length > 0 && <div><div class="label mb-2" style="color:var(--muted)">Forms</div><ul class="grid gap-1 text-sm">{e.externalForms.map((f) => <li><a href={f.href} target="_blank" rel="noopener" class="underline underline-offset-4">{f.label}</a></li>)}</ul></div>}
+      </aside>
+    </div>
+  </div>
+
+  <div class="pad-x"><div class="container-xl"><Testimonials items={own} heading="Those who went" id="reviews" /></div></div>
+  <div class="pad-x"><div class="container-xl"><FaqAccordion items={e.faqs} heading="Questions" id="faq" intro="Can't find your answer? Ask us below." /></div></div>
+  <section id="contact-us" class="pad-x section-md anchor-offset border-t border-line"><div class="container-md text-center"><h2 class="mb-3 text-3xl">Looking for more info?</h2><p class="mb-6" style="color:var(--muted)">Email or call and a real person answers.</p><div class="flex flex-wrap justify-center gap-4">{site.business.email && <a href={`mailto:${site.business.email}?subject=${encodeURIComponent(e.title)}`} class="btn btn-secondary">Email us</a>}{site.business.phone && <a href={`tel:${site.business.phone.replace(/\s+/g, '')}`} class="btn btn-secondary">Call {site.business.phone}</a>}</div></div></section>
+  <CtaBand site={site} adapter={adapter} heading={site.home.cta?.heading ?? `Walk the ${e.title} with us`} body={site.home.cta?.body} image={e.gallery[1]?.src ?? hero} target={target} experience={slug} />
+  <MobileBookBar adapter={adapter} target={target} price={formatPriceShort(e.priceFrom)} experience={slug} title={e.title} />
+</Base>

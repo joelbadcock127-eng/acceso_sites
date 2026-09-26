@@ -1,0 +1,85 @@
+{
+  "business": {
+    "name": "Ridgeline Walks",
+    "legalName": "Ridgeline Walks (demo)",
+    "tagline": "Guided high country walks, demo site",
+    "region": "Victorian High Country",
+    "state": "VIC",
+    "baseTown": "Bright",
+    "address": "Demo address, Bright VIC 3741",
+    "phone": "03 0000 0000",
+    "email": "hello@ridgeline.demo",
+    "founded": 2009,
+    "ownerNames": ["Sam Demo"],
+    "socials": { "instagram": "https://instagram.com/", "facebook": "https://facebook.com/" },
+    "acknowledgement": null,
+    "location": { "lat": -36.7297, "lng": 146.9604 },
+    "driveTimes": [
+      { "from": "Melbourne", "time": "3 hours 45 minutes", "sourceUrl": "demo" },
+      { "from": "Albury airport", "time": "1 hour 30 minutes", "sourceUrl": "demo" }
+    ],
+    "nearestAirport": "Albury",
+    "mapsUrl": "https://maps.google.com/?q=Bright+VIC",
+    "commitment": { "heading": "We carry out more than we carry in", "body": "Every Ridgeline walk removes rubbish from the track and logs weeds for Parks Victoria. It's a small thing done every week for fifteen years.", "sourceUrl": "demo", "image": "images/demo-08.jpg" },
+    "notFoundLine": "That track doesn't go anywhere. The ridge is this way."
+  },
+  "booking": { "provider": "request", "group": 2, "responseTime": "24 hours", "ownerFirstName": "Sam" },
+  "nav": {
+    "primary": [ { "label": "Walks", "href": "/experiences" }, { "label": "About", "href": "/about" } ],
+    "groups": [
+      { "label": "Walks", "links": [ { "label": "Razorback Traverse", "href": "/experiences/razorback-traverse" }, { "label": "Feathertop Day Walk", "href": "/experiences/feathertop-day-walk" }, { "label": "High Plains Night Walk", "href": "/experiences/high-plains-night-walk" } ] },
+      { "label": "Information", "links": [ { "label": "About", "href": "/about" }, { "label": "Questions", "href": "/faq" }, { "label": "Downloads", "href": "/downloads" }, { "label": "Contact", "href": "/contact" } ] },
+      { "label": "Explore", "links": [ { "label": "Private and groups", "href": "/private-and-groups" }, { "label": "Journal", "href": "/journal" }, { "label": "Gift vouchers", "href": "/gift-vouchers" } ] }
+    ],
+    "featured": [
+      { "title": "Razorback Traverse", "image": "images/demo-02.jpg", "alt": "Demo image of a ridge", "cta": "Request to book", "kind": "book", "bookingTarget": { "itemId": "razorback-traverse" } },
+      { "title": "Gift a walk", "image": "images/demo-05.jpg", "alt": "Demo image", "cta": "Gift vouchers", "kind": "link", "href": "/gift-vouchers" }
+    ]
+  },
+  "footer": {
+    "columns": [
+      { "label": "Walks", "links": [ { "label": "Razorback Traverse", "href": "/experiences/razorback-traverse" }, { "label": "Feathertop Day Walk", "href": "/experiences/feathertop-day-walk" }, { "label": "High Plains Night Walk", "href": "/experiences/high-plains-night-walk" } ] },
+      { "label": "Information", "links": [ { "label": "About", "href": "/about" }, { "label": "Questions", "href": "/faq" }, { "label": "Downloads", "href": "/downloads" }, { "label": "Contact", "href": "/contact" } ] },
+      { "label": "Explore", "links": [ { "label": "Private and groups", "href": "/private-and-groups" }, { "label": "Journal", "href": "/journal" }, { "label": "Gift vouchers", "href": "/gift-vouchers" } ] }
+    ],
+    "legal": [ { "label": "Privacy", "href": "/legal/privacy" }, { "label": "Terms", "href": "/legal/terms" } ],
+    "credit": "Ridgeline Walks is a fictional demo operator. All images are placeholders."
+  },
+  "seo": { "defaultTitle": "Ridgeline Walks | Guided walks in the Victorian High Country (demo)", "defaultDescription": "Small group guided walks on the Razorback and Bogong High Plains from Bright, Victoria. A fictional demo site built on the Acceso kit.", "ogImage": "images/demo-01.jpg", "siteUrl": "https://ridgeline-demo.pages.dev" },
+  "newsletter": null,
+  "preview": { "enabled": true, "preparedFor": "Ridgeline Walks (demo)", "sourceDomain": "ridgeline.demo" },
+  "home": {
+    "hero": { "headline": "Fifteen seasons on the Razorback", "support": "Small group guided walks above the treeline, from Bright. Six walkers, one guide, no crowds.", "cta": { "label": "See the walks", "href": "/experiences" }, "image": "images/demo-01.jpg", "alt": "Demo placeholder image of an alpine ridge at dawn" },
+    "positioning": { "heading": "The high country, on foot and at your pace", "body": "We've guided the Razorback every summer since 2009. Groups are capped at six so the guide can read the weather, the track and the walkers, and change the plan when the mountain says so.", "link": { "label": "How we walk", "href": "/about" } },
+    "features": [
+      { "heading": "Above the treeline by the second hour", "body": "Most of our routes climb through snow gum woodland and break out onto open ridges before lunch. From there the walking is airy, the views run to the Main Range, and the wind decides the pace.", "link": { "label": "The Razorback Traverse", "href": "/experiences/razorback-traverse" }, "images": [ { "src": "images/demo-02.jpg", "alt": "Demo placeholder: ridge line" }, { "src": "images/demo-03.jpg", "alt": "Demo placeholder: walkers on track" }, { "src": "images/demo-04.jpg", "alt": "Demo placeholder: snow gums" }, { "src": "images/demo-05.jpg", "alt": "Demo placeholder: alpine flowers" } ] },
+      { "heading": "One guide, six walkers", "body": "Small groups mean the guide walks with you, not ahead of you. Ask about the geology, the wildflowers, or just walk in silence for an hour.", "link": { "label": "Meet the guides", "href": "/about" }, "images": [ { "src": "images/demo-06.jpg", "alt": "Demo placeholder: guide and walkers" } ] }
+    ],
+    "offers": { "heading": "Three ways to walk the high country", "intro": "A three day traverse, a big day walk, and a night on the plains under the stars." },
+    "statsHeading": "The numbers behind the walks",
+    "story": { "heading": "Started with one tent and a borrowed ute", "body": "Sam Demo guided the first Ridgeline walk in January 2009 with three friends, one tent and a borrowed ute. The walks have grown, the groups haven't. Six walkers is still the maximum, because that's the number one guide can genuinely look after on a ridge in changing weather.\n\nToday Ridgeline runs from October to April out of Bright, with two guides who between them have walked the Razorback more than four hundred times.", "image": "images/demo-07.jpg", "alt": "Demo placeholder: guide portrait", "link": { "label": "Our story", "href": "/about" } },
+    "cta": { "heading": "The ridge is waiting", "body": "Dates run October to April. Six places per departure.", "label": "Request to book", "image": "images/demo-09.jpg" },
+    "contactHeading": "Ask us anything"
+  },
+  "about": { "heading": "About Ridgeline Walks", "intro": "A two guide operation based in Bright, walking the Razorback and Bogong High Plains since 2009. This is a fictional demo.", "image": "images/demo-10.jpg", "alt": "Demo placeholder: high plains" },
+  "contact": { "heading": "Contact", "intro": "Email is quickest. If we're on the mountain we'll reply that evening.", "interests": [] },
+  "privateGroups": { "heading": "Private and group walks", "intro": "Walking clubs, families and workplaces book the whole group. Same guides, your dates.", "body": "We run private departures of every walk for groups of four to six. For larger clubs we add a second guide.", "kinds": ["Family", "Walking club", "Corporate team"], "image": "images/demo-11.jpg", "alt": "Demo placeholder: group on track", "sourceUrl": "demo" },
+  "giftVouchers": { "heading": "Gift a walk", "intro": "Vouchers cover any walk and are valid for three years.", "image": "images/demo-05.jpg", "alt": "Demo placeholder", "sourceUrl": "demo" },
+  "gettingThere": { "meetingPoint": "Ridgeline base, Bright", "directionsUrl": "https://maps.google.com/?q=Bright+VIC", "notes": "We provide transfers from Bright to every trailhead.", "sourceUrl": "demo" },
+  "parkAlerts": { "label": "Check Alpine National Park alerts before you travel", "url": "https://www.parks.vic.gov.au/" },
+  "reviews": { "tripadvisorUrl": "https://www.tripadvisor.com.au/" },
+  "instagram": {},
+  "analytics": {},
+  "trust": [
+    { "label": "Guide experience", "value": "Guiding since 2009", "sourceUrl": "demo" },
+    { "label": "Cancellation", "value": "Full refund 30 days out", "sourceUrl": "demo" }
+  ],
+  "seasons": [
+    { "months": [10, 11], "note": "Late snow on the tops, wildflowers starting low down.", "sourceUrl": "demo" },
+    { "months": [12, 1], "note": "Peak wildflowers on the Razorback. Long days, early starts.", "sourceUrl": "demo" },
+    { "months": [2, 3], "note": "Settled weather, clearest views to the Main Range.", "sourceUrl": "demo" },
+    { "months": [4], "note": "Snow gums turning, first frosts on the plains.", "sourceUrl": "demo" }
+  ],
+  "conditions": { "lat": -36.89, "lng": 147.14, "label": "Mount Feathertop" },
+  "youtube": []
+}

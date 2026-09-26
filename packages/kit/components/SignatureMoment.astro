@@ -1,0 +1,34 @@
+---
+// Exactly one bespoke section per site (A4d), rendered from signature.json:
+// a species checklist, a night sky guide, tide times, a wildflower calendar,
+// a "20 seasons on this trail" timeline, or a single feature story.
+import Img from './Img.astro';
+import { MONTHS_SHORT } from '../lib/site';
+interface Props { data: { kind: string; heading: string; intro?: string; items: { label: string; detail?: string; when?: string; image?: string; alt?: string }[]; sourceUrl: string } | null }
+const { data } = Astro.props;
+---
+{data && data.sourceUrl && data.items.length > 0 && (
+  <section class="pad-x section border-t border-line" data-reveal data-signature={data.kind}>
+    <div class="container-xl">
+      <div class="mb-8 max-w-2xl"><h2 class="mb-3">{data.heading}</h2>{data.intro && <p class="lede" style="color:var(--muted)">{data.intro}</p>}</div>
+      {data.kind === 'checklist' && (
+        <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{data.items.map((it) => <li class="flex items-start gap-3 border-b border-line py-3"><span class="mt-1 h-4 w-4 flex-none border border-ink"></span><span><span class="font-medium">{it.label}</span>{it.detail && <span class="block text-sm" style="color:var(--muted)">{it.detail}</span>}{it.when && <span class="block text-xs" style="color:var(--muted)">{it.when}</span>}</span></li>)}</ul>
+      )}
+      {data.kind === 'timeline' && (
+        <ol class="grid gap-6 border-l border-line pl-8">{data.items.map((it) => <li class="relative"><span class="absolute -left-[2.3rem] top-1.5 h-3 w-3 rounded-full" style="background:var(--accent);box-shadow:0 0 0 5px var(--ground)"></span>{it.when && <div class="label" style="color:var(--muted)">{it.when}</div>}<h3 class="text-2xl">{it.label}</h3>{it.detail && <p class="mt-1" style="color:var(--muted)">{it.detail}</p>}</li>)}</ol>
+      )}
+      {data.kind === 'calendar' && (
+        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{data.items.map((it) => <li class="card p-5">{it.image && <Img src={it.image} alt={it.alt ?? it.label} class="mb-3 aspect-[4/3] w-full object-cover" sizes="25vw" widths={[320, 480]} />}{it.when && <div class="label" style="color:var(--muted)">{it.when}</div>}<div class="font-display text-xl">{it.label}</div>{it.detail && <p class="mt-1 text-sm" style="color:var(--muted)">{it.detail}</p>}</li>)}</ul>
+      )}
+      {data.kind === 'tides' && (
+        <table class="w-full border-collapse text-left"><thead><tr class="label" style="color:var(--muted)"><th class="border-b border-line py-2 font-medium">When</th><th class="border-b border-line py-2 font-medium">Tide</th><th class="border-b border-line py-2 font-medium">What it means for the walk</th></tr></thead><tbody>{data.items.map((it) => <tr><td class="border-b border-line py-2 pr-4">{it.when}</td><td class="border-b border-line py-2 pr-4 font-medium">{it.label}</td><td class="border-b border-line py-2">{it.detail}</td></tr>)}</tbody></table>
+      )}
+      {data.kind === 'nightsky' && (
+        <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{data.items.map((it) => <li class="band p-6"><div class="label" style="opacity:.7">{it.when ?? MONTHS_SHORT.join(' ')}</div><div class="font-display text-2xl">{it.label}</div>{it.detail && <p class="mt-2" style="opacity:.85">{it.detail}</p>}</li>)}</ul>
+      )}
+      {data.kind === 'feature' && (
+        <div class="grid gap-8 lg:grid-cols-2 lg:items-center">{data.items[0].image && <div class="overflow-hidden" style="border-radius:var(--radius)"><Img src={data.items[0].image} alt={data.items[0].alt ?? ''} class="aspect-[4/3] w-full object-cover" sizes="50vw" widths={[768, 1080]} /></div>}<div><h3 class="text-3xl">{data.items[0].label}</h3>{data.items[0].detail && <p class="lede mt-3" style="color:var(--muted)">{data.items[0].detail}</p>}</div></div>
+      )}
+    </div>
+  </section>
+)}

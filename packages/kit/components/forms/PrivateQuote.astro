@@ -1,0 +1,26 @@
+---
+// Private and group quote (A4d), multi step: group type, size, dates, trip interest, notes.
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import type { Site } from '../../lib/content/schema';
+import type { ExperienceEntry } from '../../lib/site';
+interface Props { site: Site; experiences: ExperienceEntry[]; kinds?: string[] }
+const { site, experiences, kinds = ['Family', 'Friends', 'Walking club', 'Celebration', 'Custom trip'] } = Astro.props;
+---
+<div class="card p-6 md:p-8" data-steps>
+  <FormShell site={site} kind="private-quote" submitLabel="Request a quote" success="Thanks, we've received your request and will come back with a quote.">
+    <fieldset class="grid gap-4" data-step="1"><legend class="label mb-2" style="color:var(--muted)">Step 1 of 3: your group</legend>
+      <Field name="groupType" label="What kind of group" options={kinds} required />
+      <Field name="groupSize" label="How many people" type="number" min={1} required />
+    </fieldset>
+    <fieldset class="grid gap-4" data-step="2"><legend class="label mb-2" style="color:var(--muted)">Step 2 of 3: when and what</legend>
+      <Field name="dates" label="Preferred dates or month" required placeholder="For example, late September" />
+      <Field name="experience" label="Trip you're interested in" options={[...experiences.map((e) => e.data.title), 'Something custom']} />
+    </fieldset>
+    <fieldset class="grid gap-4" data-step="3"><legend class="label mb-2" style="color:var(--muted)">Step 3 of 3: your details</legend>
+      <div class="grid gap-4 sm:grid-cols-2"><Field name="name" label="Your name" required autocomplete="name" /><Field name="email" label="Email" type="email" required autocomplete="email" /></div>
+      <Field name="phone" label="Phone" type="tel" autocomplete="tel" />
+      <Field name="notes" label="Notes" type="textarea" rows={3} />
+    </fieldset>
+  </FormShell>
+</div>

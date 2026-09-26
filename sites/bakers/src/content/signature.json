@@ -1,0 +1,13 @@
+{
+  "kind": "timeline",
+  "heading": "From wilderness to legacy",
+  "intro": "The path to founding Bakers Walking Company was not a straight line. It was carved through experience, partnerships and trial and error. Below are the moments that shaped what exists today.",
+  "items": [
+    { "when": "2018", "label": "The Inspiration", "detail": "Walking the iconic Overland Track and realizing that Tasmania’s true magic is found in its silence and scale." },
+    { "when": "2020", "label": "Perspective in the Wild", "detail": "Trekking the Kokoda Trail, a lesson in endurance, deep hospitality, and the profound impact of walking through history." },
+    { "when": "2023", "label": "The Private Sanctuary", "detail": "Acquiring the 1,137-acre estate at Bakers Beach to create a space where wilderness could be experienced without the public crowds." },
+    { "when": "2024", "label": "Testing the Vision", "detail": "Launching our off-grid basecamp and hosting the first guided tours to refine the balance of rugged adventure and refined comfort." },
+    { "when": "2025", "label": "Bakers Walking Co.", "detail": "Opening our doors as a dedicated retreat for private groups, focusing on custom itineraries, local hosting, and total immersion." }
+  ],
+  "sourceUrl": "https://www.bakerswalkingco.com.au/founder"
+}

@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import { pageData } from '../lib/page';
+const { site, experiences } = await pageData();
+---
+<Base title={`Page not found | ${site.business.name}`} description="That page isn't here." noindex>
+  <section class="pad-x section"><div class="container-md text-center"><div class="eyebrow mb-4">404</div><h1 class="mb-4">{site.business.notFoundLine ?? 'That track doesn\'t go anywhere.'}</h1><p class="lede mb-8" style="color:var(--muted)">Try one of the walks instead.</p><ul class="flex flex-wrap justify-center gap-3">{experiences.slice(0, 4).map((e) => <li><a href={`/experiences/${e.slug}`} class="btn btn-secondary btn-sm">{e.data.title}</a></li>)}<li><a href="/" class="btn btn-sm">Home</a></li></ul></div></section>
+</Base>

@@ -3,7 +3,7 @@
 // through Web3Forms (the key lives in the Pages project's environment).
 import { json } from './lib.js';
 
-const KINDS = new Set(['contact', 'request', 'private-quote', 'corporate', 'gift-voucher', 'brochure', 'newsletter']);
+const KINDS = new Set(['contact', 'request', 'private-quote', 'corporate', 'gift-voucher', 'brochure', 'newsletter', 'notify']);
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function handleForm({ request, env }) {
@@ -37,8 +37,9 @@ export async function handleForm({ request, env }) {
     'gift-voucher': `Thanks. ${ownerName} will send payment details and your voucher within ${responseTime}.`,
     brochure: `Here are the trip notes you asked for: ${new URL(request.url).origin}${data.file || ''}`,
     newsletter: 'Thanks, you are on the list.',
+    notify: `Thanks. ${ownerName} will email you as soon as the dates are set.`,
   };
-  const subjectMap = { request: `Booking request: ${data.experience ?? ''} (${data.groupSize ?? '?'} walkers)`, contact: `Website message from ${data.name ?? data.email}`, 'private-quote': `Private quote: ${data.groupType ?? ''} of ${data.groupSize ?? '?'}`, corporate: `Corporate or school enquiry: ${data.organisation ?? ''}`, 'gift-voucher': `Gift voucher request from ${data.name ?? data.email}`, brochure: `Trip notes requested: ${data.experience ?? ''}`, newsletter: `Newsletter signup: ${data.email}` };
+  const subjectMap = { request: `Booking request: ${data.experience ?? ''} (${data.groupSize ?? '?'} walkers)`, contact: `Website message from ${data.name ?? data.email}`, 'private-quote': `Private quote: ${data.groupType ?? ''} of ${data.groupSize ?? '?'}`, corporate: `Corporate or school enquiry: ${data.organisation ?? ''}`, 'gift-voucher': `Gift voucher request from ${data.name ?? data.email}`, brochure: `Trip notes requested: ${data.experience ?? ''}`, newsletter: `Newsletter signup: ${data.email}`, notify: `Notify me when dates are set: ${data.experience ?? ''}` };
   const payment = data.kind === 'request' && env.PAYMENT_LINKS ? safeJson(env.PAYMENT_LINKS)?.[data.experience] : null;
 
   if (env.WEB3FORMS_KEY) {

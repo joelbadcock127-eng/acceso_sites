@@ -1,1 +1,6 @@
-[]
+[
+  { "value": "2008", "label": "sharing the Scenic Rim with walkers", "sourceFact": "Home page: Established in 2008 (the about page says 2007; flagged for confirmation)" },
+  { "value": "8 to 10", "label": "walkers on a day walk, plus guides", "sourceFact": "Day walks 2026 page: Generally a maximum of 8-10 participants + guide/s" },
+  { "value": "10 years", "label": "with Ecotourism Australia, Green Travel Leader 2023", "sourceFact": "Home page: In 2023 Green Travel Leader was added for 10 years of Membership" },
+  { "value": "1 hour", "label": "from Brisbane to the walks", "sourceFact": "Navigation Retreat 2026 PDF: Just 1 hour from Brisbane" }
+]

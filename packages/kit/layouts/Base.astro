@@ -25,7 +25,8 @@ const adapter = getAdapter({ ...site.booking, giftUrl: site.booking.giftUrl ?? u
 const headScript = adapter.headScript?.() ?? null;
 const og = ogImage ?? site.seo.ogImage;
 const canonical = absoluteUrl(site, Astro.url.pathname);
-const textureClass = theme.texture === 'topo' ? 'texture-topo' : theme.texture === 'grain' ? 'texture-grain' : '';
+// Print routes skip the texture: Chromium rasterises it as a full page image on every PDF page.
+const textureClass = bare ? '' : theme.texture === 'topo' ? 'texture-topo' : theme.texture === 'grain' ? 'texture-grain' : '';
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -50,7 +51,7 @@ const textureClass = theme.texture === 'topo' ? 'texture-topo' : theme.texture =
     {site.analytics.plausibleDomain && !preview && <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.outbound-links.js"></script>}
     <slot name="head" />
   </head>
-  <body class:list={[bodyClass, textureClass, { 'is-preview': preview }]} style={theme.textureFile ? `background-image:url(${theme.textureFile});background-size:1200px;background-attachment:fixed` : undefined}>
+  <body class:list={[bodyClass, textureClass, { 'is-preview': preview }]} style={theme.textureFile && !bare ? `background-image:url(${theme.textureFile});background-size:1200px;background-attachment:fixed` : undefined}>
     {preview && !bare && <PreviewBanner business={site.preview.preparedFor ?? site.business.name} />}
     {!bare && <SiteHeader site={site} adapter={adapter} />}
     <main id="main">

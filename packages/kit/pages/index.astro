@@ -22,10 +22,11 @@ import TripFinder from '../components/TripFinder.astro';
 import SeasonCalendar from '../components/SeasonCalendar.astro';
 import RecentFromTheTrail from '../components/RecentFromTheTrail.astro';
 import ReviewsWidget from '../components/ReviewsWidget.astro';
+import ProgramCalendar from '../components/ProgramCalendar.astro';
 import { pageData } from '../lib/page';
 import { organization } from '../lib/jsonld';
 import plan from '/src/content/plan.json';
-const { site, adapter, experiences, testimonials, faqs, press, stats, posts, signature } = await pageData();
+const { site, adapter, experiences, testimonials, faqs, press, stats, posts, signature, program } = await pageData();
 const on = (k: string) => (plan as Record<string, boolean>)[k] !== false;
 const h = site.home;
 const seasonRows = experiences.map((e) => ({ title: e.data.title, slug: e.slug, months: e.data.seasons.flatMap((s) => s.months) }));
@@ -33,6 +34,7 @@ const seasonRows = experiences.map((e) => ({ title: e.data.title, slug: e.slug, 
 <Base title={site.seo.defaultTitle} description={site.seo.defaultDescription} jsonLd={[organization(site)]}>
   <HeroMedia site={site} adapter={adapter} />
   <Positioning site={site} />
+  {on('programCalendar') && <ProgramCalendar rows={program} adapter={adapter} heading={(plan as any).programHeading} intro={(plan as any).programIntro} season={(plan as any).programSeason} />}
   {on('pressStrip') && <PressStrip items={press} />}
   {on('featureSplit') && <FeatureSplit features={h.features} />}
   {on('locationBlock') && <LocationBlock site={site} />}

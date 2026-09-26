@@ -3,7 +3,7 @@
 import { chromium } from 'playwright';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
-import { serve } from './lib/serve.mjs';
+import { serve, settle } from './lib/serve.mjs';
 import { siteDir, slugArg, readJson, readRegistry, log } from './lib/site.mjs';
 const slug = slugArg();
 const dir = siteDir(slug); const out = join(dir, 'pitch'); mkdirSync(out, { recursive: true });
@@ -16,8 +16,8 @@ const browser = await chromium.launch();
 const best = readdirSync(join(dir, 'dist/experiences')).filter((f) => f.endsWith('.html'))[0]?.replace('.html', '');
 const bestOld = intake?.pages.find((p) => /walk|tour|trek|experience/i.test(p.url) && p.url !== intake.source)?.url;
 for (const [w, tag] of [[1440, 'desktop'], [390, 'mobile']]) {
-  const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, reducedMotion: 'reduce' }); const page = await ctx.newPage();
-  const shot = async (u, name) => { try { await page.goto(u, { waitUntil: 'networkidle', timeout: 60000 }); await page.screenshot({ path: join(out, name), fullPage: true }); log('pitch ' + name); } catch (e) { log(`skip ${name}: ${e.message.split('\n')[0]}`); } };
+  const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, reducedMotion: 'reduce', ignoreHTTPSErrors: !!process.env.INTAKE_IGNORE_TLS }); const page = await ctx.newPage();
+  const shot = async (u, name) => { try { await page.goto(u, { waitUntil: 'networkidle', timeout: 60000 }); await settle(page); await page.screenshot({ path: join(out, name), fullPage: true }); log('pitch ' + name); } catch (e) { log(`skip ${name}: ${e.message.split('\n')[0]}`); } };
   if (live) await shot(live.startsWith('http') ? live : 'https://' + live, `before-home-${tag}.png`);
   await shot(base + '/', `after-home-${tag}.png`);
   if (bestOld) await shot(bestOld, `before-experience-${tag}.png`);

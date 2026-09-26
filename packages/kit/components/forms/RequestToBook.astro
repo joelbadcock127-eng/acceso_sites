@@ -6,10 +6,12 @@ import Field from './Field.astro';
 import { futureDepartures, formatDate } from '../../lib/site';
 import type { Site } from '../../lib/content/schema';
 import type { ExperienceEntry } from '../../lib/site';
-interface Props { site: Site; experience?: ExperienceEntry; experiences?: ExperienceEntry[]; id?: string }
-const { site, experience, experiences = [], id = 'request-to-book' } = Astro.props;
+interface Props { site: Site; experience?: ExperienceEntry; experiences?: ExperienceEntry[]; id?: string; program?: { date: string; title: string; status: string }[] }
+const { site, experience, experiences = [], id = 'request-to-book', program = [] } = Astro.props;
 const deps = experience ? futureDepartures(experience.data) : [];
-const dateOptions = deps.map((d) => `${formatDate(d.start)}${d.end && d.end !== d.start ? ` to ${formatDate(d.end)}` : ''}`);
+const today = new Date().toISOString().slice(0, 10);
+const programOptions = program.filter((r) => r.date >= today && r.status !== 'full' && r.status !== 'cancelled').map((r) => `${formatDate(r.date)}: ${r.title}`);
+const dateOptions = programOptions.length ? programOptions : deps.map((d) => `${formatDate(d.start)}${d.end && d.end !== d.start ? ` to ${formatDate(d.end)}` : ''}`);
 const owner = site.booking.ownerFirstName ?? site.business.ownerNames[0]?.split(' ')[0] ?? 'We';
 ---
 <section id={id} class="anchor-offset card p-6 md:p-8" data-reveal>

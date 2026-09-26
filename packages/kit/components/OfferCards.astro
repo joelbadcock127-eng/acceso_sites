@@ -8,9 +8,10 @@ import type { ExperienceEntry } from '../lib/site';
 import type { Site } from '../lib/content/schema';
 import theme from '/src/generated/theme.json';
 interface Props { site: Site; experiences: ExperienceEntry[]; heading?: string; intro?: string; limit?: number }
-const { site, experiences, heading = site.home.offers?.heading ?? 'Our walks', intro = site.home.offers?.intro, limit = 3 } = Astro.props;
+const { site, experiences, heading = site.home.offers?.heading ?? 'Our walks', intro = site.home.offers?.intro, limit } = Astro.props;
 const v = theme.variants.offerCards;
-const items = experiences.filter((e) => e.data.cardImages[0] || e.data.heroImage || e.data.gallery[0]).slice(0, limit);
+// The list variant carries every experience (it is a list); the card variants show three.
+const items = experiences.filter((e) => e.data.cardImages[0] || e.data.heroImage || e.data.gallery[0]).slice(0, limit ?? (theme.variants.offerCards === 'list' ? 6 : 3));
 const img = (e: ExperienceEntry) => e.data.cardImages[0] ?? (e.data.heroImage ? { src: e.data.heroImage, alt: e.data.heroAlt ?? '' } : e.data.gallery[0]);
 ---
 {items.length >= 2 && (

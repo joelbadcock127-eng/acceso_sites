@@ -18,6 +18,7 @@ export const collections = {
   press: defineCollection({ loader: list('src/content/press.json'), schema: s.pressSchema }),
   stats: defineCollection({ loader: list('src/content/stats.json'), schema: s.statSchema }),
   species: defineCollection({ loader: list('src/content/species.json'), schema: s.speciesSchema }),
+  program: defineCollection({ loader: list('src/content/program.json'), schema: s.programSchema }),
   signature: defineCollection({ loader: single('src/content/signature.json'), schema: s.signatureSchema }),
   posts: defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/posts' }), schema: s.postSchema }),
   legal: defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/legal' }), schema: s.legalSchema }),

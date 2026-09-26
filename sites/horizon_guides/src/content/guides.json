@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "name": "Teresa Cause",
+    "role": "Owner and guide",
+    "bio": "Teresa established Horizon Guides in Boonah and has been sharing the Scenic Rim with walkers since 2008: day hikes between April and November, hosted weekends, and limited departures of walking holidays interstate. She writes every program herself, grades honestly, and reads the flora, fauna, geology and history of a place as she walks it.",
+    "yearsGuiding": 18,
+    "knowsBest": "The places in the Scenic Rim that rarely feel a footfall: the Rabbit Board Fence, the Upper Portals, Campbell's Folly and the peaks of the Fassifern.",
+    "credentials": [
+      "Wilderness First Aid",
+      "Ecotourism Australia certified operator",
+      "Accredited with the national parks services of Queensland, Victoria and Tasmania"
+    ],
+    "sourceUrl": "https://horizonguides.com.au/more/k2-item"
+  }
+]

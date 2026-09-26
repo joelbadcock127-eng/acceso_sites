@@ -3,7 +3,7 @@
 import { chromium } from 'playwright';
 import { mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { serve } from './lib/serve.mjs';
+import { serve, settle } from './lib/serve.mjs';
 import { siteDir, slugArg, log } from './lib/site.mjs';
 const slug = slugArg();
 const dir = siteDir(slug); const dist = join(dir, 'dist');
@@ -18,7 +18,7 @@ for (const w of widths) {
   for (const p of pages) {
     await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(600);
     const name = (p === '/' ? 'home' : p.slice(1).replace(/\//g, '__')) + `-${w}.png`;
-    await page.screenshot({ path: join(out, name), fullPage: true });
+    await settle(page); await page.screenshot({ path: join(out, name), fullPage: true });
     log(`shot ${name}`);
   }
   await ctx.close();

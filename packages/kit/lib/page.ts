@@ -13,7 +13,8 @@ export async function pageData() {
   const species = (await safeCollection('species')).map((s) => s.data);
   const posts = (await safeCollection('posts')).map((p) => ({ ...p, slug: p.id.replace(/\.md$/, '') }));
   const legal = (await safeCollection('legal')).map((p) => ({ ...p, slug: p.id.replace(/\.md$/, '') }));
+  const program = (await safeCollection('program')).map((p) => p.data);
   const signatureEntry = (await safeCollection('signature'))[0];
   const signature = signatureEntry ? signatureEntry.data : null;
-  return { site, adapter, experiences, testimonials, faqs, guides, press, stats, species, posts, legal, signature };
+  return { site, adapter, experiences, testimonials, faqs, guides, press, stats, species, posts, legal, signature, program };
 }

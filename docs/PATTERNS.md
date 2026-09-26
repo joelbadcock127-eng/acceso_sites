@@ -124,3 +124,15 @@ Screenshots: `docs/screens/bakers/bakers-traverse-1440.jpg`, `multi-day-experien
 ## Improvements the kit adds beyond Bakers (A4)
 
 `MobileBookBar`, `ExperienceCompare`, `NextDeparture`, `TrustRow` and `WhoItsFor` answer the four questions every walker has before booking: which walk, when, can I trust you, can I do it. They're on by default and hide without content.
+
+## Added during the Horizon Guides build (Phase B, first prospect)
+
+| Pattern | Why | Kit piece |
+|---|---|---|
+| Program calendar | Operators who sell a season of dated walks rather than products. Dated rows with area, distance, hours, grade, price and status, month and grade filters, a request button per row, and rows that have passed collapsed under "Earlier this season" so the page never leads with stale dates | `ProgramCalendar`, the `program` collection (`src/content/program.json`), `plan.programCalendar`, `programHeading`, `programIntro`, `programSeason`. An experience whose slug the rows name shows its own rows as the Dates section |
+| Notify me | An experience with no dates yet (`datesComingSoon: true`). Price and booking hide, a badge carries `datesComingNote`, and a short form (name, email, group size) takes their place. Form kind `notify` | `NotifyMe`, `[slug].astro`, `functions/form.js` |
+| Hero focal point | `home.hero.focal` sets `object-position` so the subject of a landscape hero survives the portrait crop on phones | `HeroMedia`, schema |
+| Offer list shows every experience | The `list` variant of `OfferCards` is a list, so it carries up to six; card variants keep three | `OfferCards` |
+| Print routes without texture, JPEG hero | Chromium rasterises the page texture on every PDF page and re-encodes WebP and AVIF losslessly, which made trip notes 4 to 6 MB. Print routes now skip the texture (`bare`) and use `printImageUrl()` for a JPEG hero: 150 to 200 KB each | `Base.astro`, `lib/media.ts`, trip notes print route |
+| Screenshots scroll first | Full page screenshots never triggered lazy images, so review shots showed grey tiles that the live page never shows. `settle(page)` scrolls end to end and waits for images | `scripts/lib/serve.mjs`, used by `shots`, `review` and `pitch` |
+| Compare table empty cell | "—" failed the copy lint; empty cells now read "not listed" in muted text | `ExperienceCompare` |

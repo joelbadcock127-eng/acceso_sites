@@ -1,37 +1,33 @@
 {
-  "archetype": "expedition",
-  "pairing": "expedition",
+  "archetype": "naturalist",
+  "pairing": "naturalist",
   "colors": {
-    "ground": "#f3efe6",
-    "surface": "#fbf9f4",
-    "ink": "#1d2a24",
-    "muted": "#55635c",
-    "line": "rgba(29, 42, 36, 0.16)",
-    "accent": "#b5562a",
-    "accentInk": "#fbf9f4",
-    "overlay": "rgba(16, 24, 20, 0.5)",
-    "band": "#1d2a24",
-    "bandInk": "#f3efe6"
+    "ground": "#faf8f3",
+    "surface": "#ffffff",
+    "ink": "#20302a",
+    "muted": "#56655d",
+    "line": "rgba(32, 48, 42, 0.15)",
+    "accent": "#b64f1c",
+    "accentInk": "#ffffff",
+    "overlay": "rgba(20, 30, 25, 0.48)",
+    "band": "#2c4638",
+    "bandInk": "#faf8f3"
   },
-  "radius": "2px",
-  "logo": {
-    "src": "images/logo.svg",
-    "alt": "Horizon Guides",
-    "framed": false,
-    "invertOnHero": false,
-    "height": "3rem",
-    "wordmark": true
-  },
+  "radius": "3px",
+  "favicon": "/favicon.svg",
+  "buttons": "accent",
+  "frames": false,
+  "logo": { "src": "images/logo.svg", "alt": "Horizon Guides", "framed": false, "invertOnHero": true, "height": "2.5rem", "wordmark": true },
   "heroStyle": "stillSlowZoom",
-  "texture": "none",
+  "texture": "grain",
   "variants": {
-    "hero": "split",
-    "positioning": "left",
-    "featureSplit": "stacked",
-    "offerCards": "featurePlusTwo",
-    "statsRow": "cards",
-    "testimonials": "grid",
-    "ctaBand": "split",
-    "keyFacts": "pills"
+    "hero": "full",
+    "positioning": "band",
+    "featureSplit": "mosaicLeft",
+    "offerCards": "list",
+    "statsRow": "inline",
+    "testimonials": "single",
+    "ctaBand": "solid",
+    "keyFacts": "stacked"
   }
 }

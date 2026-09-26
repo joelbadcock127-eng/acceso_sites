@@ -20,7 +20,7 @@ const cols = [
       <div class="overflow-x-auto">
         <table class="w-full min-w-[40rem] border-collapse text-left text-sm">
           <thead><tr class="label" style="color:var(--muted)"><th class="border-b border-line py-2 pr-4 font-medium">Walk</th>{cols.map((c) => <th class="border-b border-line py-2 pr-4 font-medium">{c.k}</th>)}</tr></thead>
-          <tbody>{experiences.map((e) => <tr><th class="border-b border-line py-3 pr-4 text-left font-medium"><a href={`/experiences/${e.slug}`} class="underline underline-offset-4">{e.data.title}</a></th>{cols.map((c) => <td class="border-b border-line py-3 pr-4">{c.f(e) ?? '—'}</td>)}</tr>)}</tbody>
+          <tbody>{experiences.map((e) => <tr><th class="border-b border-line py-3 pr-4 text-left font-medium"><a href={`/experiences/${e.slug}`} class="underline underline-offset-4">{e.data.title}</a></th>{cols.map((c) => <td class="border-b border-line py-3 pr-4">{c.f(e) ?? <span style="color:var(--muted)">not listed</span>}</td>)}</tr>)}</tbody>
         </table>
       </div>
     </div>

@@ -1,57 +1,416 @@
 {
   "business": {
     "name": "Horizon Guides",
-    "ownerNames": [],
-    "socials": {},
-    "acknowledgement": null,
-    "driveTimes": []
+    "legalName": "Horizon Guides Pty Ltd as trustee for Horizon Trust trading as Horizon Guides",
+    "tagline": "Guided bushwalks in the Scenic Rim",
+    "region": "Scenic Rim",
+    "state": "QLD",
+    "baseTown": "Boonah",
+    "address": "7 Church Street, Boonah QLD 4310",
+    "phone": "0417 760 966",
+    "email": "walks@horizonguides.com.au",
+    "founded": 2008,
+    "ownerNames": [
+      "Teresa Cause"
+    ],
+    "socials": {
+      "facebook": "https://facebook.com/HorizonGuides"
+    },
+    "acknowledgement": "Horizon Guides seeks to walk with respect in all the places we travel. We acknowledge the ancient and living relationship that First Nations people have on land and sea across our beautiful country. We believe all People have the responsibility to care for Country, drawing on traditional and contemporary knowledge and understanding. Walk lightly and love your place.",
+    "location": {
+      "lat": -27.997,
+      "lng": 152.681
+    },
+    "driveTimes": [
+      {
+        "from": "Brisbane",
+        "time": "1 hour",
+        "sourceUrl": "https://horizonguides.com.au/events/navigation-courses/item/319-introduction-to-navigation-caro-ryan-2026"
+      }
+    ],
+    "nearestAirport": "Brisbane airport",
+    "mapsUrl": "https://maps.google.com/?q=7+Church+Street+Boonah+QLD+4310",
+    "chat": {
+      "sms": "0417 760 966"
+    },
+    "notFoundLine": "No track here. Let's get you back to the walks."
   },
   "booking": {
     "provider": "request",
     "group": 2,
-    "responseTime": "24 hours"
+    "responseTime": "24 hours",
+    "ownerFirstName": "Teresa"
   },
   "nav": {
     "primary": [
       {
-        "label": "Experiences",
+        "label": "Walks",
         "href": "/experiences"
+      },
+      {
+        "label": "Program",
+        "href": "/#program"
       },
       {
         "label": "About",
         "href": "/about"
       }
     ],
-    "groups": [],
-    "featured": []
+    "groups": [
+      {
+        "label": "Walks",
+        "links": [
+          {
+            "label": "Scenic Rim day walks",
+            "href": "/experiences/scenic-rim-day-walks"
+          },
+          {
+            "label": "Winter Walking Weekend",
+            "href": "/experiences/winter-walking-weekend"
+          },
+          {
+            "label": "Border Tracks",
+            "href": "/experiences/border-tracks"
+          },
+          {
+            "label": "Spring Retreat",
+            "href": "/experiences/spring-retreat-art-nature-fine-food"
+          },
+          {
+            "label": "Navigation Retreat",
+            "href": "/experiences/navigation-retreat"
+          },
+          {
+            "label": "Private guiding",
+            "href": "/experiences/private-guiding"
+          }
+        ]
+      },
+      {
+        "label": "Information",
+        "links": [
+          {
+            "label": "About Teresa",
+            "href": "/about"
+          },
+          {
+            "label": "Questions",
+            "href": "/faq"
+          },
+          {
+            "label": "Downloads",
+            "href": "/downloads"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ]
+      },
+      {
+        "label": "Explore",
+        "links": [
+          {
+            "label": "This season's program",
+            "href": "/#program"
+          },
+          {
+            "label": "Private and groups",
+            "href": "/private-and-groups"
+          },
+          {
+            "label": "Booking terms",
+            "href": "/legal/terms-conditions"
+          }
+        ]
+      }
+    ],
+    "featured": [
+      {
+        "title": "This season's day walks",
+        "image": "images/mt-barney-lindesay-vista.jpg",
+        "alt": "A walker looking across to Mt Barney and Mt Lindesay",
+        "cta": "See the dates",
+        "kind": "link",
+        "href": "/#program"
+      },
+      {
+        "title": "Border Tracks",
+        "image": "images/walkers-on-ridge-vista.jpg",
+        "alt": "Walkers on a ridge above the Scenic Rim",
+        "cta": "Tell me when dates are set",
+        "kind": "link",
+        "href": "/experiences/border-tracks#notify"
+      }
+    ],
+    "bookLabel": "Request a place"
   },
   "footer": {
-    "columns": [],
-    "legal": []
+    "columns": [
+      {
+        "label": "Walks",
+        "links": [
+          {
+            "label": "Scenic Rim day walks",
+            "href": "/experiences/scenic-rim-day-walks"
+          },
+          {
+            "label": "Winter Walking Weekend",
+            "href": "/experiences/winter-walking-weekend"
+          },
+          {
+            "label": "Border Tracks",
+            "href": "/experiences/border-tracks"
+          },
+          {
+            "label": "Spring Retreat",
+            "href": "/experiences/spring-retreat-art-nature-fine-food"
+          },
+          {
+            "label": "Navigation Retreat",
+            "href": "/experiences/navigation-retreat"
+          },
+          {
+            "label": "Private guiding",
+            "href": "/experiences/private-guiding"
+          }
+        ]
+      },
+      {
+        "label": "Information",
+        "links": [
+          {
+            "label": "About",
+            "href": "/about"
+          },
+          {
+            "label": "Questions",
+            "href": "/faq"
+          },
+          {
+            "label": "Downloads",
+            "href": "/downloads"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ]
+      },
+      {
+        "label": "Explore",
+        "links": [
+          {
+            "label": "This season's program",
+            "href": "/#program"
+          },
+          {
+            "label": "Private and groups",
+            "href": "/private-and-groups"
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "label": "Booking terms",
+        "href": "/legal/terms-conditions"
+      }
+    ],
+    "credit": "Eco Certified with Ecotourism Australia since 2013. Green Travel Leader 2023."
   },
   "seo": {
-    "defaultTitle": "Horizon Guides",
-    "defaultDescription": "Horizon Guides: guided walks."
+    "defaultTitle": "Horizon Guides | Guided bushwalks in the Scenic Rim, Queensland",
+    "defaultDescription": "Small group eco interpreted bushwalks in the Scenic Rim from Boonah, one hour from Brisbane. Day walks May to October, hosted walking weekends and a three day border traverse, guided by Teresa Cause since 2008.",
+    "ogImage": "images/ridge-walker-grass-trees.jpg",
+    "siteUrl": "https://horizon-guides-lg9a.pages.dev"
   },
   "newsletter": null,
   "preview": {
     "enabled": true,
-    "preparedFor": "Horizon Guides",
-    "sourceDomain": ""
+    "preparedFor": "Teresa Cause, Horizon Guides",
+    "sourceDomain": "horizonguides.com.au"
   },
   "home": {
     "hero": {
-      "headline": "Horizon Guides"
+      "headline": "The Scenic Rim, off the track",
+      "support": "Small group bushwalks led by Teresa Cause, an eco certified guide who reads the country as you walk it. From Boonah, one hour from Brisbane.",
+      "cta": {
+        "label": "See this season's walks",
+        "href": "#program"
+      },
+      "image": "images/ridge-walker-grass-trees.jpg",
+      "alt": "A walker on an open ridge among grass trees, looking out across the Scenic Rim",
+      "focal": "32% 45%"
     },
-    "features": []
+    "positioning": {
+      "heading": "Walks that rarely feel a footfall",
+      "body": "Teresa has been sharing the Scenic Rim with walkers since 2008. Groups are eight to ten at most, the pace leaves time for what's underfoot and overhead, and most routes step off the marked tracks into national park country and private valleys you could not find alone.",
+      "link": {
+        "label": "How the walks work",
+        "href": "/about"
+      }
+    },
+    "features": [
+      {
+        "heading": "Interpretation is the point",
+        "body": "Flora, fauna, geology and history come with every walk. These are not races to a destination. The group stays together, stops for the tiny spider and the forest giant, and learns how to bushwalk safely along the way. Walk regularly through a season and you build the skills and confidence for bigger adventures.",
+        "link": {
+          "label": "This season's program",
+          "href": "#program"
+        },
+        "images": [
+          {
+            "src": "images/toolona-creek-rainforest.jpg",
+            "alt": "A rainforest creek at Picnic Rock on the Toolona Circuit, Green Mountains"
+          },
+          {
+            "src": "images/yellow-fungus.jpg",
+            "alt": "A bright yellow fungus on a log"
+          },
+          {
+            "src": "images/fringe-lily.jpg",
+            "alt": "A purple fringe lily flower"
+          },
+          {
+            "src": "images/rainforest-track-1.jpg",
+            "alt": "A rainforest track on the border ranges"
+          }
+        ]
+      },
+      {
+        "heading": "Eco certified since 2013",
+        "body": "Horizon Guides has held Ecotourism Australia accreditation since 2013 and was named a Green Travel Leader in 2023 for ten years of membership. Guides hold Wilderness First Aid certification and carry emergency equipment including a PLB on every walk. Small groups, a hot cuppa at lunch and a home baked treat are part of the deal.",
+        "link": {
+          "label": "About Teresa",
+          "href": "/about"
+        },
+        "images": [
+          {
+            "src": "images/guide-and-group-at-tree.jpg",
+            "alt": "Teresa with a walking group beside a rainforest tree"
+          }
+        ]
+      }
+    ],
+    "offers": {
+      "heading": "Six ways to walk with us",
+      "intro": "Day walks through the season, hosted weekends in Boonah and at the foot of Mt Maroon, a three day border traverse, a navigation course, and private guiding when you want a day made for you."
+    },
+    "statsHeading": "Small numbers, on purpose",
+    "cta": {
+      "heading": "Come walking with Horizon Guides this season",
+      "body": "Places are eight to ten a walk and the popular dates go within days. Request your walk and Teresa confirms by email.",
+      "label": "Request a place",
+      "image": "images/walkers-on-grassy-ridge.jpg"
+    },
+    "contactHeading": "Ask Teresa"
+  },
+  "about": {
+    "heading": "About Horizon Guides",
+    "intro": "Based in Boonah, Horizon Guides provides professional guided bushwalks in the Scenic Rim region of South East Queensland and beyond, and is an accredited tour operator with the national parks services in Queensland, Victoria and Tasmania.",
+    "story": "Sharing the beauty of wild places with people is the principle aim. Every walk is designed to enhance appreciation of the world through ecology and natural history, to acknowledge and manage risk, to set a level of challenge that is appropriate yet stimulating, to build each walker's bushwalking knowledge and skills, to model minimal impact practice, and to allow the time each place deserves.\n\nDay hikes run locally between April and November each year, with hosted weekends in the Scenic Rim and limited departures of walking holidays interstate. Horizon Guides was featured on Channel 7's The Great South East in 2013 and joined by the Queensland Weekender team on the Mt Cordeaux walk in 2014.\n\nSustainability is at the heart of Horizon Guides. The vision since 2008 has been to share the richness of the Scenic Rim by walking it, interpreting the landscape and telling its stories. The work was formally recognised in 2013 with Ecotourism Australia accreditation, and in 2023 Green Travel Leader was added for ten years of membership. Horizon Guides belongs to Destination Scenic Rim, the Boonah and District Chamber of Commerce and Outdoors Queensland.",
+    "image": "images/group-on-granite.jpg",
+    "alt": "A walking group standing on granite at Girraween with their arms raised"
   },
   "contact": {
-    "interests": []
+    "heading": "Contact",
+    "intro": "Email is best, or call or text Teresa on 0417 760 966. Reservations are confirmed by return email.",
+    "interests": [
+      "Day walks",
+      "Winter Walking Weekend",
+      "Border Tracks",
+      "Spring Retreat",
+      "Navigation Retreat",
+      "Private guiding",
+      "Accessibility"
+    ]
+  },
+  "privateGroups": {
+    "heading": "Private guiding and tailor made walks",
+    "intro": "Around Boonah there are wonderful places to explore nature in the national parks of the Scenic Rim, and the best of them aren't easy to find by yourself, because there are few marked tracks in this wilderness area.",
+    "body": "Based on your fitness and recent bushwalking experience, Teresa selects a walk that suits you, your expectations and the conditions on the day. The best time to walk is usually April to October, with June and July particularly fine: chilly mornings and clear days of 18 to 25 degrees. Winter is the time for the peaks of the Fassifern, from less than half a day on Mt Edwards to most of a day on Mt Maroon, or a full and challenging 12 to 14 hours on Mt Barney. Summer can reach 42 degrees, so summer walks head for creeks and rock pools during the heat of the day.\n\nIf you want to go bushwalking somewhere special and would like all the arrangements made for you, get in touch to discuss the options. Teresa loves to create trips around individual requirements. The deposit for a private booking is specified in your quote.",
+    "kinds": [
+      "Individuals and couples",
+      "Walking groups",
+      "People with disability, carers, families and friends"
+    ],
+    "image": "images/mt-greville-echo-point.jpg",
+    "alt": "A walking group at Echo Point on Mt Greville",
+    "sourceUrl": "https://horizonguides.com.au/more/guiding"
+  },
+  "gettingThere": {
+    "meetingPoint": "Set per walk and sent with your confirmation. Most are trailheads within an hour of Boonah.",
+    "directionsUrl": "https://maps.google.com/?q=Boonah+QLD+4310",
+    "notes": "Boonah is one hour from Brisbane. Car pooling is encouraged, and with your permission Teresa can connect you with others on your walk so you can share the drive.",
+    "sourceUrl": "https://horizonguides.com.au/tours/day-hikes/item/322-horizon-guides-bush-spring-walks-2026"
+  },
+  "parkAlerts": {
+    "label": "Check Queensland Parks alerts before you travel",
+    "url": "https://parks.desi.qld.gov.au/park-alerts"
   },
   "reviews": {},
   "instagram": {},
   "analytics": {},
-  "trust": [],
-  "seasons": [],
+  "trust": [
+    {
+      "label": "Accreditation",
+      "value": "Eco Certified since 2013",
+      "sourceUrl": "https://horizonguides.com.au/"
+    },
+    {
+      "label": "Green Travel Leader",
+      "value": "2023, for ten years with Ecotourism Australia",
+      "sourceUrl": "https://horizonguides.com.au/"
+    },
+    {
+      "label": "Guides",
+      "value": "Wilderness First Aid certified, PLB carried",
+      "sourceUrl": "https://horizonguides.com.au/tours/day-hikes/item/322-horizon-guides-bush-spring-walks-2026"
+    },
+    {
+      "label": "Group size",
+      "value": "Eight to ten walkers plus guides",
+      "sourceUrl": "https://horizonguides.com.au/tours/day-hikes/item/322-horizon-guides-bush-spring-walks-2026"
+    }
+  ],
+  "seasons": [
+    {
+      "months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "note": "Day walk season. June and July are particularly fine: chilly mornings and clear days of 18 to 25 degrees.",
+      "sourceUrl": "https://horizonguides.com.au/more/guiding"
+    },
+    {
+      "months": [
+        8
+      ],
+      "note": "Winter Walking Weekend from Boonah.",
+      "sourceUrl": "https://horizonguides.com.au/tours/bushwalking-holidays/horizon-guides-winter-walking-2026"
+    },
+    {
+      "months": [
+        11
+      ],
+      "note": "Spring Retreat at Tuckeroo Homestead below Mt Maroon.",
+      "sourceUrl": "https://horizonguides.com.au/events/art-courses/item/324-horizon-guides-nature-journaling-2026"
+    },
+    {
+      "months": [
+        12,
+        1,
+        2
+      ],
+      "note": "Summer walks head for creeks and rock pools during the heat of the day. Days can reach 42 degrees.",
+      "sourceUrl": "https://horizonguides.com.au/more/guiding"
+    }
+  ],
   "youtube": []
 }

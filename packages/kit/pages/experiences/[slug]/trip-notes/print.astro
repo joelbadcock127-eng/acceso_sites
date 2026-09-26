@@ -6,6 +6,7 @@ import ElevationProfile from '../../../../components/ElevationProfile.astro';
 import { pageData } from '../../../../lib/page';
 import { getRouteData } from '../../../../lib/routes';
 import { keyFacts, formatPrice, groupSizeLine } from '../../../../lib/site';
+import { printImageUrl } from '../../../../lib/media';
 import '../../../../styles/print.css';
 import theme from '/src/generated/theme.json';
 export async function getStaticPaths() { const { experiences } = await pageData(); return experiences.map((e) => ({ params: { slug: e.slug }, props: { slug: e.slug } })); }
@@ -13,14 +14,14 @@ const { slug } = Astro.props as { slug: string };
 const { site, experiences, faqs } = await pageData();
 const entry = experiences.find((x) => x.slug === slug)!; const e = entry.data;
 const route = await getRouteData(slug, e.route?.dataFile);
-const hero = e.heroImage ?? e.gallery[0]?.src;
+const hero = await printImageUrl(e.heroImage ?? e.gallery[0]?.src);
 const qs = e.faqs.length ? e.faqs : faqs.slice(0, 5);
 const groups = [...new Set(e.whatToBring.map((i) => i.group))];
 ---
 <Base title={`${e.title}: trip notes`} description={e.summary} bare noindex>
   <article class="print-doc mx-auto max-w-3xl p-6 print:p-0">
     <div class="print-header"><span>{site.business.name}</span>{!theme.logo.wordmark && <Img src={theme.logo.src} alt="" widths={[240]} sizes="120px" />}<span>Trip notes</span></div>
-    <div class="print-cover">{hero && <Img src={hero} alt={e.heroAlt ?? ''} widths={[1080]} sizes="800px" />}<h1>{e.title}</h1>{site.home.positioning && <p class="lede">{site.home.positioning.heading}</p>}<p>{e.summary}</p></div>
+    <div class="print-cover">{hero && <img src={hero} alt={e.heroAlt ?? ''} />}<h1>{e.title}</h1>{site.home.positioning && <p class="lede">{site.home.positioning.heading}</p>}<p>{e.summary}</p></div>
     <div class="facts">{keyFacts(e).map((f) => <div><div class="k">{f.k}</div><div class="v">{f.v}</div></div>)}</div>
     {e.itinerary.length > 0 && <><h2>{e.type === 'multiday' ? 'Day by day' : 'The day'}</h2>{e.itinerary.map((d) => <div class="day"><div class="label">{d.label}</div><h3>{d.title}</h3><p>{d.body}</p></div>)}</>}
     {route && <><h2>Route and elevation</h2><ElevationProfile data={route} print /><p class="small">{route.distanceKm && `${route.distanceKm} km. `}{route.ascentM && `${route.ascentM} m of ascent. `}{route.highestM && `Highest point ${route.highestM} m. `}{route.attribution}</p></>}

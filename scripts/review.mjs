@@ -3,7 +3,7 @@
 import { chromium } from 'playwright';
 import { mkdirSync, existsSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { serve } from './lib/serve.mjs';
+import { serve, settle } from './lib/serve.mjs';
 import { siteDir, slugArg, ROOT, log } from './lib/site.mjs';
 const slug = slugArg();
 const round = process.argv[3] || '1';
@@ -17,7 +17,7 @@ async function capture(dist, label) {
   const best = process.argv[4] ? '/experiences/' + process.argv[4] : exp[0];
   for (const w of [390, 1440]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, reducedMotion: 'reduce' }); const page = await ctx.newPage();
-    for (const [name, p] of [['home', '/'], ['experience', best]]) { if (!p) continue; await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(600); await page.screenshot({ path: join(out, `${label}-${name}-${w}.png`), fullPage: true }); log(`review ${label}-${name}-${w}.png`); }
+    for (const [name, p] of [['home', '/'], ['experience', best]]) { if (!p) continue; await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await settle(page); await page.screenshot({ path: join(out, `${label}-${name}-${w}.png`), fullPage: true }); log(`review ${label}-${name}-${w}.png`); }
     await ctx.close();
   }
   await close();
@@ -25,8 +25,6 @@ async function capture(dist, label) {
 await capture(join(dir, 'dist'), slug);
 if (slug !== 'bakers') await capture(bakersDist, 'bakers');
 await browser.close();
-writeFileSync(join(out, 'RUBRIC.md'), RUBRIC);
-log(`Screenshots and rubric in sites/${slug}/qa/review/round-${round}/. Hand them, with audit.md, to a subagent that did not build the site.`);
 const RUBRIC = `# Design review rubric (B10)
 
 Score each criterion 1 to 5 with one sentence of evidence and one specific fix for anything under 5. Be harsh. Every criterion must reach 4.
@@ -47,3 +45,5 @@ Score each criterion 1 to 5 with one sentence of evidence and one specific fix f
 
 Save scores in the site's review.md under a heading for this round.
 `;
+writeFileSync(join(out, 'RUBRIC.md'), RUBRIC);
+log(`Screenshots and rubric in sites/${slug}/qa/review/round-${round}/. Hand them, with audit.md, to a subagent that did not build the site.`);

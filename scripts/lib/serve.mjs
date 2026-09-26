@@ -34,3 +34,15 @@ function matchHeaders(rules, path) {
   for (const r of rules) { const re = new RegExp('^' + r.pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$'); if (re.test(path)) Object.assign(out, r.headers); }
   return out;
 }
+
+/** Scroll a page end to end so lazy images and reveal animations load before a full page screenshot. */
+export async function settle(page) {
+  await page.evaluate(async () => {
+    const step = window.innerHeight * 0.8; let y = 0;
+    while (y < document.body.scrollHeight) { window.scrollTo(0, y); y += step; await new Promise((r) => setTimeout(r, 120)); }
+    window.scrollTo(0, 0);
+  });
+  // Hidden images never load, so cap the wait.
+  await page.evaluate(() => Promise.race([new Promise((r) => setTimeout(r, 3000)), Promise.all(Array.from(document.images).filter((i) => !i.complete).map((i) => new Promise((r) => { i.onload = i.onerror = r; })))]));
+  await page.waitForTimeout(400);
+}

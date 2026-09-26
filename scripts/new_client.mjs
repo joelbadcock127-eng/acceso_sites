@@ -16,7 +16,7 @@ cpSync(join(ROOT, 'sites/_demo_ridgeline'), dir, { recursive: true, filter: (src
 // Clear the demo content, keep the shapes.
 const content = join(dir, 'src/content');
 for (const d of ['experiences', 'posts', 'legal', 'routes']) { rmSync(join(content, d), { recursive: true, force: true }); mkdirSync(join(content, d), { recursive: true }); writeFileSync(join(content, d, '.gitkeep'), ''); }
-for (const f of ['testimonials', 'faqs', 'guides', 'press', 'stats', 'species']) writeFileSync(join(content, f + '.json'), '[]\n');
+for (const f of ['testimonials', 'faqs', 'guides', 'press', 'stats', 'species', 'program']) writeFileSync(join(content, f + '.json'), '[]\n');
 rmSync(join(content, 'signature.json'), { force: true });
 writeFileSync(join(content, 'plan.json'), '{}\n');
 const site = JSON.parse(readFileSync(join(content, 'site.json'), 'utf8'));

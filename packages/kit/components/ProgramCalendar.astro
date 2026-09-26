@@ -1,0 +1,77 @@
+---
+// Program calendar (kit module, proposed during the Horizon Guides build).
+// A season's walks as dated rows: date, walk, area, distance, hours, grade,
+// price, status, each with its own request button. Filters by month and grade
+// run in the browser with no data collected. Past rows are hidden; a
+// cancelled row shows as cancelled. Hides with fewer than 3 future rows.
+import BookButton from './BookButton.astro';
+import { formatDate, MONTHS } from '../lib/site';
+import type { BookingAdapter } from '../lib/booking';
+interface Row { date: string; endDate?: string; title: string; area?: string; distanceKm?: number; hours?: string; grade?: string; price?: string; note?: string; status: string; experience?: string }
+interface Props { rows: Row[]; adapter: BookingAdapter; heading?: string; intro?: string; id?: string; season?: string }
+const { rows, adapter, heading = 'This season\'s walks', intro, id = 'program', season } = Astro.props;
+const today = new Date(); const t0 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const isPast = (r: Row) => r.status === 'past' || new Date((r.endDate ?? r.date) + 'T00:00:00') < t0;
+const future = rows.filter((r) => !isPast(r)).sort((a, b) => a.date.localeCompare(b.date));
+const past = rows.filter(isPast).sort((a, b) => b.date.localeCompare(a.date));
+const months = [...new Set(future.map((r) => new Date(r.date + 'T00:00:00').getMonth()))];
+const grades = [...new Set(future.map((r) => r.grade).filter(Boolean))] as string[];
+const dateLabel = (r: Row) => {
+  const s = new Date(r.date + 'T00:00:00'); const wd = s.toLocaleDateString('en-AU', { weekday: 'short' });
+  if (!r.endDate || r.endDate === r.date) return `${MONTHS[s.getMonth()].slice(0, 3)} · ${wd}`;
+  const e = new Date(r.endDate + 'T00:00:00');
+  return e.getMonth() === s.getMonth() ? `to ${e.getDate()} ${MONTHS[e.getMonth()].slice(0, 3)} · ${wd}` : `${MONTHS[s.getMonth()].slice(0, 3)} to ${e.getDate()} ${MONTHS[e.getMonth()].slice(0, 3)} · ${wd}`;
+};
+const label: Record<string, string> = { open: 'Places available', limited: 'Limited places', full: 'Full', cancelled: 'Cancelled' };
+---
+{rows.length >= 3 && (
+  <section id={id} class="pad-x section anchor-offset" data-reveal data-program>
+    <div class="container-xl">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl"><h2 class="mb-2">{heading}</h2>{intro && <p class="lede" style="color:var(--muted)">{intro}</p>}{season && <div class="badge mt-3">{season}</div>}</div>
+        <form class="flex flex-wrap gap-3" data-program-filters aria-label="Filter the program">
+          <label class="field"><span class="sr-only">Month</span><select name="month"><option value="">All months</option>{months.map((m) => <option value={m}>{MONTHS[m]}</option>)}</select></label>
+          {grades.length > 1 && <label class="field"><span class="sr-only">Grade</span><select name="grade"><option value="">All grades</option>{grades.map((g) => <option value={g}>{g}</option>)}</select></label>}
+        </form>
+      </div>
+      {future.length === 0 && <p class="lede mb-6" style="color:var(--muted)">No dates are left on this season's program. The next program goes to the mailing list first; ask below to be on it.</p>}
+      <ol class="grid divide-y divide-line border-y border-line">
+        {future.map((r) => (
+          <li class:list={['grid gap-3 py-5 md:grid-cols-[9rem_1fr_auto] md:items-center', { 'opacity-60': r.status === 'cancelled' }]} data-month={new Date(r.date + 'T00:00:00').getMonth()} data-grade={r.grade}>
+            <div><div class="font-display text-2xl leading-none">{new Date(r.date + 'T00:00:00').getDate()}</div><div class="label mt-1" style="color:var(--muted)">{dateLabel(r)}</div></div>
+            <div>
+              <h3 class="text-xl">{r.experience ? <a href={`/experiences/${r.experience}`} class="hover:underline underline-offset-4">{r.title}</a> : r.title}</h3>
+              <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm" style="color:var(--muted)">{r.area && <span>{r.area}</span>}{r.distanceKm && <span>{r.distanceKm} km</span>}{r.hours && <span>{r.hours}</span>}{r.grade && <span class="badge">{r.grade}</span>}</div>
+              {r.note && <p class="mt-2 text-sm">{r.note}</p>}
+            </div>
+            <div class="flex items-center gap-4 md:flex-col md:items-end md:gap-2">
+              {r.price && r.status !== 'cancelled' && <span class="font-medium">{r.price}</span>}
+              {r.status === 'cancelled' ? <span class="badge">Cancelled</span> : r.status === 'full' ? <span class="badge">Full</span> : <BookButton adapter={adapter} target={{ itemId: `${r.experience ?? 'program'}|${r.date}` }} experience={r.experience ?? 'program'} small variant={r.status === 'limited' ? 'accent' : 'secondary'} label={r.status === 'limited' ? 'Request to book, limited places' : undefined} />}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-4 text-sm" style="color:var(--muted)">{`${future.length} ${future.length === 1 ? 'walk' : 'walks'} to come.`} Programs change with the weather and the guides' judgement; you'll hear at least 24 hours ahead if a walk moves.</p>
+      {past.length > 0 && (
+        <details class="mt-8">
+          <summary class="label cursor-pointer" style="color:var(--muted)">Earlier this season ({past.length})</summary>
+          <ol class="mt-4 grid divide-y divide-line border-y border-line text-sm" style="color:var(--muted)">
+            {past.map((r) => (
+              <li class="grid gap-1 py-3 md:grid-cols-[9rem_1fr_auto] md:items-center">
+                <span>{formatDate(r.date)}</span>
+                <span>{r.title}{r.area ? `, ${r.area}` : ''}{r.grade ? ` · ${r.grade}` : ''}</span>
+                <span class="badge">{r.status === 'cancelled' ? 'Cancelled' : r.status === 'full' ? 'Ran full' : 'Ran'}</span>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
+    </div>
+    <script>
+      document.querySelectorAll<HTMLElement>('[data-program]').forEach((root) => {
+        const form = root.querySelector<HTMLFormElement>('[data-program-filters]')!; const rows = Array.from(root.querySelectorAll<HTMLElement>('li[data-month]'));
+        form.addEventListener('change', () => { const f = new FormData(form); const m = f.get('month') as string, g = f.get('grade') as string; rows.forEach((r) => { r.hidden = !!(m && r.dataset.month !== m) || !!(g && r.dataset.grade !== g); }); });
+      });
+    </script>
+  </section>
+)}

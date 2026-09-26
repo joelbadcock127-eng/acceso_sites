@@ -1,0 +1,17 @@
+---
+// "Tell me when dates are announced" for an experience with datesComingSoon.
+import FormShell from './FormShell.astro';
+import Field from './Field.astro';
+import type { Site } from '../../lib/content/schema';
+interface Props { site: Site; experience: string; note?: string; id?: string }
+const { site, experience, note, id = 'notify' } = Astro.props;
+---
+<section id={id} class="anchor-offset card p-6 md:p-8" data-reveal>
+  <h2 class="mb-2 text-3xl">Be first to hear the dates</h2>
+  <p class="mb-6" style="color:var(--muted)">{note ?? 'Leave your details and we\'ll email you as soon as dates and prices are confirmed. No obligation.'}</p>
+  <FormShell site={site} kind="notify" submitLabel="Notify me" success="Thanks. You'll be the first to hear when the dates are set.">
+    <input type="hidden" name="experience" value={experience} />
+    <div class="grid gap-4 sm:grid-cols-2"><Field name="name" label="Your name" required autocomplete="name" /><Field name="email" label="Email" type="email" required autocomplete="email" /></div>
+    <Field name="groupSize" label="How many walkers, if you know" type="number" min={1} />
+  </FormShell>
+</section>

@@ -42,6 +42,7 @@ import TapToChat from '../../components/TapToChat.astro';
 import ReviewsWidget from '../../components/ReviewsWidget.astro';
 import RecentFromTheTrail from '../../components/RecentFromTheTrail.astro';
 import AdditionalInfo from '../../components/AdditionalInfo.astro';
+import ProgramCalendar from '../../components/ProgramCalendar.astro';
 import { getAdapter } from '../../lib/booking';
 import type { Site, Experience } from '../../lib/content/schema';
 import { siteSchema, experienceSchema } from '../../lib/content/schema';
@@ -69,6 +70,7 @@ const noBook = { ...adapter, bookUrl: () => '#' };
     <Itinerary items={[]} />
     <IncludedExcluded included={[]} excluded={[]} />
     <AdditionalInfo experience={exp} />
+    <ProgramCalendar rows={[]} adapter={adapter} />
     <PackageCards experience={exp} slug="empty" adapter={adapter} />
     <AmenityGrid items={[]} />
     <DeparturesTable experience={exp} slug="empty" adapter={adapter} />

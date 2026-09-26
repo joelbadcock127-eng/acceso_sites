@@ -109,6 +109,8 @@ export const siteSchema = z.object({
       poster: z.string().optional(),
       image: z.string().optional(),
       alt: z.string().optional(),
+      /** CSS object-position for the hero image, so the subject survives portrait crops ("30% 50%") */
+      focal: z.string().optional(),
       /** Only for cinemagraphs made from their own photo (B7). Needs owner approval before launch */
       aiMotion: z.boolean().default(false),
     }),
@@ -234,6 +236,9 @@ export const experienceSchema = z.object({
   downloads: z.array(z.object({ kind: z.enum(['trip-notes', 'packing-list', 'welcome-pack']), file: z.string(), pages: z.number(), sizeKb: z.number() })).default([]),
   externalForms: z.array(linkSchema).default([]),
   calcomEvent: z.string().optional(),
+  /** No dates yet: hide prices and booking, show a "notify me" request instead */
+  datesComingSoon: z.boolean().default(false),
+  datesComingNote: z.string().optional(),
   order: z.number().default(100),
   sourceUrl: z.string(),
 });
@@ -278,6 +283,22 @@ export const postSchema = z.object({
 export const legalSchema = z.object({ title: z.string(), sourceUrl: z.string() });
 
 export const speciesSchema = z.object({ name: z.string(), scientific: z.string().optional(), note: z.string().optional(), image: z.string().optional(), season: z.string().optional(), sourceUrl: z.string() });
+
+/** Program calendar (kit module): a season of dated walks sold as a program rather than as products */
+export const programSchema = z.object({
+  date: isoDate,
+  endDate: isoDate.optional(),
+  title: z.string(),
+  area: z.string().optional(),
+  distanceKm: z.number().optional(),
+  hours: z.string().optional(),
+  grade: z.string().optional(),
+  price: z.string().optional(),
+  note: z.string().optional(),
+  status: z.enum(['open', 'limited', 'full', 'cancelled', 'past']).default('open'),
+  experience: z.string().optional(),
+  sourceUrl: z.string(),
+});
 
 /** One signature moment per site (A4d), rendered from content only */
 export const signatureSchema = z.object({

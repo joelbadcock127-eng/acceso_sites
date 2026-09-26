@@ -1,0 +1,53 @@
+{
+  "kind": "checklist",
+  "heading": "What you might see",
+  "intro": "The species Teresa's own walk notes name. Interpretation of flora, fauna, geology and history is part of every walk, and no two days show the same things.",
+  "items": [
+    {
+      "label": "Albert's Lyrebird",
+      "detail": "Elusive, and heard more than seen in the rainforest along the border ranges.",
+      "when": "Border Tracks"
+    },
+    {
+      "label": "Glossy Black Cockatoo",
+      "detail": "Feeding in the she oaks along the foothills track to the Lower Portals, with luck.",
+      "when": "Mt Barney National Park"
+    },
+    {
+      "label": "Peregrine falcon",
+      "detail": "Nesting on the cave dotted cliffs of Campbell's Folly, outliers of Mt Barney.",
+      "when": "Winter Walking Weekend"
+    },
+    {
+      "label": "Rock wallaby",
+      "detail": "On the same rhyolite cliffs, along with plants found nowhere else.",
+      "when": "Winter Walking Weekend"
+    },
+    {
+      "label": "Wildflowers",
+      "detail": "Fringe lilies and orchids in the eucalypt forest and along the paddock edges in spring.",
+      "image": "images/fringe-lily.jpg",
+      "alt": "A purple fringe lily",
+      "when": "Spring"
+    },
+    {
+      "label": "Fungi",
+      "detail": "Bright fungi on fallen timber after rain, a favourite stop on rainforest walks.",
+      "image": "images/yellow-fungus.jpg",
+      "alt": "A yellow fungus on a log",
+      "when": "After rain"
+    },
+    {
+      "label": "Tiny brightly coloured spiders",
+      "detail": "The small things a guide stops for, like the brightly coloured spider a walker found on a Scenic Rim day walk.",
+      "image": "images/insect-macro.jpg",
+      "alt": "A close up of an insect on a leaf"
+    },
+    {
+      "label": "136 bird species",
+      "detail": "Recorded in the Flinders Goolman Conservation Estate, with 25 mammals, 13 reptiles and 531 plant species.",
+      "when": "Hardings Paddock"
+    }
+  ],
+  "sourceUrl": "https://horizonguides.com.au/tours/bushwalking-holidays/item/312-horizon-guides-border-tracks-2024"
+}

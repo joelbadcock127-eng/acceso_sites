@@ -26,13 +26,13 @@
   {
     "slug": "horizon_guides",
     "business": "Horizon Guides",
-    "status": "prospect",
+    "status": "preview",
     "pagesProject": "horizon-guides-lg9a",
     "previewUrl": "https://horizon-guides-lg9a.pages.dev",
     "domain": null,
     "sentOn": null,
     "deleteAfter": null,
     "bookingGroup": 2,
-    "archetype": "expedition"
+    "archetype": "naturalist"
   }
 ]

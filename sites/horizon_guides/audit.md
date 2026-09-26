@@ -49,7 +49,7 @@ Evidence: `intake/evidence/lighthouse-live.json`. The 390px screenshot shows a 4
 
 ## Three email hooks
 
-1. Your home page still leads with the August winter weekend marked "FULLY BOOKED" and the 2025 spring walks.
+1. Your home page still leads with walks from August and the 2025 spring program, so a first time visitor reads it as last season's site.
 2. Your mobile speed score is 57 out of 100, and the home page takes 17 seconds to show its main image on a phone.
 3. To book a walk, someone has to download a PDF form, fill it in and email it back.
 
@@ -63,6 +63,13 @@ Evidence: `intake/evidence/lighthouse-live.json`. The 390px screenshot shows a 4
 - Whether the private Tailor Made guiding has a price per day or half day
 - Updated booking terms without the COVID clauses
 - Permission to state the Eco Certified and Green Travel Leader accreditations with their logos
+- Founding year: the home page says 2008, the about page 2007 (the preview uses 2008 and keeps it out of the headline)
+- The landline: the contact page shows "07 54634 114", which is one digit out of place (the preview shows the mobile only)
+- Which mailing list provider she uses, so the newsletter form can post to it (the preview has no newsletter form)
+- The 2027 program, or the remaining 2026 dates still open, before launch: only three 2026 dates lie ahead (Ships Stern 18 October, the Aussie Bird Count weekend, the Spring Retreat)
+- Whether the Aussie Bird Count weekend has a price
+- The booking terms page was transcribed from the PDF and needs a proofread against it; the PDF itself is linked at the top of the page as the authoritative copy
+- Confirm the Queensland Parks alerts link (parks.desi.qld.gov.au/park-alerts) is the page she wants walkers to check
 
 ## Archetype chosen
 
@@ -70,4 +77,4 @@ Evidence: `intake/evidence/lighthouse-live.json`. The 390px screenshot shows a 4
 
 ## Signature features and downloads
 
-Built: see `build_plan.md`. Skipped for lack of content: route maps (no GPX), day on the trail (no timed itineraries for day walks), press strip (media coverage is 2013 to 2014 and not on their own pages as logos).
+Built: program calendar (new kit module, the main home feature), notify me on Border Tracks, signature map, species checklist, guide profile, compare table, who it's for, getting there, park alerts link, SMS tap to chat, trip notes PDFs for every experience and a packing list for Border Tracks, booking terms page. See `build_plan.md`. Skipped for lack of content: route maps (no GPX), day on the trail (no timed itineraries for day walks), press strip (media coverage is 2013 to 2014 and not on their own pages as logos).

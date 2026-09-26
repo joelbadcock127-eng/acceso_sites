@@ -31,6 +31,8 @@ import ParkAlertsLink from '../../components/ParkAlertsLink.astro';
 import RequestToBook from '../../components/forms/RequestToBook.astro';
 import CalcomEmbed from '../../components/CalcomEmbed.astro';
 import BrochureLead from '../../components/forms/BrochureLead.astro';
+import NotifyMe from '../../components/forms/NotifyMe.astro';
+import ProgramCalendar from '../../components/ProgramCalendar.astro';
 import { pageData } from '../../lib/page';
 import { getRouteData } from '../../lib/routes';
 import { formatPrice, formatPriceShort } from '../../lib/site';
@@ -42,9 +44,11 @@ export async function getStaticPaths() {
   return experiences.map((e) => ({ params: { slug: e.slug }, props: { slug: e.slug } }));
 }
 const { slug } = Astro.props as { slug: string };
-const { site, adapter, experiences, testimonials } = await pageData();
+const { site, adapter, experiences, testimonials, program } = await pageData();
 const entry = experiences.find((x) => x.slug === slug)!;
 const e = entry.data;
+const soon = e.datesComingSoon;
+const programRows = program.filter((r) => r.experience === slug);
 const on = (k: string) => (plan as Record<string, boolean>)[k] !== false;
 const multi = e.type === 'multiday';
 const target = { itemId: e.booking.itemId ?? (adapter.onSite ? slug : undefined), url: e.booking.url };
@@ -60,9 +64,11 @@ const sections = [
   { id: 'gallery', label: 'Gallery', show: e.gallery.filter((g) => (g.score ?? 4) >= 4).length >= 6 },
   { id: 'reviews', label: 'Reviews', show: own.length >= 2 },
   { id: 'faq', label: 'FAQs', show: e.faqs.length >= 3 },
-  { id: 'availability', label: 'Availability', show: e.departures.length > 0 || !!adapter.onSite },
+  { id: 'program', label: 'Dates', show: programRows.length >= 3 },
+  { id: 'availability', label: 'Availability', show: !soon && programRows.length < 3 && (e.departures.length > 0 || !!adapter.onSite) },
+  { id: 'notify', label: 'Dates', show: soon },
 ].filter((s) => s.show);
-const price = formatPrice(e.priceFrom);
+const price = soon ? null : formatPrice(e.priceFrom);
 const hero = e.heroImage ?? e.gallery[0]?.src;
 const heroAlt = e.heroAlt ?? e.gallery[0]?.alt ?? '';
 const printHref = `/experiences/${slug}/trip-notes/print`;
@@ -80,13 +86,13 @@ const desc = [e.summary, e.distanceKm && `${e.distanceKm} km`, e.durationLabel, 
         <h1 class="mb-4">{e.title}</h1>
         <p class="lede mb-8 max-w-2xl">{e.summary}</p>
         <div class="flex flex-wrap items-center gap-4">
-          <BookButton adapter={adapter} target={target} experience={slug} variant="alt-solid" />
+          {soon ? <a href="#notify" class="btn btn-alt-solid">Tell me when dates are set</a> : <BookButton adapter={adapter} target={target} experience={slug} variant="alt-solid" />}
           {adapter.giftUrl?.() && <BookButton adapter={adapter} gift variant="alt" />}
           {price && <span class="font-medium">{price}</span>}
         </div>
         <TrustRow site={site} experience={e} class="mt-5" onBand />
       </div>
-      <div class="mt-10"><KeyFactsBanner experience={e} onBand /></div>
+      <div class="mt-10"><KeyFactsBanner experience={soon ? { ...e, priceFrom: undefined } : e} onBand /></div>
       {heroAlt && <span class="sr-only">{heroAlt}</span>}
     </div>
   </section>
@@ -107,7 +113,7 @@ const desc = [e.summary, e.distanceKm && `${e.distanceKm} km`, e.durationLabel, 
               {e.highlights.map((h) => <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="check" size={16} class="mt-1 flex-none" />{h}</div>)}
               {e.packFree && <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="packfree" size={16} class="mt-1 flex-none" />Pack free</div>}
               {e.startLocation && <div class="flex items-start gap-2 border-b border-line pb-2"><Icon name="pin" size={16} class="mt-1 flex-none" /><span>Starts {e.startLocation.mapsUrl ? <a href={e.startLocation.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-4">{e.startLocation.name}</a> : e.startLocation.name}{e.startTime && `, ${e.startTime}`}</span></div>}
-              <div class="mt-2"><BookButton adapter={adapter} target={target} experience={slug} small /></div>
+              <div class="mt-2">{soon ? <a href="#notify" class="btn btn-sm">Tell me when dates are set</a> : programRows.length >= 3 ? <a href="#program" class="btn btn-sm">See the dates</a> : <BookButton adapter={adapter} target={target} experience={slug} small />}</div>
             </div>
           </div>
           {e.grade && <GradeExplainer grade={e.grade} />}
@@ -123,15 +129,18 @@ const desc = [e.summary, e.distanceKm && `${e.distanceKm} km`, e.durationLabel, 
         {on('packingList') && <PackingList items={e.whatToBring} download={e.downloads.find((d) => d.kind === 'packing-list')?.file ?? `/experiences/${slug}/packing-list/print`} />}
         {on('gettingThere') && <GettingThere site={site} experience={e} />}
         <Gallery images={e.gallery} />
-        <DeparturesTable experience={e} slug={slug} adapter={adapter} />
-        {adapter.onSite === 'request' && <RequestToBook site={site} experience={entry} />}
+        {programRows.length >= 3 && <ProgramCalendar rows={programRows} adapter={adapter} heading="Dates" season={e.season} />}
+        {!soon && programRows.length < 3 && <DeparturesTable experience={e} slug={slug} adapter={adapter} />}
+        {soon && <NotifyMe site={site} experience={e.title} note={e.datesComingNote} />}
+        {!soon && adapter.onSite === 'request' && <RequestToBook site={site} experience={entry} program={programRows} />}
         {adapter.onSite === 'calcom' && e.calcomEvent && <CalcomEmbed site={site} event={e.calcomEvent} title={e.title} />}
       </div>
       <aside class="grid content-start gap-6 lg:sticky lg:top-32 lg:self-start">
         <div class="card p-6">
           {price && <div class="font-display text-2xl">{formatPriceShort(e.priceFrom)}<span class="text-base" style="color:var(--muted)"> per {e.priceFrom!.per}</span></div>}
           {e.priceFrom?.note && <p class="mt-1 text-sm" style="color:var(--muted)">{e.priceFrom.note}</p>}
-          <div class="mt-4 grid gap-2"><BookButton adapter={adapter} target={target} experience={slug} /><a href="#contact-us" class="btn btn-secondary btn-sm">Ask a question</a></div>
+          {soon && <div class="badge badge-accent mb-3">{e.datesComingNote ?? 'Dates coming soon'}</div>}
+          <div class="mt-4 grid gap-2">{soon ? <a href="#notify" class="btn btn-accent">Tell me when dates are set</a> : programRows.length >= 3 ? <a href="#program" class="btn btn-accent">See the dates</a> : <BookButton adapter={adapter} target={target} experience={slug} />}<a href="#contact-us" class="btn btn-secondary btn-sm">Ask a question</a></div>
           <TrustRow site={site} experience={e} class="mt-4 flex-col gap-2" />
         </div>
         {on('downloads') && (e.downloads.length > 0 || true) && <div><div class="label mb-3" style="color:var(--muted)">Downloads</div><DownloadCard downloads={e.downloads} title={e.title} printHref={printHref} compact /></div>}
@@ -147,5 +156,5 @@ const desc = [e.summary, e.distanceKm && `${e.distanceKm} km`, e.durationLabel, 
   <div class="pad-x"><div class="container-xl"><FaqAccordion items={e.faqs} heading="Questions" id="faq" intro="Can't find your answer? Ask us below." /></div></div>
   <section id="contact-us" class="pad-x section-md anchor-offset border-t border-line"><div class="container-md text-center"><h2 class="mb-3 text-3xl">Looking for more info?</h2><p class="mb-6" style="color:var(--muted)">Email or call and a real person answers.</p><div class="flex flex-wrap justify-center gap-4">{site.business.email && <a href={`mailto:${site.business.email}?subject=${encodeURIComponent(e.title)}`} class="btn btn-secondary">Email us</a>}{site.business.phone && <a href={`tel:${site.business.phone.replace(/\s+/g, '')}`} class="btn btn-secondary">Call {site.business.phone}</a>}</div></div></section>
   <CtaBand site={site} adapter={adapter} heading={site.home.cta?.heading ?? `Walk the ${e.title} with us`} body={site.home.cta?.body} image={e.gallery[1]?.src ?? hero} target={target} experience={slug} />
-  <MobileBookBar adapter={adapter} target={target} price={formatPriceShort(e.priceFrom)} experience={slug} title={e.title} />
+  {!soon && <MobileBookBar adapter={adapter} target={target} price={formatPriceShort(e.priceFrom)} experience={slug} title={e.title} />}
 </Base>

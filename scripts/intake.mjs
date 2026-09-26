@@ -11,11 +11,13 @@ const dir = siteDir(slug); const out = join(dir, 'intake');
 for (const d of ['raw', 'images', 'pdfs', 'evidence', 'social']) mkdirSync(join(out, d), { recursive: true });
 const origin = new URL(url).origin;
 const MAX = 60; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const skip = /\/(wp-admin|wp-login|admin|login|cart|checkout|account|feed|xmlrpc|wp-json)\b|\.(jpg|jpeg|png|gif|webp|svg|css|js|zip|mp4)(\?|$)/i;
-const queue = [url]; const seen = new Set(); const pages = []; const failed = [];
+// Skips admin paths, assets, and CMS tag or listing pages (Joomla K2 itemlist/tag, WordPress tag and category archives) that repeat content and burn the 60 page budget.
+const skip = /\/(wp-admin|wp-login|admin|login|cart|checkout|account|feed|xmlrpc|wp-json|itemlist|component\/k2|tag|category|author|page\/\d+)\b|\?(format|tmpl|start|print)=|\.(jpg|jpeg|png|gif|webp|svg|css|js|zip|mp4|pdf)(\?|$)/i;
+const queue = [url]; const seen = new Set(); const retried = new Set(); const pages = []; const failed = [];
 // Sitemap first, if there is one
 try { const sm = await (await fetch(origin + '/sitemap.xml')).text(); for (const m of sm.matchAll(/<loc>([^<]+)<\/loc>/g)) if (m[1].startsWith(origin) && !skip.test(m[1])) queue.push(m[1]); } catch {}
-const browser = await chromium.launch(); const page = await browser.newPage({ userAgent: 'AccesoIntake/1.0 (+site preview for the owner; one request per second)' });
+// INTAKE_IGNORE_TLS=1 only for sandboxes behind an intercepting proxy; never needed on Johnny's machine.
+const browser = await chromium.launch(); const page = await browser.newPage({ userAgent: 'AccesoIntake/1.0 (+site preview for the owner; one request per second)', ignoreHTTPSErrors: !!process.env.INTAKE_IGNORE_TLS });
 const images = new Map(); const pdfs = new Set(); const booking = { platform: null, urls: new Set(), scripts: new Set() };
 let brand = { colors: {}, fonts: new Set(), logo: null, socials: {} };
 while (queue.length && pages.length < MAX) {
@@ -38,7 +40,10 @@ while (queue.length && pages.length < MAX) {
     css.fonts.forEach((f) => brand.fonts.add(f)); for (const [c, n] of Object.entries(css.colors)) brand.colors[c] = (brand.colors[c] || 0) + n;
     if (html.includes('woocommerce')) booking.platform ??= 'woocommerce';
     log(`crawled ${u}`);
-  } catch (e) { failed.push(`${u} (${e.message.split('\n')[0]})`); }
+  } catch (e) {
+    if (/ERR_TOO_MANY_RETRIES|ERR_CONNECTION|Timeout/i.test(e.message) && !retried.has(u)) { retried.add(u); seen.delete(u); queue.push(u); await sleep(4000); continue; }
+    failed.push(`${u} (${e.message.split('\n')[0]})`);
+  }
   await sleep(1000);
 }
 // Download images and PDFs, politely

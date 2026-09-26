@@ -1,0 +1,57 @@
+{
+  "business": {
+    "name": "Horizon Guides",
+    "ownerNames": [],
+    "socials": {},
+    "acknowledgement": null,
+    "driveTimes": []
+  },
+  "booking": {
+    "provider": "request",
+    "group": 2,
+    "responseTime": "24 hours"
+  },
+  "nav": {
+    "primary": [
+      {
+        "label": "Experiences",
+        "href": "/experiences"
+      },
+      {
+        "label": "About",
+        "href": "/about"
+      }
+    ],
+    "groups": [],
+    "featured": []
+  },
+  "footer": {
+    "columns": [],
+    "legal": []
+  },
+  "seo": {
+    "defaultTitle": "Horizon Guides",
+    "defaultDescription": "Horizon Guides: guided walks."
+  },
+  "newsletter": null,
+  "preview": {
+    "enabled": true,
+    "preparedFor": "Horizon Guides",
+    "sourceDomain": ""
+  },
+  "home": {
+    "hero": {
+      "headline": "Horizon Guides"
+    },
+    "features": []
+  },
+  "contact": {
+    "interests": []
+  },
+  "reviews": {},
+  "instagram": {},
+  "analytics": {},
+  "trust": [],
+  "seasons": [],
+  "youtube": []
+}

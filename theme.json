@@ -1,0 +1,32 @@
+{
+  "archetype": "naturalist",
+  "pairing": "naturalist",
+  "colors": {
+    "ground": "#faf8f3",
+    "surface": "#ffffff",
+    "ink": "#20302a",
+    "muted": "#56655d",
+    "line": "rgba(32, 48, 42, 0.15)",
+    "accent": "#c4561f",
+    "accentInk": "#ffffff",
+    "overlay": "rgba(20, 30, 25, 0.48)",
+    "band": "#2c4638",
+    "bandInk": "#faf8f3"
+  },
+  "radius": "3px",
+  "buttons": "accent",
+  "frames": false,
+  "logo": { "src": "images/logo.svg", "alt": "Horizon Guides", "framed": false, "invertOnHero": false, "height": "3rem", "wordmark": true },
+  "heroStyle": "stillSlowZoom",
+  "texture": "grain",
+  "variants": {
+    "hero": "full",
+    "positioning": "band",
+    "featureSplit": "mosaicLeft",
+    "offerCards": "list",
+    "statsRow": "inline",
+    "testimonials": "single",
+    "ctaBand": "solid",
+    "keyFacts": "stacked"
+  }
+}

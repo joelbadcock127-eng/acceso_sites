@@ -22,5 +22,17 @@
     "deleteAfter": null,
     "bookingGroup": 1,
     "archetype": "lodge"
+  },
+  {
+    "slug": "horizon_guides",
+    "business": "Horizon Guides",
+    "status": "prospect",
+    "pagesProject": "horizon-guides-lg9a",
+    "previewUrl": "https://horizon-guides-lg9a.pages.dev",
+    "domain": null,
+    "sentOn": null,
+    "deleteAfter": null,
+    "bookingGroup": 2,
+    "archetype": "expedition"
   }
 ]

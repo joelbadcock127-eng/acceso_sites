@@ -12,9 +12,10 @@ const findings = []; const year = new Date().getFullYear();
 const add = (cat, text, evidence) => findings.push({ cat, text, evidence });
 for (const p of intake.pages) {
   const txt = existsSync(join(dir, p.textFile)) ? readFileSync(join(dir, p.textFile), 'utf8') : '';
-  for (const y of txt.match(/\b20(1\d|2[0-5])\b/g) ?? []) if (Number(y) < year) { add('Stale content', `Mentions ${y} on ${p.url}`, p.url); break; }
+  // Past years only count when they sit in the page title or heading (a dated tour or program), not in body text.
+  for (const y of (p.title + ' ' + p.h1.join(' ')).match(/\b20(1\d|2[0-5])\b/g) ?? []) if (Number(y) < year) { add('Stale content', `"${p.title}" is dated ${y}`, p.url); break; }
   if (/covid|coronavirus/i.test(txt)) add('Stale content', `COVID notice still on ${p.url}`, p.url);
-  if (/©\s*20(1\d|2[0-5])\b/.test(txt) && !txt.includes(`© ${year}`)) add('Stale content', `Old copyright year on ${p.url}`, p.url);
+  const cy = txt.match(/©\s*(20(1\d|2[0-5]))\b/); if (cy && p.url.replace(/\/$/, '') === intake.source.replace(/\/$/, '')) add('Stale content', `Copyright line still says ${cy[1]}`, p.url);
   if (!p.title) add('Search basics', `No title on ${p.url}`, p.url);
   if (!p.description) add('Search basics', `No meta description on ${p.url}`, p.url);
   if (!p.jsonld?.length && p.url === intake.source) add('Search basics', 'No structured data on the home page', p.url);
@@ -22,7 +23,7 @@ for (const p of intake.pages) {
 }
 const titles = intake.pages.map((p) => p.title); const dup = titles.filter((t, i) => t && titles.indexOf(t) !== i);
 if (dup.length) add('Search basics', `Duplicate titles: "${dup[0]}"`, intake.source);
-for (const f of intake.failed) add('Broken things', `Could not fetch ${f}`, f);
+for (const f of intake.failed) if (!/Download is starting|ERR_TOO_MANY_RETRIES|ERR_CERT/.test(f)) add('Broken things', `Could not fetch ${f}`, f);
 const allText = intake.pages.map((p) => existsSync(join(dir, p.textFile)) ? readFileSync(join(dir, p.textFile), 'utf8') : '').join('\n');
 if (!/\$\s?\d/.test(allText)) add('Missing basics', 'No prices anywhere on the site', intake.source);
 if (!/\b(0[2-9]|\+61|1300|1800)[\d\s]{7,}/.test(allText)) add('Missing basics', 'No phone number found', intake.source);
@@ -34,7 +35,7 @@ try { const r = await fetch(new URL('/sitemap.xml', intake.source)); if (!r.ok) 
 let lh = null;
 try {
   const lighthouse = (await import('lighthouse')).default; const { launch } = await import('chrome-launcher');
-  const chrome = await launch({ chromePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', chromeFlags: ['--headless=new', '--no-sandbox'] });
+  const chrome = await launch({ chromePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', chromeFlags: ['--headless=new', '--no-sandbox', ...(process.env.INTAKE_IGNORE_TLS ? ['--ignore-certificate-errors'] : [])] });
   const { lhr } = await lighthouse(intake.source, { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] });
   await chrome.kill();
   lh = { performance: Math.round(lhr.categories.performance.score * 100), accessibility: Math.round(lhr.categories.accessibility.score * 100), bestPractices: Math.round(lhr.categories['best-practices'].score * 100), seo: Math.round(lhr.categories.seo.score * 100), lcp: (lhr.audits['largest-contentful-paint'].numericValue / 1000).toFixed(1), cls: lhr.audits['cumulative-layout-shift'].numericValue.toFixed(3) };
@@ -42,7 +43,7 @@ try {
   writeFileSync(join(dir, 'intake/evidence/lighthouse-live.json'), JSON.stringify(lh));
 } catch (e) { log('Lighthouse skipped: ' + e.message); }
 // Evidence screenshot of the live home page
-try { const b = await chromium.launch(); const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); await pg.goto(intake.source, { waitUntil: 'networkidle', timeout: 60000 }); await pg.screenshot({ path: join(dir, 'intake/evidence/live-home-390.png'), fullPage: true }); await b.close(); } catch {}
+try { const b = await chromium.launch(); const pg = await b.newPage({ viewport: { width: 390, height: 844 }, ignoreHTTPSErrors: !!process.env.INTAKE_IGNORE_TLS }); await pg.goto(intake.source, { waitUntil: 'networkidle', timeout: 60000 }); await pg.screenshot({ path: join(dir, 'intake/evidence/live-home-390.png'), fullPage: true }); await b.close(); } catch {}
 const groups = {}; for (const f of findings) (groups[f.cat] ??= []).push(f);
 const hooks = findings.filter((f) => ['Stale content', 'Speed and mobile', 'Booking friction', 'Missing basics'].includes(f.cat)).slice(0, 3).map((f) => f.text);
 const archetype = /lodge|accommodation|hut|glamping|pack.?free/i.test(allText) ? 'lodge' : /aboriginal|first nations|cultural|country|traditional owner/i.test(allText) ? 'country' : /bird|wildlife|nocturnal|species|rainforest/i.test(allText) ? 'naturalist' : 'expedition';

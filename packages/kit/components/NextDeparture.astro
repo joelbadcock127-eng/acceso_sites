@@ -7,4 +7,4 @@ interface Props { experience: Experience; class?: string }
 const { experience, class: cls = '' } = Astro.props;
 const line = nextDepartureLine(experience);
 ---
-{line && <span class:list={['badge', cls]}><Icon name="calendar" size={14} />{line}</span>}
+{line && <span class:list={["badge text-ink", cls]}><Icon name="calendar" size={14} />{line}</span>}

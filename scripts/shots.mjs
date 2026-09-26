@@ -16,7 +16,7 @@ for (const w of widths) {
   const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   for (const p of pages) {
-    await page.goto(base + p, { waitUntil: 'networkidle' });
+    await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(600);
     const name = (p === '/' ? 'home' : p.slice(1).replace(/\//g, '__')) + `-${w}.png`;
     await page.screenshot({ path: join(out, name), fullPage: true });
     log(`shot ${name}`);

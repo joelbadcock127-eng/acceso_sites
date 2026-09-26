@@ -5,7 +5,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.mp4': 'video/mp4', '.woff2': 'font/woff2', '.woff': 'font/woff', '.txt': 'text/plain', '.xml': 'application/xml', '.pdf': 'application/pdf', '.ico': 'image/x-icon' };
 export async function serve(dir, port = 0) {
-  let headers = {};
+  let headers = [];
   try { const h = await readFile(join(dir, '_headers'), 'utf8'); headers = parseHeaders(h); } catch {}
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://x');

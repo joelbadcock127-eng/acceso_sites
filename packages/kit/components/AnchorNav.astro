@@ -1,11 +1,12 @@
 ---
 // Built from the sections present on the page (experience #3). 3 or more.
+import theme from '/src/generated/theme.json';
 interface Props { sections: { id: string; label: string }[] }
 const { sections } = Astro.props;
 ---
 {sections.length >= 3 && (
   <nav class="sticky top-[4.5rem] z-30 border-b border-line" style="background:var(--ground)" aria-label="On this page">
-    <ul class="pad-x container-xl flex gap-1 overflow-x-auto py-1 [scrollbar-width:none]">
+    <ul class:list={['pad-x container-xl flex gap-1 overflow-x-auto py-1 [scrollbar-width:none]', { 'accent-frame my-2 justify-center': theme.frames }]}>
       {sections.map((s) => <li class="flex-none"><a href={`#${s.id}`} class="block px-3 py-3 text-sm font-medium underline-offset-8 hover:underline">{s.label}</a></li>)}
     </ul>
   </nav>

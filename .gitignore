@@ -12,7 +12,7 @@ sites/*/pitch/
 # Generated per build from theme.json
 sites/*/src/generated/
 # Generated PDFs are build output
-sites/*/public/downloads/*.pdf
+# Generated PDFs are committed so Pages builds need no browser; regenerate with build_pdfs.mjs after content changes
 # QA output
 sites/*/qa/
 docs/screens/tmp/

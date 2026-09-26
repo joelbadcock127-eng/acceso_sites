@@ -9,7 +9,7 @@ const v = theme.variants.positioning;
 ---
 {p && (
   <section class:list={['pad-x', v === 'band' ? 'band section' : 'section']} data-reveal>
-    <div class:list={['container-lg', v === 'centred' ? 'text-center' : v === 'left' ? 'grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start' : 'grid gap-8 lg:grid-cols-[1fr_1fr]']}>
+    <div class:list={['container-lg', v === 'centred' ? 'text-center' : v === 'left' ? 'grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start' : 'grid gap-8 lg:grid-cols-[1fr_1fr]', { 'accent-frame px-6 py-12 md:px-16': theme.frames && v !== 'band' }]}>
       <h2 class:list={{ 'mx-auto max-w-3xl': v === 'centred' }}>{p.heading}</h2>
       <div class:list={{ 'mx-auto max-w-2xl': v === 'centred' }}>
         <p class="lede" style={v === 'band' ? undefined : 'color:var(--muted)'}>{p.body}</p>

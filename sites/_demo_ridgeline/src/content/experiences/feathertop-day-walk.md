@@ -1,4 +1,7 @@
 ---
+downloads:
+  - { kind: "trip-notes", file: "/downloads/feathertop-day-walk-trip-notes.pdf", pages: 3, sizeKb: 171 }
+  - { kind: "packing-list", file: "/downloads/feathertop-day-walk-packing-list.pdf", pages: 1, sizeKb: 53 }
 title: Feathertop Day Walk
 type: day
 summary: A big single day to the summit of Mount Feathertop and back along the Bungalow Spur, with a guide who knows every bend.

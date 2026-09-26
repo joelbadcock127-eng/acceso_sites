@@ -17,6 +17,8 @@
   },
   "radius": "0px",
   "favicon": "/favicon.png",
+  "buttons": "ink",
+  "frames": true,
   "logo": { "src": "images/logo-bakers.png", "alt": "Bakers Walking Co", "framed": false, "invertOnHero": true, "height": "3rem", "wordmark": false },
   "heroStyle": "video",
   "texture": "none",

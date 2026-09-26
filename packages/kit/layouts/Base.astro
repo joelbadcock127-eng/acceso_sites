@@ -59,9 +59,10 @@ const textureClass = theme.texture === 'topo' ? 'texture-topo' : theme.texture =
     {!bare && <SiteFooter site={site} />}
     {!bare && (
       <script>
-        import { initMotion, pauseOffscreenVideos } from '../client/motion';
+        import { initMotion, pauseOffscreenVideos, lazyVideos } from '../client/motion';
         import { initForms } from '../client/forms';
         initMotion();
+        lazyVideos();
         pauseOffscreenVideos();
         initForms();
         // Book button clicks are tracked as events tagged with their experience (Phase C, step 8).

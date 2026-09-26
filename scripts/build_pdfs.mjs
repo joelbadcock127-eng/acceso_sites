@@ -40,5 +40,7 @@ for (const f of readdirSync(expDir).filter((x) => x.endsWith('.md'))) {
 }
 if (existsSync(join(dist, 'welcome-pack/print.html'))) { await page.goto(base + '/welcome-pack/print', { waitUntil: 'networkidle' }); await page.pdf({ path: join(outDir, 'welcome-pack.pdf'), format: 'A4', printBackground: true }); log('pdf welcome-pack.pdf'); }
 await browser.close(); await close();
-log(`Done. Rebuild the site so the download cards show the new files.`);
+// Also drop the PDFs into the current dist so a deploy from this build carries them.
+if (existsSync(join(dist, 'downloads')) || existsSync(dist)) { mkdirSync(join(dist, 'downloads'), { recursive: true }); for (const f of readdirSync(outDir)) if (f.endsWith('.pdf')) writeFileSync(join(dist, 'downloads', f), readFileSync(join(outDir, f))); }
+log(`Done. PDFs are in public/downloads (commit them) and copied into dist/downloads. Rebuild so the download cards show page counts and sizes.`);
 function countPages(buf) { const m = buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g); return m ? m.length : 1; }

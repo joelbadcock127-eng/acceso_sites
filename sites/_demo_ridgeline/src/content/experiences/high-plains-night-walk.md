@@ -1,4 +1,7 @@
 ---
+downloads:
+  - { kind: "trip-notes", file: "/downloads/high-plains-night-walk-trip-notes.pdf", pages: 3, sizeKb: 162 }
+  - { kind: "packing-list", file: "/downloads/high-plains-night-walk-packing-list.pdf", pages: 1, sizeKb: 50 }
 title: High Plains Night Walk
 type: day
 summary: An evening on the Bogong High Plains, walking out to a hut for dinner and back under one of the darkest skies in Victoria.

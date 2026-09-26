@@ -18,9 +18,9 @@ const next = experience.departures.length || experience.season;
     {facts.map((f) => (
       <div class:list={[v === 'pills' ? 'badge py-2 text-sm normal-case tracking-normal text-ink' : v === 'stacked' ? 'flex items-center gap-3 border-b border-line py-2' : 'p-4', { 'bg-ground': v === 'banner' && !onBand, 'bg-band': v === 'banner' && onBand }]} style={v === 'banner' && onBand ? 'background:var(--band)' : undefined}>
         {v !== 'pills' && <Icon name={icon[f.k] ?? 'info'} size={20} class="mb-2 opacity-70" />}
-        <div class:list={['label', { 'sr-only': v === 'pills' }]} style="opacity:.7">{f.k}</div>
+        <div class:list={['label', { 'sr-only': v === 'pills' }]} style={onBand ? undefined : 'color:var(--muted)'}>{f.k}</div>
         <div class="font-medium">{f.v}</div>
-        {f.sub && v !== 'pills' && <div class="mt-1 text-xs" style="opacity:.75">{f.sub}</div>}
+        {f.sub && v !== 'pills' && <div class="mt-1 text-xs" style={onBand ? undefined : 'color:var(--muted)'}>{f.sub}</div>}
       </div>
     ))}
     {next && v === 'banner' && <div class:list={['flex items-center p-4', { 'bg-ground': !onBand }]} style={onBand ? 'background:var(--band)' : undefined}><NextDeparture experience={experience} /></div>}

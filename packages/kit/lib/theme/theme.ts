@@ -46,6 +46,8 @@ export const themeSchema = z.object({
   favicon: z.string().default('/favicon.svg'),
   /** Primary button fill: the accent, or the ink (Bakers uses black buttons and keeps its gold for lines) */
   buttons: z.enum(['accent', 'ink']).default('accent'),
+  /** Thin double accent frame around the positioning statement and anchor nav (a Bakers device) */
+  frames: z.boolean().default(false),
   heroStyle: z.enum(['video', 'still', 'stillSlowZoom', 'typeLed']).default('still'),
   texture: z.enum(['none', 'topo', 'grain', 'place']).default('none'),
   /** Generated contour SVG for `place` texture (scripts/place_texture.mjs) */

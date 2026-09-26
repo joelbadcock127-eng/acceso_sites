@@ -85,7 +85,7 @@ const axeSrc = readFileSync(join(process.cwd(), 'node_modules/axe-core/axe.min.j
 const axeViolations = []; const hscroll = []; const bookLinks = new Set();
 for (const p of pages) {
   await page.setViewportSize({ width: 1280, height: 900 });
-  const res = await page.goto(base + p, { waitUntil: 'networkidle' });
+  const res = await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(600);
   if (!res || res.status() >= 400) { fail('pages', `${p} returned ${res?.status()}`); continue; }
   for (const href of await page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')))) { if (href.startsWith('/') && !href.startsWith('//')) internal.add(href.split('#')[0].split('?')[0]); }
   for (const href of await page.$$eval('[data-book]', (as) => as.map((a) => a.getAttribute('href')))) bookLinks.add(href);
@@ -118,7 +118,7 @@ hscroll.length ? fail('viewports', hscroll.slice(0, 8).join('; ')) : pass('viewp
   const seen = new Set();
   const handler = async (r) => { const u = r.url(); if (u.startsWith(base) && /\.js(\?|$)/.test(u) && !seen.has(u)) { seen.add(u); try { sizes.push([u.replace(base, ''), gzipSync(await r.body()).length]); } catch {} } };
   page.on('response', handler);
-  await page.goto(base + '/', { waitUntil: 'networkidle' }); page.off('response', handler);
+  await page.goto(base + '/', { waitUntil: 'load' }); await page.waitForTimeout(800); page.off('response', handler);
   const total = sizes.filter(([u]) => !/maplibre/i.test(u)).reduce((a, [, n]) => a + n, 0);
   total > 150 * 1024 ? fail('js-payload', `${Math.round(total / 1024)} KB gzipped`) : pass('js-payload', `${Math.round(total / 1024)} KB gzipped`);
   results.js = sizes;

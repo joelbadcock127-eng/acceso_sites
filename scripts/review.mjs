@@ -17,7 +17,7 @@ async function capture(dist, label) {
   const best = process.argv[4] ? '/experiences/' + process.argv[4] : exp[0];
   for (const w of [390, 1440]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 }, reducedMotion: 'reduce' }); const page = await ctx.newPage();
-    for (const [name, p] of [['home', '/'], ['experience', best]]) { if (!p) continue; await page.goto(base + p, { waitUntil: 'networkidle' }); await page.screenshot({ path: join(out, `${label}-${name}-${w}.png`), fullPage: true }); log(`review ${label}-${name}-${w}.png`); }
+    for (const [name, p] of [['home', '/'], ['experience', best]]) { if (!p) continue; await page.goto(base + p, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(600); await page.screenshot({ path: join(out, `${label}-${name}-${w}.png`), fullPage: true }); log(`review ${label}-${name}-${w}.png`); }
     await ctx.close();
   }
   await close();

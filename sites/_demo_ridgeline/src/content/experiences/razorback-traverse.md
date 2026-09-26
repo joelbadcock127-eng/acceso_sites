@@ -1,4 +1,7 @@
 ---
+downloads:
+  - { kind: "trip-notes", file: "/downloads/razorback-traverse-trip-notes.pdf", pages: 4, sizeKb: 198 }
+  - { kind: "packing-list", file: "/downloads/razorback-traverse-packing-list.pdf", pages: 1, sizeKb: 60 }
 title: Razorback Traverse
 type: multiday
 summary: Three days along the Razorback from Mount Hotham to Mount Feathertop and down to Harrietville, with two nights in our hut camp.

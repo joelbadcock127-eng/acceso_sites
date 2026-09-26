@@ -76,6 +76,8 @@
   .frame::before, .frame::after { content: ""; position: absolute; width: 0.75rem; height: 0.75rem; border-color: currentColor; border-style: solid; }
   .frame::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
   .frame::after { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+  .accent-frame { position: relative; border: 1px solid var(--accent); }
+  .accent-frame::after { content: ""; position: absolute; inset: 0.75rem -0.9rem; border: 1px solid var(--accent); pointer-events: none; }
   .prose { max-width: 65ch; }
   .prose p + p { margin-top: 1em; }
   .prose h2, .prose h3 { margin-top: 1.5em; margin-bottom: 0.5em; }

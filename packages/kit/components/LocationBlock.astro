@@ -3,6 +3,7 @@
 // region map with a pin. Hides without location facts.
 import Icon from './Icon.astro';
 import RegionMap from './RegionMap.astro';
+import Img from './Img.astro';
 import type { Site } from '../lib/content/schema';
 interface Props { site: Site }
 const { site } = Astro.props;
@@ -24,7 +25,7 @@ const heading = [b.baseTown, b.region].filter(Boolean).join(', ') || b.state;
         </ul>
         {b.mapsUrl && <a href={b.mapsUrl} target="_blank" rel="noopener" class="btn-link mt-6">Open in Google Maps</a>}
       </div>
-      <RegionMap site={site} />
+      {b.mapImage ? <Img src={b.mapImage} alt={b.mapImageAlt ?? `Map of ${heading}`} class="w-full" sizes="(min-width:1024px) 45vw, 100vw" widths={[768, 1080]} /> : <RegionMap site={site} />}
     </div>
   </section>
 )}

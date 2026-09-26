@@ -65,6 +65,9 @@ export const siteSchema = z.object({
     driveTimes: z.array(z.object({ from: z.string(), time: z.string(), sourceUrl: z.string().optional() })).default([]),
     nearestAirport: z.string().optional(),
     mapsUrl: z.string().optional(),
+    /** Their own stylised region map image, used instead of the generated outline when present */
+    mapImage: z.string().optional(),
+    mapImageAlt: z.string().optional(),
     /** A pledge they state, for CommitmentBand */
     commitment: z.object({ heading: z.string(), body: z.string(), href: z.string().optional(), image: z.string().optional(), sourceUrl: z.string() }).optional(),
     /** Contact channels they already invite, for TapToChat */

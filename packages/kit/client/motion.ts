@@ -35,13 +35,14 @@ export function initMotion() {
  * the video is near the viewport, so the poster is the LCP and video bytes
  * never compete with it. Under reduced motion no video loads at all. */
 export function lazyVideos() {
-  const attach = (v: HTMLVideoElement) => { if (v.dataset.attached) return; v.dataset.attached = '1'; v.querySelectorAll<HTMLSourceElement>('source[data-src]').forEach((s) => { s.src = s.dataset.src!; }); v.load(); v.play().catch(() => {}); };
+  const attach = (v: HTMLVideoElement) => { if (v.dataset.attached) return; v.dataset.attached = '1'; if (v.dataset.poster) v.poster = v.dataset.poster; v.querySelectorAll<HTMLSourceElement>('source[data-src]').forEach((s) => { s.src = s.dataset.src!; }); v.load(); v.play().catch(() => {}); };
   const all = Array.from(document.querySelectorAll<HTMLVideoElement>('video[data-lazy-video]'));
   if (reduced) { all.forEach((v) => { v.removeAttribute('autoplay'); }); return; }
   const hero = all.filter((v) => v.dataset.lazyVideo === 'hero');
   const rest = all.filter((v) => v.dataset.lazyVideo !== 'hero');
   const afterLoad = () => hero.forEach(attach);
-  if (document.readyState === 'complete') setTimeout(afterLoad, 150); else window.addEventListener('load', () => setTimeout(afterLoad, 150), { once: true });
+  // The hero video starts about a second after load, once the poster (the LCP) has painted.
+  if (document.readyState === 'complete') setTimeout(afterLoad, 1200); else window.addEventListener('load', () => setTimeout(afterLoad, 1200), { once: true });
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { attach(e.target as HTMLVideoElement); io.unobserve(e.target); } }, { rootMargin: '300px' }); rest.forEach((v) => io.observe(v)); } else rest.forEach(attach);
 }
 

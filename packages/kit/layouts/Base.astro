@@ -43,7 +43,7 @@ const textureClass = theme.texture === 'topo' ? 'texture-topo' : theme.texture =
     <meta name="twitter:card" content="summary_large_image" />
     {!preview && <link rel="canonical" href={canonical} />}
     <link rel="icon" href={theme.favicon} type={theme.favicon.endsWith(".svg") ? "image/svg+xml" : "image/png"} />
-    {theme.adobeKitId && <link rel="stylesheet" href={`https://use.typekit.net/${theme.adobeKitId}.css`} />}
+    {theme.adobeKitId && <><link rel="preconnect" href="https://use.typekit.net" crossorigin /><link rel="stylesheet" href={`https://use.typekit.net/${theme.adobeKitId}.css`} media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href={`https://use.typekit.net/${theme.adobeKitId}.css`} /></noscript></>}
     {headScript && !bare && <Fragment set:html={headScript} />}
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
     {theme.textureFile && <link rel="preload" as="image" href={theme.textureFile} />}

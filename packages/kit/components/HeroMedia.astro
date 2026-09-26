@@ -8,18 +8,20 @@ import TrustRow from './TrustRow.astro';
 import type { Site } from '../lib/content/schema';
 import type { BookingAdapter } from '../lib/booking';
 import theme from '/src/generated/theme.json';
+import { posterUrl } from '../lib/media';
 interface Props { site: Site; adapter: BookingAdapter }
 const { site, adapter } = Astro.props;
 const h = site.home.hero;
 const hasMedia = !!(h.video || h.image);
 const variant = !hasMedia ? 'typeLed' : theme.variants.hero;
 const zoom = theme.heroStyle === 'stillSlowZoom' && !h.video;
+const poster = await posterUrl(h.poster, 1280);
 ---
 {variant === 'full' && (
   <section class="relative band overflow-hidden" data-hero>
     <div class="absolute inset-0">
       {h.video ? (
-        <video class="cover" autoplay muted loop playsinline preload="none" data-lazy-video="hero" poster={h.poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source data-src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={h.video} type="video/mp4" /></video>
+        <video class="cover" autoplay muted loop playsinline preload="none" data-lazy-video="hero" poster={poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source data-src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={h.video} type="video/mp4" /></video>
       ) : (
         <Img src={h.image!} alt="" class:list={['cover', { 'zoom-slow': zoom }]} priority sizes="100vw" widths={[768, 1080, 1440, 1920]} />
       )}
@@ -53,7 +55,7 @@ const zoom = theme.heroStyle === 'stillSlowZoom' && !h.video;
       </div>
     </div>
     <div class="relative min-h-[60svh] overflow-hidden">
-      {h.video ? <video class="cover absolute inset-0" autoplay muted loop playsinline preload="none" data-lazy-video="hero" poster={h.poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source data-src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={h.video} type="video/mp4" /></video>
+      {h.video ? <video class="cover absolute inset-0" autoplay muted loop playsinline preload="none" data-lazy-video="hero" poster={poster} aria-hidden="true">{h.video.endsWith(".mp4") && <source data-src={h.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={h.video} type="video/mp4" /></video>
         : <Img src={h.image!} alt={h.alt ?? ''} class:list={['cover absolute inset-0', { 'zoom-slow': zoom }]} priority sizes="(min-width:1024px) 50vw, 100vw" widths={[768, 1080, 1440]} />}
     </div>
   </section>

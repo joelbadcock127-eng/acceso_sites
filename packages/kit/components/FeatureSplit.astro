@@ -5,10 +5,11 @@
 import Img from './Img.astro';
 import type { Site } from '../lib/content/schema';
 import theme from '/src/generated/theme.json';
+import { posterUrl } from '../lib/media';
 interface Props { features: Site['home']['features'] }
 const { features } = Astro.props;
 const v = theme.variants.featureSplit;
-const usable = features.filter((f) => f.video || f.images.length >= 1);
+const usable = await Promise.all(features.filter((f) => f.video || f.images.length >= 1).map(async (f) => ({ ...f, posterSrc: await posterUrl(f.poster, 1080) })));
 ---
 {usable.length > 0 && (
   <section class="pad-x section">
@@ -20,7 +21,7 @@ const usable = features.filter((f) => f.video || f.images.length >= 1);
           <div class:list={['grid items-center gap-8 lg:gap-16', v === 'stacked' ? 'lg:grid-cols-1' : 'lg:grid-cols-2']} data-reveal>
             <div class:list={['overflow-hidden', { 'lg:order-2': flip }]} style="border-radius:var(--radius)">
               {f.video ? (
-                <video class="aspect-square w-full object-cover" autoplay muted loop playsinline preload="none" data-lazy-video poster={f.poster} aria-label={f.heading}>{f.video.endsWith(".mp4") && <source data-src={f.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={f.video} type="video/mp4" /></video>
+                <video class="aspect-square w-full object-cover" autoplay muted loop playsinline preload="none" data-lazy-video data-poster={f.posterSrc} aria-label={f.heading}>{f.video.endsWith(".mp4") && <source data-src={f.video.replace(/\.mp4$/, ".webm")} type="video/webm" />}<source data-src={f.video} type="video/mp4" /></video>
               ) : mosaic ? (
                 <div class:list={['mosaic', { 'lg:grid-cols-4': v === 'stacked' }]}>{f.images.slice(0, 4).map((im) => <Img src={im.src} alt={im.alt} sizes="(min-width:1024px) 25vw, 50vw" widths={[480, 768]} />)}</div>
               ) : (

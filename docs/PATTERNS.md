@@ -63,7 +63,7 @@ Kit motion rules (A2): only fades and short rises (12 to 24px, 0.6 to 0.9s, ease
 | Logo mark in a thin frame | The word mark sits inside a thin rectangle drawn only at the top left and bottom right corners (hero overlay logo) | theme.logo | Header logo 3rem tall | none | `.frame` utility, `theme.logo.framed` |
 | Footer | Location and contact, social links, three navigation columns, newsletter signup, legal links (Privacy, Refund, Terms, Liability Waiver), credit line | business, footer.columns, newsletter, footer.legal | 1440: logo column plus four columns. 390: stacked | none | `SiteFooter`, `NewsletterForm` |
 
-Screenshots: `docs/screens/bakers/home-1440.png`, `home-390.png`.
+Screenshots: `docs/screens/bakers/home-1440.jpg`, `home-390.jpg`.
 
 ## Home page, in order
 
@@ -84,7 +84,7 @@ Screenshots: `docs/screens/bakers/home-1440.png`, `home-390.png`.
 | 13 | Commitment band | The wildlife pledge in a thin gold frame with the devil photo | business.commitment | Framed card with text left, image right | Fade | `CommitmentBand` |
 | 14 | Contact | A form with an "interest" dropdown, plus email and social links | business, contact.interests | Two columns: details left, form right; 390 stacks | none | `ContactSection` |
 
-Screenshots: `docs/screens/bakers/home-1440.png`, `home-390.png`.
+Screenshots: `docs/screens/bakers/home-1440.jpg`, `home-390.jpg`.
 
 ## Experiences index
 
@@ -94,7 +94,7 @@ Screenshots: `docs/screens/bakers/home-1440.png`, `home-390.png`.
 | Cards grouped under Day Walks and Multi Day | Four image grid, difficulty badge, "Best for", distance, duration, group size, price per person, short description, "Learn More" | Two column card rows; 390 stacks | `experiences/index.astro` list |
 | Region map contact block | Address, special requests, questions | 3 columns | `LocationBlock` |
 
-Screenshots: `docs/screens/bakers/experiences-1440.png`, `experiences-390.png`.
+Screenshots: `docs/screens/bakers/experiences-1440.jpg`, `experiences-390.jpg`.
 
 ## Experience detail, in order
 
@@ -119,7 +119,7 @@ Screenshots: `docs/screens/bakers/experiences-1440.png`, `experiences-390.png`.
 
 Day walks also carry a map and a photo gallery (`Gallery`, `RouteMap`).
 
-Screenshots: `docs/screens/bakers/bakers-traverse-1440.png`, `multi-day-experience-1440.png`, and the 390 versions.
+Screenshots: `docs/screens/bakers/bakers-traverse-1440.jpg`, `multi-day-experience-1440.jpg`, and the 390 versions.
 
 ## Improvements the kit adds beyond Bakers (A4)
 

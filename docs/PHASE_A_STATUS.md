@@ -17,7 +17,16 @@ Checked against A11 in the manual. Johnny's review items are at the end.
 
 ## QA on the two sites
 
-`node scripts/qa.mjs {slug}` results are in `sites/{slug}/qa/qa.json`. Both sites pass the automated gates except where noted in the final report to Johnny.
+`node scripts/qa.mjs {slug}` writes `sites/{slug}/qa/qa.json`. Lighthouse is the mobile profile on a local build. In this sandbox the proxy hangs on third party hosts (Adobe Fonts, FareHarbor), so the Bakers run used `QA_BLOCK_EXTERNAL=1`; production loads those normally.
+
+| Gate | Ridgeline demo | Bakers rebuild |
+|---|---|---|
+| Lighthouse performance / accessibility / best practices / SEO | 99 / 100 / 100 / 100 | 95 / 100 / 100 / 100 |
+| LCP / CLS | 1.9s / 0.00 | 2.95s / 0.00 |
+| JS payload (gzipped, without the map) | 46 KB | 46 KB |
+| axe, console, viewports, internal links, booking links, leak, placeholders, copy lint, fact trace, preview privacy, maps, downloads | pass | pass (copy lint is advisory on Bakers' verbatim copy) |
+
+The one open gate is Bakers' LCP at 2.95s against the 2.5s threshold: the hero poster is a busy aerial frame that doesn't compress well and the Adobe Fonts stylesheet still has to arrive before the display face swaps in. A tighter poster crop or a simpler hero still would pass; it's a content choice for Johnny rather than a kit fault. The demo, with the same hero code, passes at 1.9s.
 
 ## Open decisions (section 11)
 

@@ -137,7 +137,9 @@ if (!skipLighthouse) {
     const lighthouse = (await import('lighthouse')).default;
     const { launch } = await import('chrome-launcher');
     const chrome = await launch({ chromePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', chromeFlags: ['--headless=new', '--no-sandbox'] });
-    const lhr = (await lighthouse(base + '/', { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] })).lhr;
+    // QA_BLOCK_EXTERNAL=1 blocks third party hosts (fonts, booking scripts) for sandboxes whose proxy hangs on them; production loads them normally.
+    const blockedUrlPatterns = process.env.QA_BLOCK_EXTERNAL ? ['*typekit.net*', '*fareharbor.com*', '*googletagmanager.com*', '*plausible.io*', '*challenges.cloudflare.com*'] : [];
+    const lhr = (await lighthouse(base + '/', { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'], blockedUrlPatterns })).lhr;
     await chrome.kill();
     const sc = Object.fromEntries(Object.entries(lhr.categories).map(([k, v]) => [k, Math.round(v.score * 100)]));
     const lcp = lhr.audits['largest-contentful-paint'].numericValue / 1000, cls = lhr.audits['cumulative-layout-shift'].numericValue;

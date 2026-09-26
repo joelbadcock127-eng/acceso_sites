@@ -78,7 +78,7 @@
       "support": "Guided walking experiences across a private 1,137-acre Tasmanian estate, designed for depth, connection, and complete disconnection from the outside world.",
       "cta": { "label": "Experiences", "href": "/experiences" },
       "video": "/video/landing.mp4",
-      "poster": "/video/poster-landing.jpg",
+      "poster": "images/poster-landing.jpg",
       "alt": "Aerial footage of the Bakers estate and coast"
     },
     "positioning": {
@@ -87,9 +87,9 @@
       "link": { "label": "Discover the experience", "href": "/experiences" }
     },
     "features": [
-      { "heading": "Private by design", "body": "Walking entirely on private land, you’ll never share a track with the public — just your group, the quiet, and the freedom to move at your pace.", "link": { "label": "Explore Our Estate", "href": "/about" }, "video": "/video/grid.mp4", "poster": "/video/poster-grid.jpg", "images": [] },
-      { "heading": "Guided, at your pace", "body": "Local Tasmanian guides shape each walk around ability and conditions, so it feels unrushed, safe, and genuinely immersive.", "link": { "label": "Meet our Tasmanian guides", "href": "/about" }, "video": "/video/trail.mp4", "poster": "/video/poster-trail.jpg", "images": [] },
-      { "heading": "Off-grid luxury accommodation", "body": "Our sustainable lodge proves that being disconnected doesn't mean roughing it; enjoy architectural luxury, gourmet hosting, and panoramic wellness facilities in total seclusion.", "link": { "label": "See the lodge and accommodation", "href": "/experiences/multi-day-experience#accommodation" }, "video": "/video/luxury.mp4", "poster": "/video/poster-luxury.jpg", "images": [] }
+      { "heading": "Private by design", "body": "Walking entirely on private land, you’ll never share a track with the public — just your group, the quiet, and the freedom to move at your pace.", "link": { "label": "Explore Our Estate", "href": "/about" }, "video": "/video/grid.mp4", "poster": "images/poster-grid.jpg", "images": [] },
+      { "heading": "Guided, at your pace", "body": "Local Tasmanian guides shape each walk around ability and conditions, so it feels unrushed, safe, and genuinely immersive.", "link": { "label": "Meet our Tasmanian guides", "href": "/about" }, "video": "/video/trail.mp4", "poster": "images/poster-trail.jpg", "images": [] },
+      { "heading": "Off-grid luxury accommodation", "body": "Our sustainable lodge proves that being disconnected doesn't mean roughing it; enjoy architectural luxury, gourmet hosting, and panoramic wellness facilities in total seclusion.", "link": { "label": "See the lodge and accommodation", "href": "/experiences/multi-day-experience#accommodation" }, "video": "/video/luxury.mp4", "poster": "images/poster-luxury.jpg", "images": [] }
     ],
     "offers": { "heading": "Explore Our Offers", "intro": "Choose the pace that fits your journey. From immersive single-day guided walks to fully hosted multi-day retreats, our offers are designed to scale to your group's needs." },
     "statsHeading": "The scale of what we have speaks for itself",

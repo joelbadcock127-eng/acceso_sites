@@ -13,7 +13,7 @@ season: Wet season, March
 departures:
   - { start: 2027-03-07, end: 2027-03-20, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "about 8 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Section one is mostly accommodated at Jabiru and Cooinda with three bush camps. Section two is all bush camps on sand, rock ledges or grass, depending on water levels.
 highlights: [Every waterfall flowing and the landscape lush and green, An overnight walk at Motorcar and Kurrundie Creeks, The Guluyambi cultural tour and both Yellow Waters cruises, Pool after pool on Barramundi Creek with no one else there]
 itinerary:
@@ -56,7 +56,7 @@ cardImages:
 featured: true
 seasons:
   - { months: [3], note: "7 to 20 March 2027" }
-order: 1
+order: 2
 sourceUrl: https://www.bushwalkingholidays.com.au/kh02
 ---
 Walk the wonder of Kakadu in the Wet. Dry season visitors never see anything like this: every waterfall flowing, the landscape lush and green, and most of the swimming pools to yourselves.

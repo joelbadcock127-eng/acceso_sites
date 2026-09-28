@@ -1,4 +1,4 @@
-# Build plan: Willi's Walkabouts (B4b)
+# Build plan: Willis's Walkabouts (B4b)
 
 Archetype `expedition`, Booking Group 2 (request to book, with their Formstack booking form linked as the next step). Preview: 15 pages. Home page carries 10 sections plus contact.
 

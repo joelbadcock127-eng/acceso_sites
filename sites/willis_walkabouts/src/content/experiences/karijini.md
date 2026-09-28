@@ -15,7 +15,7 @@ departures:
   - { start: 2027-04-04, end: 2027-04-17, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
   - { start: 2027-06-06, end: 2027-06-19, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Tom Price, pick up from your accommodation" }
-startTime: Pre trip meeting the evening before, details advised
+startTime: "early, after a pre trip meeting the evening before in Tom Price"
 accommodation: Bush camps, mostly roomy, on gravel, rock ledges and hard ground
 highlights: [Gorges that non walkers never see, Four or five days on a day pack from base camps, Some of the oldest exposed rock on the continent, Warmer swims and more water in April than in June]
 itinerary:

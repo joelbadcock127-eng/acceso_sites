@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/bungles-in-the-wet-trip-notes.pdf", pages: 4, sizeKb: 214 }
+  - { kind: "trip-notes", file: "/downloads/bungles-in-the-wet-trip-notes.pdf", pages: 4, sizeKb: 215 }
   - { kind: "packing-list", file: "/downloads/bungles-in-the-wet-packing-list.pdf", pages: 1, sizeKb: 54 }
 title: Bungles in the Wet
 type: multiday
@@ -9,12 +9,12 @@ bestFor: Experienced off track walkers who want Purnululu with water in it
 durationLabel: 14 days
 grade: { system: "own", value: "Hard", label: "Hard", explainer: "The long walk up Piccaninny Gorge over pebbles and sand is tiring; beyond the first base camp there is clambering over large rocks and at least one narrow ledge. Eleven days of food, with many day walks on day packs." }
 groupSize: { min: 4, max: 12 }
-priceFrom: { amount: 9995, per: "person", note: "List price on the 2026 to 2027 program. Discounts available. The trip page still shows $7995; the office is confirming which applies.", isFrom: false }
+priceFrom: { amount: 9995, per: "person", note: "List price on the 2026 to 2027 program. Discounts available.", isFrom: false }
 season: Wet season, February
 departures:
   - { start: 2027-02-14, end: 2027-02-27, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Kununurra, pick up from your accommodation" }
-startTime: Pre trip meeting 6 pm the evening before, Kimberley Croc Lodge
+startTime: "6.30 to 7 am, after the 6 pm pre trip meeting the evening before at the Kimberley Croc Lodge"
 accommodation: Bush camps on flat rock ledges, sandy beaches if not flooded, and grassy ground, chosen for safety from flash flooding before comfort
 highlights: [A helicopter flight to the Piccaninny car park and the park all to yourselves, Piccaninny Gorge and its many tributary gorges, Waterfalls that appear and disappear as if someone was turning a tap, Several swims a day in pools you have alone]
 itinerary:
@@ -41,7 +41,6 @@ faqs:
   - { q: "Is there Aboriginal art?", a: "Only a few small sites have been found in this area." }
 gallery:
   - { src: "images/bungles-cathedral-waterfall.jpg", alt: "A waterfall pouring into a Bungle Bungles gorge", score: 5 }
-  - { src: "images/bungles-river-vista.jpg", alt: "The banded domes of the Bungles above a flowing creek", score: 5 }
   - { src: "images/piccaninny-creek-flowing.jpg", alt: "Piccaninny Creek flowing after rain", score: 5 }
   - { src: "images/walkers-piccaninny-creek.jpg", alt: "Walkers with full packs wading up Piccaninny Creek", score: 5 }
   - { src: "images/bungles-chasm.jpg", alt: "Walkers in a narrow chasm", score: 4 }
@@ -59,7 +58,7 @@ cardImages:
 featured: true
 seasons:
   - { months: [2], note: "14 to 27 February 2027" }
-order: 2
+order: 1
 sourceUrl: https://www.bushwalkingholidays.com.au/bungles-in-the-wet-2025
 ---
 The Bungle Bungles all to yourselves. The walk begins with a helicopter ride to the Piccaninny car park, and from there it is on foot, the exact route set by how much rain falls. There is plenty of time to explore Piccaninny Gorge and its many tributary gorges, and a substantial part of the walking is done with day packs rather than full packs.

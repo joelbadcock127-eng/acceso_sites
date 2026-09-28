@@ -1,4 +1,4 @@
-# Copy log: Willi's Walkabouts
+# Copy log: Willis's Walkabouts
 
 ## Voice profile (from their own pages)
 
@@ -6,7 +6,7 @@ Russell Willis writes plainly, in the first person plural, to experienced walker
 
 ## Thesis (B3)
 
-The one thing only Willi's Walkabouts has: they begin where the four wheel drive tours stop. Forty years of off track expeditions into Kakadu, the Kimberley, the Pilbara and the Red Centre, to places no vehicle and no other tour can reach, carrying everything on your back.
+The one thing only Willis's Walkabouts has: they begin where the four wheel drive tours stop. Forty years of off track expeditions into Kakadu, the Kimberley, the Pilbara and the Red Centre, to places no vehicle and no other tour can reach, carrying everything on your back.
 
 Three hero options, all from intake facts:
 
@@ -33,6 +33,10 @@ Facts used: "We begin where the four wheel drive tours stop" and "trek through a
 | No one else will show you as much of the area as we will on this trip. | No one else shows you as much of the area. | https://www.bushwalkingholidays.com.au/mitchell-plateau-3 |
 | Kunumeleng -- The Build Up Season | Kunumeleng, the Build Up | https://www.bushwalkingholidays.com.au/regions |
 | 2019 All rights Reserved | Footer credit: Off track since 1986. Sustainable Tourism accredited. | every page |
+
+## Name
+
+The brief said "Willi's Walkabouts". Their site, logo and PDFs all say "Willis's Walkabouts", so the preview uses their spelling; the folder slug stays willis_walkabouts.
 
 ## Rules applied
 

@@ -13,7 +13,7 @@ season: Late dry season, late August to early September
 departures:
   - { start: 2027-08-29, end: 2027-09-05, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up 7 to 7.30 am from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "7 to 7.30 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Anbinik Resort in Jabiru, Cooinda in accommodation or the campground, and two bush camps on sand and rock ledges with good to excellent sites
 highlights: [The Pudakul tour and the Injalak Art Centre in Arnhem Land, A private beach camp above Twin Falls and a day walk to Amphitheatre Falls, The Animal Tracks tour with a bush tucker meal, Two nights in Koolpin Gorge with its pools and art sites]
 itinerary:

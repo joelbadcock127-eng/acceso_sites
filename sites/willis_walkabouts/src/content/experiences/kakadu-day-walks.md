@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/kakadu-day-walks-trip-notes.pdf", pages: 3, sizeKb: 252 }
+  - { kind: "trip-notes", file: "/downloads/kakadu-day-walks-trip-notes.pdf", pages: 3, sizeKb: 251 }
   - { kind: "packing-list", file: "/downloads/kakadu-day-walks-packing-list.pdf", pages: 1, sizeKb: 51 }
 title: Kakadu Day Walks
 type: day
@@ -14,7 +14,7 @@ season: Late dry season, late August to early September
 departures:
   - { start: 2027-08-30, end: 2027-09-03, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "about 8 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Anbinik Resort in Jabiru, Aboriginal owned, and Cooinda in accommodation or the campground, your choice
 packFree: true
 highlights: [The Pudakul tour and the Animal Tracks tour with a bush tucker dinner, The Guluyambi cruise and the 6.45 am Yellow Waters cruise, Ubirr, Nanguluwurr and Burrungkuy art sites, A swim in the plunge pool at Maguk]

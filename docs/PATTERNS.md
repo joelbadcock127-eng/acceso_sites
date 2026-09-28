@@ -136,3 +136,11 @@ Screenshots: `docs/screens/bakers/bakers-traverse-1440.jpg`, `multi-day-experien
 | Print routes without texture, JPEG hero | Chromium rasterises the page texture on every PDF page and re-encodes WebP and AVIF losslessly, which made trip notes 4 to 6 MB. Print routes now skip the texture (`bare`) and use `printImageUrl()` for a JPEG hero: 150 to 200 KB each | `Base.astro`, `lib/media.ts`, trip notes print route |
 | Screenshots scroll first | Full page screenshots never triggered lazy images, so review shots showed grey tiles that the live page never shows. `settle(page)` scrolls end to end and waits for images | `scripts/lib/serve.mjs`, used by `shots`, `review` and `pitch` |
 | Compare table empty cell | "—" failed the copy lint; empty cells now read "not listed" in muted text | `ExperienceCompare` |
+
+## Added during the Willi's Walkabouts build (Phase B, second prospect)
+
+| Pattern | Why | Kit piece |
+|---|---|---|
+| Program calendar pack badge and show all | Operators who list a whole year of expeditions (47 rows) need the pack weight beside the rating, and a home page that does not run to 18,000 pixels. Rows carry an optional `pack`; the calendar shows the first 12 future rows and a "Show all N trips" button, and any filter change reveals everything | `ProgramCalendar` (`limit` prop, default 12), `programSchema.pack` |
+| Lazy loaded galleries | Site builders such as Duda put every gallery image in `data-src`. The first crawl saw 20 images on a site holding hundreds; a second pass over the raw HTML recovered 290. `intake_assets.mjs` already reads `data-src`, so check its output count against a grep of the raw HTML before trusting it | `intake/images2/` on this site; `scripts/intake_assets.mjs` |
+| Trip notes PDFs as source | When the site's own pages carry stale dates, the current trip notes PDFs (linked from the trip list) carry the dates, prices, inclusions and a fuller itinerary. `pdf_text.mjs` takes file paths, not a slug | `scripts/pdf_text.mjs` |

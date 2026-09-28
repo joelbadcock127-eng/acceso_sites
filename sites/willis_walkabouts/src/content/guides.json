@@ -3,11 +3,11 @@
     "name": "Russell Willis",
     "role": "Founder and guide",
     "bio": "Russell came to Darwin in early 1974 and fell in love with the Top End bush. Within a few months he was helping found the Darwin Bushwalking Club, and as its first president he pioneered many of the routes local bushwalkers use today. In 1986 he started Willis's Walkabouts as a one man, one vehicle operation in Kakadu and the Kimberley. A year later there were two guides and two vehicles.",
-    "yearsGuiding": "Since 1986",
+    "yearsGuiding": 40,
     "knowsBest": "Depot Creek, a small gorge unknown even to most locals, which he visits every wet season.",
     "credentials": [],
     "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
-    "photo": "images/russell-willis.jpg",
+    "photo": "images/russell-at-camp.jpg",
     "alt": "Russell Willis"
   },
   {
@@ -45,9 +45,7 @@
     "credentials": [
       "Professional roping guide"
     ],
-    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
-    "photo": "images/graeme-spedding.jpg",
-    "alt": "Graeme Spedding"
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides"
   },
   {
     "name": "Sébastien Heritier",
@@ -88,11 +86,9 @@
     "name": "Andy Peart",
     "role": "Guide",
     "bio": "Andy lives in Darwin and Jabiru, works part time as a field officer for an Aboriginal language centre covering northern Kakadu and West Arnhem Land, and has guided on and off for Willis's Walkabouts since 2000. He has worked as a bush teacher, trainer and land management facilitator in the Top End and Kimberley.",
-    "yearsGuiding": "Since 2000",
+    "yearsGuiding": 26,
     "credentials": [],
-    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
-    "photo": "images/andy-peart.jpg",
-    "alt": "Andy Peart"
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides"
   },
   {
     "name": "Don Butcher",
@@ -108,7 +104,7 @@
     "name": "Annette Miller",
     "role": "Guide",
     "bio": "Annette has hiked and rock climbed for over 30 years across Australia, New Zealand, Europe and the USA, trekked to Mera Peak, in the Indian Himalaya and on Kilimanjaro, and climbed Mt Aspiring and Mont Blanc. A guide for Willis's Walkabouts since 2015, she has led trips across Kakadu, the Pilbara and the Kimberley including the Bungle Bungles, Mitchell Plateau and Prince Regent.",
-    "yearsGuiding": "Since 2015",
+    "yearsGuiding": 11,
     "credentials": [
       "Remote First Aid"
     ],
@@ -120,7 +116,7 @@
     "name": "Rod Costigan",
     "role": "Guide",
     "bio": "Rod has led expeditions for Willis's Walkabouts since 2012 in the northern NT, the Centre, the Kimberley, the Pilbara and Japan, and has walked and skied across the Americas, Europe, Japan, New Zealand and Papua. With Bush Search and Rescue Victoria he has 40 years of experience finding lost walkers and is a field organiser. He has studied botany and genetics and holds a master's degree in finance.",
-    "yearsGuiding": "Since 2012",
+    "yearsGuiding": 14,
     "credentials": [
       "Bush Search and Rescue Victoria field organiser"
     ],

@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/top-end-family-walk-trip-notes.pdf", pages: 3, sizeKb: 224 }
+  - { kind: "trip-notes", file: "/downloads/top-end-family-walk-trip-notes.pdf", pages: 3, sizeKb: 250 }
 title: Top End Family Walk No. 1
 type: multiday
 summary: Kakadu and Litchfield at a slower pace so that families with children can enjoy the bush. Three short walks with two night base camps, swims at every camp, and a night at a holiday park with wild bird feeding. Two school holiday dates; whichever books first runs.
@@ -14,7 +14,7 @@ departures:
   - { start: 2027-04-04, end: 2027-04-10, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
   - { start: 2027-04-11, end: 2027-04-17, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "about 8 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Two night bush camps beside private pools at Lower Motorcar and Baroalba Creek, a night at the Batchelor Holiday Park in accommodation or camping, and a night at Walker Creek in Litchfield
 highlights: [Lower Motorcar and Kurrundie Falls from a two night camp, A private pool at the Baroalba camp with art sites upstream, Twice daily wild bird feeding at Batchelor, Buley Rockhole to Florence Falls and a night at Walker Creek]
 itinerary:
@@ -42,10 +42,10 @@ gallery:
   - { src: "images/camp-beach-kids.jpg", alt: "Children and parents at a sandy creek camp", score: 4 }
   - { src: "images/litchfield-camp.jpg", alt: "Tents in open woodland at a Litchfield camp", score: 4 }
   - { src: "images/lower-motorcar-falls.jpg", alt: "Lower Motorcar Falls", score: 4 }
-heroImage: images/kids-swimming.jpg
-heroAlt: "A child and a parent swimming in a Kakadu creek pool"
+heroImage: images/family-swim-koolpin.jpg
+heroAlt: "A family swimming below a small waterfall in Kakadu"
 cardImages:
-  - { src: "images/kids-swimming.jpg", alt: "Swimming on the family walk" }
+  - { src: "images/family-swim-koolpin.jpg", alt: "A family swim on the walk" }
 seasons:
   - { months: [4], note: "4 to 10 or 11 to 17 April 2027" }
 order: 5

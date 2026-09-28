@@ -17,7 +17,7 @@
   "favicon": "/favicon.svg",
   "buttons": "accent",
   "frames": false,
-  "logo": { "src": "images/logo.png", "alt": "Willi's Walkabouts", "framed": false, "invertOnHero": true, "height": "3rem", "wordmark": true },
+  "logo": { "src": "images/logo.png", "alt": "Willis's Walkabouts", "framed": false, "invertOnHero": true, "height": "3rem", "wordmark": true },
   "heroStyle": "stillSlowZoom",
   "texture": "topo",
   "variants": {

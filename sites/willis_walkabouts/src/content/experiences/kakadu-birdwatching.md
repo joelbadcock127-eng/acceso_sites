@@ -1,6 +1,6 @@
 ---
 downloads:
-  - { kind: "trip-notes", file: "/downloads/kakadu-birdwatching-trip-notes.pdf", pages: 4, sizeKb: 161 }
+  - { kind: "trip-notes", file: "/downloads/kakadu-birdwatching-trip-notes.pdf", pages: 4, sizeKb: 160 }
 title: Kakadu and Top End Birdwatching and Nature Special
 type: multiday
 summary: Day walks and accommodation around Darwin and Pine Creek, then a five night loop walk up Barramundi Creek carrying a full pack, to reach the birds no road gets near. The Top End has more than 350 recorded species, six of them found nowhere else.
@@ -13,7 +13,7 @@ season: October, the end of the Dry and start of the Build Up
 departures:
   - { start: 2026-10-04, end: 2026-10-17, status: "limited", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "about 8 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Your own accommodation in Darwin for two nights, Pine Creek, Kakadu campgrounds, bush camps on sand and rock ledges on the walk, then Cooinda, Anbinik at Jabiru and Mary River
 highlights: [Chestnut Rail and Rainbow Pitta around Darwin, Hooded Parrot near Pine Creek, Five nights on Barramundi Creek where birds concentrate at the last waterholes, Both Yellow Waters cruises and the Mamukala bird hide]
 itinerary:

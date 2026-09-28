@@ -62,6 +62,10 @@ The business itself is in good shape: Russell Willis has run off track bushwalki
 - The current mobile number: the footer says 0435 636 999, the contact page 0428 829 757
 - The Bushwalking Essentials video link and the newsletter provider
 - Permission to reproduce the Sustainable Tourism accreditation badge
+- The business name: the site says "Willis's Walkabouts" everywhere and the logo reads the same, while the brief said "Willi's". The preview uses their spelling
+- Bungles in the Wet is "Varied" on the trip list and "Hard" on its page; the preview uses Hard in both places
+- Print size portraits for Graeme Spedding and Andy Peart (the site's are too small to use) and a portrait of Russell that is not a group snapshot
+- The Kakadu Highlights No. 10 row still takes requests with no price; the office needs the price or a "sold out" flag
 
 ## Archetype chosen
 

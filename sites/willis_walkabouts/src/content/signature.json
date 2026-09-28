@@ -1,7 +1,7 @@
 {
   "kind": "checklist",
   "heading": "What the walk ratings mean",
-  "intro": "Almost none of the walking is on marked trails, so every trip carries a rating built from climate, terrain, vegetation, hours walked and pack weight. Someone who has never walked off track should rate each walk one level harder.",
+  "intro": "Almost none of the walking is on marked trails, so every trip carries a rating built from climate, terrain, vegetation, hours walked and pack weight. Someone who has never walked off track should rate each walk one level harder. None of the level four and five trips is level four or five in every respect, and a positive mental attitude matters more than being superfit.",
   "items": [
     {
       "label": "Day pack only",
@@ -32,16 +32,6 @@
       "label": "Our most difficult trips",
       "detail": "Days over 35 degrees with very high humidity, extremely rugged ground, scrub for up to a third of the trip, 5 to 7 hours most days, possibly 8. Not suited to beginners unless they are exceptionally fit.",
       "when": "Level 5"
-    },
-    {
-      "label": "The good news",
-      "detail": "None of the level four and five trips is level four or five in every respect. One or more factors are always lower, and the details are in the trip notes.",
-      "when": "Every trip"
-    },
-    {
-      "label": "Attitude beats fitness",
-      "detail": "A superfit person who is unhappy at leaving the comforts of civilisation behind will not cope as well as a moderately fit person prepared to enjoy the wilderness on its own terms.",
-      "when": "Every trip"
     }
   ],
   "sourceUrl": "https://www.bushwalkingholidays.com.au/view-the-level-of-difficulty"

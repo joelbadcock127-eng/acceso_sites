@@ -13,7 +13,7 @@ season: Wet season, January
 departures:
   - { start: 2027-01-10, end: 2027-01-30, status: "open", sourceUrl: "https://www.bushwalkingholidays.com.au/experiencesb96c989b" }
 startLocation: { name: "Darwin, pick up from your accommodation" }
-startTime: Pre trip meeting 6.30 pm the evening before
+startTime: "about 8 am, after the 6.30 pm pre trip meeting the evening before"
 accommodation: Section one mostly accommodated with one bush camp; section two fixed camps with some shelter on the Ord; section three bush camps on sand, rock and grass above flood level
 highlights: [Waterfalls that flow only at this time of year on the drive to Kununurra, Four days paddling the Ord from Lake Argyle with a few luxuries in the canoe, One waterfall after another through the Carr Boyd Range, Some nights in air conditioned accommodation]
 itinerary:

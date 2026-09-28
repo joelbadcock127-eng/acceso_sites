@@ -8,8 +8,8 @@ import BookButton from './BookButton.astro';
 import { formatDate, MONTHS } from '../lib/site';
 import type { BookingAdapter } from '../lib/booking';
 interface Row { date: string; endDate?: string; title: string; area?: string; distanceKm?: number; hours?: string; grade?: string; pack?: string; price?: string; note?: string; status: string; experience?: string }
-interface Props { rows: Row[]; adapter: BookingAdapter; heading?: string; intro?: string; id?: string; season?: string }
-const { rows, adapter, heading = 'This season\'s walks', intro, id = 'program', season } = Astro.props;
+interface Props { rows: Row[]; adapter: BookingAdapter; heading?: string; intro?: string; id?: string; season?: string; /** Rows shown before a "show all" button; the rest stay in the page for search and filters */ limit?: number }
+const { rows, adapter, heading = 'This season\'s walks', intro, id = 'program', season, limit = 12 } = Astro.props;
 const today = new Date(); const t0 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 const isPast = (r: Row) => r.status === 'past' || new Date((r.endDate ?? r.date) + 'T00:00:00') < t0;
 const future = rows.filter((r) => !isPast(r)).sort((a, b) => a.date.localeCompare(b.date));
@@ -36,8 +36,8 @@ const label: Record<string, string> = { open: 'Places available', limited: 'Limi
       </div>
       {future.length === 0 && <p class="lede mb-6" style="color:var(--muted)">No dates are left on this season's program. The next program goes to the mailing list first; ask below to be on it.</p>}
       <ol class="grid divide-y divide-line border-y border-line">
-        {future.map((r) => (
-          <li class:list={['grid gap-3 py-5 md:grid-cols-[9rem_1fr_auto] md:items-center', { 'opacity-60': r.status === 'cancelled' }]} data-month={new Date(r.date + 'T00:00:00').getMonth()} data-grade={r.grade}>
+        {future.map((r, i) => (
+          <li class:list={['grid gap-3 py-5 md:grid-cols-[9rem_1fr_auto] md:items-center', { 'opacity-60': r.status === 'cancelled' }]} data-month={new Date(r.date + 'T00:00:00').getMonth()} data-grade={r.grade} data-over={i >= limit ? '' : undefined} hidden={i >= limit}>
             <div><div class="font-display text-2xl leading-none">{new Date(r.date + 'T00:00:00').getDate()}</div><div class="label mt-1" style="color:var(--muted)">{dateLabel(r)}</div></div>
             <div>
               <h3 class="text-xl">{r.experience ? <a href={`/experiences/${r.experience}`} class="hover:underline underline-offset-4">{r.title}</a> : r.title}</h3>
@@ -51,6 +51,7 @@ const label: Record<string, string> = { open: 'Places available', limited: 'Limi
           </li>
         ))}
       </ol>
+      {future.length > limit && <div class="mt-6"><button type="button" class="btn btn-secondary" data-program-more>{`Show all ${future.length} trips`}</button></div>}
       <p class="mt-4 text-sm" style="color:var(--muted)">{`${future.length} ${future.length === 1 ? 'walk' : 'walks'} to come.`} Programs change with the weather and the guides' judgement; you'll hear at least 24 hours ahead if a walk moves.</p>
       {past.length > 0 && (
         <details class="mt-8">
@@ -70,7 +71,10 @@ const label: Record<string, string> = { open: 'Places available', limited: 'Limi
     <script>
       document.querySelectorAll<HTMLElement>('[data-program]').forEach((root) => {
         const form = root.querySelector<HTMLFormElement>('[data-program-filters]')!; const rows = Array.from(root.querySelectorAll<HTMLElement>('li[data-month]'));
-        form.addEventListener('change', () => { const f = new FormData(form); const m = f.get('month') as string, g = f.get('grade') as string; rows.forEach((r) => { r.hidden = !!(m && r.dataset.month !== m) || !!(g && r.dataset.grade !== g); }); });
+        const more = root.querySelector<HTMLButtonElement>('[data-program-more]');
+        const showAll = () => { rows.forEach((r) => { delete r.dataset.over; r.hidden = false; }); more?.remove(); };
+        more?.addEventListener('click', showAll);
+        form.addEventListener('change', () => { showAll(); const f = new FormData(form); const m = f.get('month') as string, g = f.get('grade') as string; rows.forEach((r) => { r.hidden = !!(m && r.dataset.month !== m) || !!(g && r.dataset.grade !== g); }); });
       });
     </script>
   </section>

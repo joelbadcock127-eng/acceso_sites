@@ -1,0 +1,131 @@
+[
+  {
+    "name": "Russell Willis",
+    "role": "Founder and guide",
+    "bio": "Russell came to Darwin in early 1974 and fell in love with the Top End bush. Within a few months he was helping found the Darwin Bushwalking Club, and as its first president he pioneered many of the routes local bushwalkers use today. In 1986 he started Willis's Walkabouts as a one man, one vehicle operation in Kakadu and the Kimberley. A year later there were two guides and two vehicles.",
+    "yearsGuiding": "Since 1986",
+    "knowsBest": "Depot Creek, a small gorge unknown even to most locals, which he visits every wet season.",
+    "credentials": [],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/russell-willis.jpg",
+    "alt": "Russell Willis"
+  },
+  {
+    "name": "Cassie Newnes",
+    "role": "Guide, office and logistics",
+    "bio": "Cassie has been walking, sleeping in and exploring untracked, remote landscapes since 1993 and guiding for Willis's Walkabouts in the Kimberley and on the Kakadu escarpment since 2004. She co manages the office and logistics with Russell, and holds a Bachelor in Natural Resource Management and Indigenous Knowledge Systems, a Certificate Four in Outdoor Recreation, Wilderness First Aid and Search and Rescue qualifications.",
+    "yearsGuiding": 22,
+    "knowsBest": "Supporting a group as a community while giving each walker space to unwind and engage with the country in their own way.",
+    "credentials": [
+      "Wilderness First Aid",
+      "Search and Rescue",
+      "Certificate Four in Outdoor Recreation"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/cassie-newnes.jpg",
+    "alt": "Cassie Newnes"
+  },
+  {
+    "name": "Cassidy Gerken",
+    "role": "Guide",
+    "bio": "Born in Darwin, Cassidy grew up camping, bushwalking and swimming all over the Northern Territory. Since returning from a Bachelor of Music in 2021 he has led walks in Kakadu, the Kimberley, the Pilbara and Central Australia, with a particular interest in reptiles and birds of prey. He has worked as a station cook in the Kimberley and happily fills the role of chef in the evenings.",
+    "knowsBest": "Helping people expand their skills in Northern Australian country, and good food.",
+    "credentials": [
+      "Remote first aid"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/cassidy-gerken.jpg",
+    "alt": "Cassidy Gerken"
+  },
+  {
+    "name": "Graeme Spedding",
+    "role": "Guide",
+    "bio": "A professional hiking guide who has guided in Kakadu, Tasmania's South West and Central Highlands, and Western Australia's south west, mid west and Kimberley, and who spent 15 years leading outdoor education expeditions to developing countries. Graeme began walking in Kakadu in 1997 and has guided there almost every year since.",
+    "knowsBest": "Kakadu as a park you walk with rather than through.",
+    "credentials": [
+      "Professional roping guide"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/graeme-spedding.jpg",
+    "alt": "Graeme Spedding"
+  },
+  {
+    "name": "Sébastien Heritier",
+    "role": "Guide",
+    "bio": "Sébastien has crossed Australia five times by bicycle, traversed Tasmania solo on foot, rafted the Franklin and walked the South West coast from Cape Sorell to Melaleuca. His longest solo journey in total autonomy is 29 days, from King Cascade on the Prince Regent River to the Lower Falls of the Mitchell. For Willis's Walkabouts he has led the Kimberley, Kakadu, Litchfield, Karijini, New Caledonia and Patagonia.",
+    "knowsBest": "The Kimberley on foot, and passionate French cooking at camp.",
+    "credentials": [
+      "Remote First Aid"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/sebastien-heritier.jpg",
+    "alt": "Sébastien Heritier"
+  },
+  {
+    "name": "Rob and Judy Clayton",
+    "role": "Guides",
+    "bio": "Rob and Judy have walked with Willis's and across the globe for over 30 years, from the Kimberley, Pilbara, Central Australia and Kakadu to Patagonia, Iceland's Hornstrandir and Mt Meru. Rob completed the Australian Alps Walking Track independently in 2024. Judy is a registered nurse with critical care experience and a Masters in Cultural Safety in Aboriginal and Torres Strait Islander communities.",
+    "knowsBest": "Safety in remote places, shared as a value with fellow walkers.",
+    "credentials": [
+      "Remote Wilderness First Aid"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/rob-and-judy-clayton.jpg",
+    "alt": "Rob and Judy Clayton"
+  },
+  {
+    "name": "John and Mardi Barnes",
+    "role": "Guides",
+    "bio": "John and Mardi lead off track wilderness walks with their outdoor club, set courses for NSW rogaining events and keep their Wilderness First Aid current with Bush Search and Rescue NSW. Their most memorable Kimberley trip was cycling into the Bungle Bungles in the wet season of 2011. John is a physicist and Mardi a healthcare worker.",
+    "credentials": [
+      "Wilderness First Aid"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/john-and-mardi-barnes.jpg",
+    "alt": "John and Mardi Barnes"
+  },
+  {
+    "name": "Andy Peart",
+    "role": "Guide",
+    "bio": "Andy lives in Darwin and Jabiru, works part time as a field officer for an Aboriginal language centre covering northern Kakadu and West Arnhem Land, and has guided on and off for Willis's Walkabouts since 2000. He has worked as a bush teacher, trainer and land management facilitator in the Top End and Kimberley.",
+    "yearsGuiding": "Since 2000",
+    "credentials": [],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/andy-peart.jpg",
+    "alt": "Andy Peart"
+  },
+  {
+    "name": "Don Butcher",
+    "role": "Guide",
+    "bio": "Don has lived and worked in the Top End over 22 years, as a seasonal ranger in Kakadu, a Willis's guide, and a leader of extended walks and canoe trips for La Trobe University's outdoor education students since 2007. A qualified science teacher with a Graduate Diploma in Outdoor and Environmental Education, he has interpreted the natural world professionally since 1991.",
+    "knowsBest": "Kakadu and the Pilbara, told through stories.",
+    "credentials": [],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/don-butcher.jpg",
+    "alt": "Don Butcher"
+  },
+  {
+    "name": "Annette Miller",
+    "role": "Guide",
+    "bio": "Annette has hiked and rock climbed for over 30 years across Australia, New Zealand, Europe and the USA, trekked to Mera Peak, in the Indian Himalaya and on Kilimanjaro, and climbed Mt Aspiring and Mont Blanc. A guide for Willis's Walkabouts since 2015, she has led trips across Kakadu, the Pilbara and the Kimberley including the Bungle Bungles, Mitchell Plateau and Prince Regent.",
+    "yearsGuiding": "Since 2015",
+    "credentials": [
+      "Remote First Aid"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/annette-miller.jpg",
+    "alt": "Annette Miller"
+  },
+  {
+    "name": "Rod Costigan",
+    "role": "Guide",
+    "bio": "Rod has led expeditions for Willis's Walkabouts since 2012 in the northern NT, the Centre, the Kimberley, the Pilbara and Japan, and has walked and skied across the Americas, Europe, Japan, New Zealand and Papua. With Bush Search and Rescue Victoria he has 40 years of experience finding lost walkers and is a field organiser. He has studied botany and genetics and holds a master's degree in finance.",
+    "yearsGuiding": "Since 2012",
+    "credentials": [
+      "Bush Search and Rescue Victoria field organiser"
+    ],
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/guides",
+    "photo": "images/rod-costigan.jpg",
+    "alt": "Rod Costigan"
+  }
+]

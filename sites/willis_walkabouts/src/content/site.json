@@ -1,0 +1,191 @@
+{
+  "business": {
+    "name": "Willi's Walkabouts",
+    "legalName": "Willis's Walkabouts",
+    "tagline": "Off track bushwalking holidays in northern and central Australia",
+    "region": "Kakadu, the Kimberley, the Pilbara and the Red Centre",
+    "state": "NT",
+    "baseTown": "Darwin",
+    "address": "12 Carrington Street, Millner NT 0810",
+    "phone": "08 8985 2134",
+    "email": "walkabout@bushwalkingholidays.com.au",
+    "founded": 1986,
+    "ownerNames": ["Russell Willis"],
+    "socials": { "facebook": "https://www.facebook.com/bushwalkingholidays/", "instagram": "http://instagram.com/willis_walkabouts", "youtube": "https://www.youtube.com/@WillissWalkabouts" },
+    "acknowledgement": null,
+    "location": { "lat": -12.39, "lng": 130.87 },
+    "driveTimes": [
+      { "from": "Darwin to Kakadu", "time": "300 km, three to three and a half hours", "sourceUrl": "https://www.bushwalkingholidays.com.au/kh02" },
+      { "from": "Darwin to Kununurra", "time": "a day's drive, or a daily flight", "sourceUrl": "https://www.bushwalkingholidays.com.au/bushwalking-in-the-kimberley" }
+    ],
+    "nearestAirport": "Darwin airport",
+    "mapsUrl": "https://maps.google.com/?q=12+Carrington+Street+Millner+NT+0810",
+    "chat": { "sms": "0435 636 999" },
+    "notFoundLine": "No track here either. That's normal for us, but this page really doesn't exist."
+  },
+  "booking": { "provider": "request", "group": 2, "responseTime": "a few days, longer if we are out of range on a walk", "ownerFirstName": "Russell" },
+  "nav": {
+    "primary": [
+      { "label": "Trips", "href": "/experiences" },
+      { "label": "All trips by date", "href": "/#program" },
+      { "label": "Guides", "href": "/about" }
+    ],
+    "groups": [
+      { "label": "Trips", "links": [
+        { "label": "Kakadu Highlights No. 2", "href": "/experiences/kakadu-highlights-2" },
+        { "label": "Bungles in the Wet", "href": "/experiences/bungles-in-the-wet" },
+        { "label": "Green Kimberley", "href": "/experiences/green-kimberley" },
+        { "label": "Karijini National Park", "href": "/experiences/karijini" },
+        { "label": "Top End Family Walk", "href": "/experiences/top-end-family-walk" },
+        { "label": "Kakadu Birdwatching", "href": "/experiences/kakadu-birdwatching" },
+        { "label": "Kakadu Short Overnight Walks", "href": "/experiences/kakadu-short-overnight" },
+        { "label": "Kakadu Day Walks", "href": "/experiences/kakadu-day-walks" }
+      ] },
+      { "label": "Information", "links": [
+        { "label": "About and guides", "href": "/about" },
+        { "label": "Questions", "href": "/faq" },
+        { "label": "Downloads", "href": "/downloads" },
+        { "label": "Contact", "href": "/contact" }
+      ] },
+      { "label": "Explore", "links": [
+        { "label": "All trips by date", "href": "/#program" },
+        { "label": "Charter and group trips", "href": "/private-and-groups" },
+        { "label": "General information", "href": "/legal/general-information" }
+      ] }
+    ],
+    "featured": [
+      { "title": "All 47 trips by date", "image": "images/walkers-plateau-clouds.jpg", "alt": "Walkers with full packs on the Kakadu plateau under a big sky", "cta": "See the program", "kind": "link", "href": "/#program" },
+      { "title": "Bungles in the Wet", "image": "images/bungles-cathedral-waterfall.jpg", "alt": "A waterfall pouring into a Bungle Bungles gorge", "cta": "Request a place", "kind": "link", "href": "/experiences/bungles-in-the-wet" }
+    ],
+    "bookLabel": "Request a place"
+  },
+  "footer": {
+    "columns": [
+      { "label": "Trips", "links": [
+        { "label": "Kakadu Highlights No. 2", "href": "/experiences/kakadu-highlights-2" },
+        { "label": "Bungles in the Wet", "href": "/experiences/bungles-in-the-wet" },
+        { "label": "Green Kimberley", "href": "/experiences/green-kimberley" },
+        { "label": "Karijini National Park", "href": "/experiences/karijini" },
+        { "label": "Kakadu Day Walks", "href": "/experiences/kakadu-day-walks" }
+      ] },
+      { "label": "Information", "links": [
+        { "label": "About and guides", "href": "/about" },
+        { "label": "Questions", "href": "/faq" },
+        { "label": "Downloads", "href": "/downloads" },
+        { "label": "Contact", "href": "/contact" }
+      ] },
+      { "label": "Explore", "links": [
+        { "label": "All trips by date", "href": "/#program" },
+        { "label": "Charter and group trips", "href": "/private-and-groups" }
+      ] }
+    ],
+    "legal": [ { "label": "General information", "href": "/legal/general-information" } ],
+    "credit": "Off track since 1986. Sustainable Tourism accredited business."
+  },
+  "seo": {
+    "defaultTitle": "Willi's Walkabouts | Off track bushwalking holidays in Kakadu, the Kimberley, the Pilbara and the Red Centre",
+    "defaultDescription": "Bushwalking expeditions of three days to six weeks into the wilderness of northern and central Australia, where no vehicle can go. Four to twelve walkers, everything on your back, guided from Darwin since 1986.",
+    "ogImage": "images/piccaninny-falls-wet.jpg",
+    "siteUrl": "https://willis-walkabouts-s6nv.pages.dev"
+  },
+  "newsletter": null,
+  "preview": { "enabled": true, "preparedFor": "Russell Willis and Cassie Newnes, Willis's Walkabouts", "sourceDomain": "bushwalkingholidays.com.au" },
+  "home": {
+    "hero": {
+      "headline": "We begin where the four wheel drive tours stop",
+      "support": "Off track bushwalking expeditions in Kakadu, the Kimberley, the Pilbara and the Red Centre since 1986. Four to twelve walkers, one to six weeks, everything on your back.",
+      "cta": { "label": "All trips by date", "href": "#program" },
+      "image": "images/piccaninny-falls-wet.jpg",
+      "alt": "Walkers at the foot of a wet season waterfall in Kakadu",
+      "focal": "50% 40%"
+    },
+    "positioning": {
+      "heading": "Trek through a wilderness where no vehicle can ever go",
+      "body": "Look at the landscape before you. Smell the wildflowers. Listen to the birds. Relax in a rock shelter under the Aboriginal paintings on the walls. Swim after swim in clear, tropical pools. Campsites you share with no one but your walking companions, because you walked to get there.",
+      "link": { "label": "How the trips work", "href": "/about" }
+    },
+    "features": [
+      {
+        "heading": "Everything on your back, and no hurry",
+        "body": "On every trip you carry a pack with your food and equipment. You need reasonable fitness, but these are not endurance tests. Trips run from three or four days to six week expeditions, some relatively easy, others relatively difficult, and all with plenty of time to stop for a swim, a three course meal by the campfire and the most amazing star show on earth.",
+        "link": { "label": "What the walk ratings mean", "href": "#signature" },
+        "images": [
+          { "src": "images/tent-under-stars.jpg", "alt": "A tent lit from inside under the Milky Way" },
+          { "src": "images/wading-with-packs.jpg", "alt": "Walkers wading a creek with full packs" },
+          { "src": "images/campfire-morning.jpg", "alt": "A campfire and billy on a creek bank in the morning" },
+          { "src": "images/waterfall-arms-up.jpg", "alt": "A walker with arms raised below a flooded waterfall" }
+        ]
+      },
+      {
+        "heading": "Guides who have walked this country for decades",
+        "body": "Russell Willis helped found the Darwin Bushwalking Club in 1974 and started Willis's Walkabouts in 1986 with one man and one vehicle. Eleven guides carry Wilderness or Remote First Aid, and every major expedition carries a satellite phone and a backup EPIRB. No two trips are alike, and no other operator offers treks that leave the tracks behind for a week at a time.",
+        "link": { "label": "Meet the guides", "href": "/about" },
+        "images": [
+          { "src": "images/russell-at-camp.jpg", "alt": "Russell Willis laughing at a bush camp" }
+        ]
+      }
+    ],
+    "offers": {
+      "heading": "Eight trips to start with",
+      "intro": "From accommodated day walks to a helicopter into the Bungle Bungles in the Wet. The full program of 47 departures is above."
+    },
+    "statsHeading": "The numbers behind forty years",
+    "story": {
+      "heading": "One man, one vehicle, 1986",
+      "body": "Russell Willis came to Darwin in early 1974 and fell in love with the Top End bush. Within months he was helping found the Darwin Bushwalking Club, and as its first president he pioneered many of the routes local bushwalkers use today. Wishing to share that with a wider group of people, he started Willis's Walkabouts as a one man, one vehicle operation in Kakadu and the Kimberley in 1986. A year later there were two guides and two vehicles.\n\nThe business grew and new areas were added: the Pilbara, the Red Centre, and trips abroad. Darwin is still the base, closer to Jakarta and Singapore than to Sydney, and Cassie Newnes co manages the office and logistics with Russell between her own trips.",
+      "image": "images/russell-willis.jpg",
+      "alt": "Russell Willis",
+      "link": { "label": "About Willis's Walkabouts", "href": "/about" }
+    },
+    "cta": {
+      "heading": "Book early and the discount is yours",
+      "body": "Book and pay four months ahead to save 20 percent, three months for 15, two months for 10. Trips need four or five bookings to run, and those who book late are often disappointed.",
+      "label": "Request a place",
+      "image": "images/bungles-river-vista.jpg"
+    },
+    "contactHeading": "Ask the office"
+  },
+  "about": {
+    "heading": "About Willis's Walkabouts",
+    "intro": "Based in Darwin on the north central coast of Australia, Willis's Walkabouts runs bushwalking holidays in four regions: the Top End, the Red Centre, the Kimberley and the Pilbara, with a few trips abroad each year.",
+    "story": "Bushwalking, trekking, hiking, backpacking, tramping: whatever you call these holidays, they are different. They begin where the four wheel drive tours stop. On every trip the guides lead you off the trail into places with Aboriginal rock art, gorges, birds, wildflowers, waterfalls and campsites you share with no one but your walking companions. They are yours alone because you walked to get there.\n\nThere are no phones, no cars, no people and no hassle: places where you swim in clear tropical pools, camp under the stars, enjoy a three course meal by the campfire and relax the evening away with a group of like minded people. Groups are four to twelve plus one or more guides, and every trip takes its time. Willis's Walkabouts is a Sustainable Tourism accredited business.",
+    "image": "images/ridge-lookout-walker.jpg",
+    "alt": "A walker looking out from a rocky lookout over the plateau"
+  },
+  "contact": {
+    "heading": "Contact",
+    "intro": "Email is best. If the office is slow to reply, it is because everyone is out doing what they love: bushwalking. Please be patient if we are out of range.",
+    "interests": ["Kakadu Highlights No. 2", "Bungles in the Wet", "Green Kimberley", "Karijini National Park", "Top End Family Walk", "Kakadu Birdwatching", "Kakadu Short Overnight Walks", "Kakadu Day Walks", "Another trip on the program", "Charter or group trip", "Becoming a guide"]
+  },
+  "privateGroups": {
+    "heading": "Charter and group trips",
+    "intro": "A fully booked special charter, like Kakadu Highlights No. 6 in 2020, is a trip that runs for your group alone.",
+    "body": "Get five or more people together and apply for a group discount: 5 percent for five or more, 10 percent for ten or more. For a charter or personalised trip, tell the office where you want to walk, how long for and when, and Russell will put an itinerary together from forty years of routes. Some places can only be reached by chartered helicopter, float plane or boat, so charters are priced trip by trip.",
+    "kinds": ["Walking clubs", "Families", "Groups of friends", "Women's groups"],
+    "image": "images/birders-on-track.jpg",
+    "alt": "A group of walkers on a track in open woodland",
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/"
+  },
+  "gettingThere": {
+    "meetingPoint": "A pre trip meeting the evening before departure, usually 6.30 pm at the Pool Side Bar of the Hilton Garden Inn, 122 The Esplanade, Darwin. Kimberley trips meet at the Kimberley Croc Motel in Kununurra.",
+    "directionsUrl": "https://maps.google.com/?q=122+The+Esplanade+Darwin",
+    "notes": "Transport on complete trips is from and to Darwin, Kununurra, Alice Springs or Tom Price, with pick up from your accommodation. Trips leave about 8 am in the Northern Territory and earlier in Western Australia. Never schedule flights on the day a trip or section begins or ends without checking first.",
+    "sourceUrl": "https://www.bushwalkingholidays.com.au/ (General Information PDF)"
+  },
+  "parkAlerts": { "label": "Check Kakadu access and closures before you travel", "url": "https://parksaustralia.gov.au/kakadu/plan/access/" },
+  "reviews": { "tripadvisorUrl": "https://tripadvisor.com/" },
+  "instagram": {},
+  "analytics": {},
+  "trust": [
+    { "label": "Since", "value": "1986, one man and one vehicle", "sourceUrl": "https://www.bushwalkingholidays.com.au/guides" },
+    { "label": "Accreditation", "value": "Sustainable Tourism accredited business", "sourceUrl": "https://www.bushwalkingholidays.com.au/" },
+    { "label": "Safety", "value": "Satellite phone and EPIRB on every expedition", "sourceUrl": "https://www.bushwalkingholidays.com.au/the-wet-season---preparing-for-your-trip" },
+    { "label": "Group size", "value": "Four to twelve walkers", "sourceUrl": "https://www.bushwalkingholidays.com.au/bushwalking-holidays" }
+  ],
+  "seasons": [
+    { "months": [12, 1, 2, 3, 4], "note": "The Wet: waterfalls and wildflowers, warm rain that is a pleasure to walk in. Every Kakadu, Top End and Kimberley trip from Christmas to March is a wet season trip.", "sourceUrl": "https://www.bushwalkingholidays.com.au/climate" },
+    { "months": [4, 5, 6, 7, 8, 9], "note": "The Dry: clear skies and weather so reliable that few people carry tents. Cool nights in the Centre and the Pilbara.", "sourceUrl": "https://www.bushwalkingholidays.com.au/climate" },
+    { "months": [9, 10, 11, 12], "note": "The Build Up: thunderstorms and the sudden greening of the land, the most dramatic season of all. Birds concentrate at the last waterholes.", "sourceUrl": "https://www.bushwalkingholidays.com.au/climate" }
+  ],
+  "youtube": []
+}

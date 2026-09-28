@@ -34,5 +34,17 @@
     "deleteAfter": null,
     "bookingGroup": 2,
     "archetype": "naturalist"
+  },
+  {
+    "slug": "willis_walkabouts",
+    "business": "Willi's Walkabouts",
+    "status": "preview",
+    "pagesProject": "willis-walkabouts-s6nv",
+    "previewUrl": "https://willis-walkabouts-s6nv.pages.dev",
+    "domain": null,
+    "sentOn": null,
+    "deleteAfter": null,
+    "bookingGroup": 2,
+    "archetype": "expedition"
   }
 ]

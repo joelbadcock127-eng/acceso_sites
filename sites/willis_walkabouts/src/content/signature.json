@@ -1,0 +1,48 @@
+{
+  "kind": "checklist",
+  "heading": "What the walk ratings mean",
+  "intro": "Almost none of the walking is on marked trails, so every trip carries a rating built from climate, terrain, vegetation, hours walked and pack weight. Someone who has never walked off track should rate each walk one level harder.",
+  "items": [
+    {
+      "label": "Day pack only",
+      "detail": "Level 0. Accommodated or base camp trips. The climate, terrain, vegetation and hours can sit anywhere from level 1 to 5.",
+      "when": "Level 0"
+    },
+    {
+      "label": "Easy",
+      "detail": "Days of 18 to 25 degrees, mostly flat, open country, 4 to 6 hours a day, no more than four days of food, tent or sleeping bag but not both.",
+      "when": "Level 1"
+    },
+    {
+      "label": "Fairly easy",
+      "detail": "Days of 26 to 29 degrees, some soft sand, rock hopping and moderate to steep climbs, short stretches of thick grass or spinifex, up to 7 days of food. Good average fitness should be enough.",
+      "when": "Level 2"
+    },
+    {
+      "label": "Moderately difficult",
+      "detail": "Days of 30 to 32 degrees, more sand, rough ground, rock hopping and steep climbs, hours of thick grass or spinifex at times, up to 11 days of food. Somewhat above average fitness or good overnight experience recommended.",
+      "when": "Level 3"
+    },
+    {
+      "label": "Relatively difficult",
+      "detail": "Days of 33 to 35 degrees with fairly high humidity and probable rain, very rugged ground, scrub for up to a quarter of the trip, 5 to 7 hours most days, up to 14 days of food and two to three litres of water. Above average fitness or extensive overnight experience recommended.",
+      "when": "Level 4"
+    },
+    {
+      "label": "Our most difficult trips",
+      "detail": "Days over 35 degrees with very high humidity, extremely rugged ground, scrub for up to a third of the trip, 5 to 7 hours most days, possibly 8. Not suited to beginners unless they are exceptionally fit.",
+      "when": "Level 5"
+    },
+    {
+      "label": "The good news",
+      "detail": "None of the level four and five trips is level four or five in every respect. One or more factors are always lower, and the details are in the trip notes.",
+      "when": "Every trip"
+    },
+    {
+      "label": "Attitude beats fitness",
+      "detail": "A superfit person who is unhappy at leaving the comforts of civilisation behind will not cope as well as a moderately fit person prepared to enjoy the wilderness on its own terms.",
+      "when": "Every trip"
+    }
+  ],
+  "sourceUrl": "https://www.bushwalkingholidays.com.au/view-the-level-of-difficulty"
+}

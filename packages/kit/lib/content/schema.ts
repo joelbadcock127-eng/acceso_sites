@@ -293,6 +293,8 @@ export const programSchema = z.object({
   distanceKm: z.number().optional(),
   hours: z.string().optional(),
   grade: z.string().optional(),
+  /** Pack weight or similar second badge ("12 to 15 kg") */
+  pack: z.string().optional(),
   price: z.string().optional(),
   note: z.string().optional(),
   status: z.enum(['open', 'limited', 'full', 'cancelled', 'past']).default('open'),

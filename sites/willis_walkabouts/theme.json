@@ -1,0 +1,33 @@
+{
+  "archetype": "expedition",
+  "pairing": "expedition",
+  "colors": {
+    "ground": "#f5f0e6",
+    "surface": "#fdfbf7",
+    "ink": "#1c1a17",
+    "muted": "#5b554c",
+    "line": "rgba(28, 26, 23, 0.16)",
+    "accent": "#9a5a1e",
+    "accentInk": "#fdfbf7",
+    "overlay": "rgba(20, 16, 10, 0.5)",
+    "band": "#1c1a17",
+    "bandInk": "#e9d9c0"
+  },
+  "radius": "2px",
+  "favicon": "/favicon.svg",
+  "buttons": "accent",
+  "frames": false,
+  "logo": { "src": "images/logo.png", "alt": "Willi's Walkabouts", "framed": false, "invertOnHero": true, "height": "3rem", "wordmark": true },
+  "heroStyle": "stillSlowZoom",
+  "texture": "topo",
+  "variants": {
+    "hero": "split",
+    "positioning": "left",
+    "featureSplit": "stacked",
+    "offerCards": "featurePlusTwo",
+    "statsRow": "cards",
+    "testimonials": "grid",
+    "ctaBand": "split",
+    "keyFacts": "pills"
+  }
+}
